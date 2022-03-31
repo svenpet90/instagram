@@ -10,9 +10,7 @@ use SvenPetersen\Instagram\Domain\Model\Account;
 use SvenPetersen\Instagram\Domain\Model\Longlivedaccesstoken;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\AccountRepository;
-use SvenPetersen\Instagram\Domain\Repository\LonglivedaccesstokenRepository;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
-use SvenPetersen\Instagram\Factory\AccountFactory;
 use SvenPetersen\Instagram\Factory\PostFactory;
 use SvenPetersen\Instagram\Service\InstagramService;
 use Symfony\Component\Console\Command\Command;
@@ -38,11 +36,7 @@ class ImportPostsCommand extends Command
 
     private AccountRepository $accountRepository;
 
-    private LonglivedaccesstokenRepository $longlivedaccesstokenRepository;
-
     private PersistenceManagerInterface $persistenceManager;
-
-    private AccountFactory $accountFactory;
 
     private InstagramService $instagramService;
 
@@ -54,9 +48,7 @@ class ImportPostsCommand extends Command
         InstagramApiClient $instagramApiClient,
         PostRepository $postRepository,
         AccountRepository $accountRepository,
-        LonglivedaccesstokenRepository $longlivedaccesstokenRepository,
         PersistenceManagerInterface $persistenceManager,
-        AccountFactory $accountFactory,
         InstagramService $instagramService,
         PostFactory $postFactory,
         $name = null
@@ -66,9 +58,7 @@ class ImportPostsCommand extends Command
         $this->instagramApiClient = $instagramApiClient;
         $this->postRepository = $postRepository;
         $this->accountRepository = $accountRepository;
-        $this->longlivedaccesstokenRepository = $longlivedaccesstokenRepository;
         $this->persistenceManager = $persistenceManager;
-        $this->accountFactory = $accountFactory;
         $this->instagramService = $instagramService;
         $this->postFactory = $postFactory;
     }
@@ -77,32 +67,8 @@ class ImportPostsCommand extends Command
     {
         $this
             ->setHelp('Imports Posts for a given instagram account')
-            ->addArgument('userId', InputArgument::REQUIRED, 'Instagram User/Account ID to import posts for')
+            ->addArgument('username', InputArgument::REQUIRED, 'Instagram Username of the account to import posts from')
             ->addArgument('storagePid', InputArgument::REQUIRED, 'The PID where to save the post records');
-    }
-
-    /**
-     * Creates or updates an account to add posts to
-     */
-    public function upsertAccount(?Account $account, array $igUserData, int $storagePid, Longlivedaccesstoken $longlivedaccesstoken): Account
-    {
-        if (null === $account) {
-            $account = $this->accountFactory->createFromAPIResponse($igUserData);
-
-            $this->accountRepository->add($account);
-            $this->persistenceManager->persistAll();
-
-            $this->output->writeln('Created new Account for username: ' . $igUserData['username'] . "\n");
-        }
-
-        $account->setSysLanguageUid(-1);
-        $account->setPid($storagePid);
-        $account->setLonglivedaccesstoken($longlivedaccesstoken);
-
-        $this->accountRepository->update($account);
-        $this->persistenceManager->persistAll();
-
-        return $account;
     }
 
     /**
@@ -126,40 +92,14 @@ class ImportPostsCommand extends Command
 
         switch ($post->getType()) {
             case 'CAROUSEL_ALBUM':
-                $childMediaIds = $this->instagramApiClient->getChildrenMediaIds($postData['id']);
-                $childMedias = $this->instagramService->getCarouselMedia($childMediaIds);
-
-                foreach ($childMedias as $item) {
-                    switch ($item['media_type']) {
-                        case 'IMAGE':
-                            $fileObject = $this->downloadFile(
-                                $item['media_url'],
-                                'jpg'
-                            );
-
-                            $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
-
-                            break;
-                        case 'VIDEO':
-                            $fileObject = $this->downloadFile($item['media_url'], 'mp4');
-                            $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
-
-                            break;
-                    }
-                }
-
+                $this->importCarouselAlbum($post, $postData);
                 break;
             case 'VIDEO':
-                $fileObject = $this->downloadFile($postData['media_url'], 'mp4');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
-
-                $fileObject = $this->downloadFile($postData['thumbnail_url'], 'jpg');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+                $this->importVideo($post, $postData);
 
                 break;
             case 'IMAGE':
-                $fileObject = $this->downloadFile($postData['media_url'], 'jpg');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+                $this->importImage($post, $postData);
 
                 break;
         }
@@ -168,6 +108,46 @@ class ImportPostsCommand extends Command
         $this->persistenceManager->persistAll();
 
         return $post;
+    }
+
+    private function importImage(Post $post, array $postData): void
+    {
+        $fileObject = $this->downloadFile($postData['media_url'], 'jpg');
+        $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+    }
+
+    private function importVideo(Post $post, array $postData): void
+    {
+        $fileObject = $this->downloadFile($postData['media_url'], 'mp4');
+        $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
+
+        $fileObject = $this->downloadFile($postData['thumbnail_url'], 'jpg');
+        $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+    }
+
+    private function importCarouselAlbum(Post $post, array $postData): void
+    {
+        $childMediaIds = $this->instagramApiClient->getChildrenMediaIds($postData['id']);
+        $childMedias = $this->instagramService->getCarouselMedia($childMediaIds);
+
+        foreach ($childMedias as $item) {
+            switch ($item['media_type']) {
+                case 'IMAGE':
+                    $fileObject = $this->downloadFile(
+                        $item['media_url'],
+                        'jpg'
+                    );
+
+                    $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+
+                    break;
+                case 'VIDEO':
+                    $fileObject = $this->downloadFile($item['media_url'], 'mp4');
+                    $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
+
+                    break;
+            }
+        }
     }
 
     /**
@@ -198,20 +178,32 @@ class ImportPostsCommand extends Command
 
         $this->output = $output;
 
-        $userId = $input->getArgument('userId');
+        $username = $input->getArgument('username');
         $storagePid = (int)$input->getArgument('storagePid');
 
-        $longlivedToken = $this->longlivedaccesstokenRepository->findOneByUserid((int)$userId);
+        $account = $this->accountRepository->findOneByUsername($username);
 
-        if (!$longlivedToken instanceof Longlivedaccesstoken) {
-            throw new \Exception('Kein Longlivedaccesstoken gefunden!');
+        if (!$account instanceof Account) {
+            throw new \Exception('No Account found for given Username: "' . $username . '"');
         }
 
-        $accesstoken = $longlivedToken->getToken();
-        $this->instagramApiClient->setAccesstoken($accesstoken);
+        $longLivedAccessToken = $account->getLonglivedaccesstoken();
+
+        if (!$longLivedAccessToken instanceof Longlivedaccesstoken) {
+            throw new \Exception('No Longlivedaccesstoken found in given account!');
+        }
+
+        $this->output->writeln([
+            'Importing posts for IG-Account: ' . $account->getUsername(),
+            '============',
+            '',
+        ]);
 
         try {
-            $instagramUser = $this->instagramApiClient->getUserdata($userId);
+            $accesstoken = $longLivedAccessToken->getToken();
+            $this->instagramApiClient->setAccesstoken($accesstoken);
+
+            $posts = $this->instagramApiClient->getPostsRecursive($account->getUserid());
         } catch (ClientException $exception) {
             $message = $exception->getMessage();
 
@@ -222,19 +214,9 @@ class ImportPostsCommand extends Command
             }
         }
 
-        $account = $this->accountRepository->findOneByUserid($instagramUser['id']);
-        $account = $this->upsertAccount($account, $instagramUser, $storagePid, $longlivedToken);
-
-        $alreadyImportedPostsForAccount = $account->getPosts();
-
-        $this->output->writeln([
-            'Importing posts for IG-Account: ' . $account->getUsername(),
-            '============',
-            '',
-        ]);
-
-        $posts = $this->instagramApiClient->getPostsRecursive($userId);
         $this->output->writeln('Got ' . count($posts) . ' Posts for the given Account from the API');
+
+        $alreadyImportedPostsForAccount = clone $account->getPosts();
 
         foreach ($posts as $postData) {
             $post = $this->postRepository->findOneByInstagramid($postData['id']);
@@ -248,12 +230,14 @@ class ImportPostsCommand extends Command
             }
         }
 
+        // Delete all posts that have once been imported but are no longer returned from the API.
+        // They therefore appear to be deleted by the user via instagram.
         /** @var Post $deletedPost */
         foreach ($alreadyImportedPostsForAccount as $deletedPost) {
             $this->postRepository->remove($deletedPost);
             $this->persistenceManager->persistAll();
 
-            $this->output->writeln('! Post with ID: ' . $deletedPost->getInstagramid() . '("' . $deletedPost->getText() . '") was not in API response and was therefor deleted.');
+            $this->output->writeln(sprintf('!!! Post with ID: %s ("%s") was not found in API response anymore and was therefore deleted.', $deletedPost->getInstagramid(), $deletedPost->getText()));
         }
 
         return self::SUCCESS;

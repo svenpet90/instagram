@@ -159,5 +159,10 @@ return [
                 'maxitems' => 1
             ],
         ],
+        'pid' => [
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
     ],
 ];

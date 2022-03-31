@@ -197,13 +197,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'internal_type' => 'db',
                 'foreign_table' => 'tx_instagram_domain_model_account',
-                'allowed' => 'tx_instagram_domain_model_account',
-                'MM' => 'tx_instagram_account_post_mm',
-                'MM_opposite_field' => 'posts',
-                'size' => 1,
-                'maxitems' => 1,
             ],
         ],
         'images' => [

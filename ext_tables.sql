@@ -31,7 +31,7 @@ CREATE TABLE tx_instagram_domain_model_post
 	link        varchar(255)  DEFAULT '',
 	type        varchar(255)  DEFAULT '',
 	lastupdate  int(11) unsigned DEFAULT NULL,
-	account     int(11) unsigned DEFAULT NULL,
+	account     int(11) DEFAULT '0' NOT NULL,
 	images      varchar(255)  DEFAULT NULL,
 	videos      varchar(255)  DEFAULT NULL,
 
@@ -49,24 +49,10 @@ CREATE TABLE tx_instagram_domain_model_account
 
 	userid               varchar(255) DEFAULT '' NOT NULL,
 	username             varchar(255) DEFAULT '' NOT NULL,
-	posts                int(11) unsigned DEFAULT '0' NOT NULL,
+	posts                int(11) DEFAULT '0' NOT NULL,
 	lastupdate           varchar(255) DEFAULT '' NOT NULL,
 	longlivedaccesstoken int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY                  parent (pid)
-);
-
-#
-# Table structure for table 'tx_instagram_account_post_mm'
-#
-CREATE TABLE tx_instagram_account_post_mm
-(
-	uid_local       int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign     int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting         int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY             uid_local (uid_local),
-	KEY             uid_foreign (uid_foreign)
 );

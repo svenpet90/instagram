@@ -33,6 +33,7 @@
             color: gray;
         }
     </style>
+
     <f:be.container>
         <div class="pageWrap">
             <h1>Schritt 1/3: Instagram API-Token Generator</h1>
@@ -50,7 +51,11 @@
                 </div>
                 <div class="form-group">
                     <label for="returnurl">Gültige OAuth Redirect URI*</label>
-                    <f:form.textfield name="returnurl" value="{returnurl}" placeholder="Gültige OAuth Redirect URI"/>
+                    <f:form.textfield name="returnurl" value="{returnurl}" placeholder="Valid OAuth Redirect URI"/>
+                </div>
+                <div class="form-group">
+                    <label for="storagePid">Storage PID for Account and Token Entites*</label>
+                    <f:form.textfield name="storagePid" value="{storagePid}" placeholder="Storage PID for Account and Token Entites"/>
                 </div>
 
                 <f:form.submit value="Link generieren" class="btn btn-success"/>
