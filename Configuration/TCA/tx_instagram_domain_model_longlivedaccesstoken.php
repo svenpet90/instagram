@@ -25,7 +25,7 @@ return [
     'interface' => [],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, token, userid, expiresat, type, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
+            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, account, token, userid, expiresat, type, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
         ],
     ],
     'palettes' => [
@@ -153,10 +153,9 @@ return [
             'exclude' => 1,
             'label' => 'Person',
             'config' => [
-                'type' => 'inline',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_instagram_domain_model_account',
-                'foreign_field' => 'longlivedaccesstoken',
-                'maxitems' => 1
             ],
         ],
         'pid' => [

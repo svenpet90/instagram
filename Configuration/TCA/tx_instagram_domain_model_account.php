@@ -146,6 +146,7 @@ return [
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_instagram_domain_model_longlivedaccesstoken',
+                'foreign_field' => 'account',
                 'maxitems' => 1,
                 'overrideChildTca' => [
                     'types' => [

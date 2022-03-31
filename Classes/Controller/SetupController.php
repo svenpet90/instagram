@@ -5,32 +5,34 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Controller;
 
 use SvenPetersen\Instagram\Client\InstagramApiClient;
-use SvenPetersen\Instagram\Creator\LongLivedAccessTokenCreator;
 use SvenPetersen\Instagram\Domain\Model\Account;
 use SvenPetersen\Instagram\Domain\Model\Longlivedaccesstoken;
 use SvenPetersen\Instagram\Domain\Repository\AccountRepository;
 use SvenPetersen\Instagram\Factory\AccountFactory;
+use SvenPetersen\Instagram\Service\InstagramService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 final class SetupController extends ActionController
 {
-    private LongLivedAccessTokenCreator $longLivedAccessTokenCreator;
+    private InstagramService $instagramService;
 
     private InstagramApiClient $instagramApiClient;
 
     private AccountFactory $accountFactory;
+
     private AccountRepository $accountRepository;
+
     private PersistenceManagerInterface $persistenceManager;
 
     public function __construct(
         InstagramApiClient $instagramApiClient,
-        LongLivedAccessTokenCreator $longLivedAccessTokenCreator,
+        InstagramService $instagramService,
         AccountFactory $accountFactory,
         AccountRepository $accountRepository,
         PersistenceManagerInterface $persistenceManager
     ) {
-        $this->longLivedAccessTokenCreator = $longLivedAccessTokenCreator;
+        $this->instagramService = $instagramService;
         $this->instagramApiClient = $instagramApiClient;
         $this->accountFactory = $accountFactory;
         $this->accountRepository = $accountRepository;
@@ -74,14 +76,14 @@ final class SetupController extends ActionController
             $code
         );
 
-        $longLivedAccessToken = $this->longLivedAccessTokenCreator->create(
+        $longLivedAccessToken = $this->instagramService->getLongLivedAccessToken(
             $clientSecret,
             $accessTokenData['access_token'],
             (int)$accessTokenData['user_id']
         );
 
-        $accesstoken = $longLivedAccessToken->getToken();
-        $this->instagramApiClient->setAccesstoken($accesstoken);
+        $accessToken = $longLivedAccessToken->getToken();
+        $this->instagramApiClient->setAccesstoken($accessToken);
         $igUserData = $this->instagramApiClient->getUserdata($longLivedAccessToken->getUserid());
 
         $account = $this->accountRepository->findOneByUserid($igUserData['id']);

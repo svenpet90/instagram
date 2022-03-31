@@ -25,6 +25,10 @@ final class Account extends AbstractEntity
 
     protected int $lastupdate = 0;
 
+    /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("persist")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     */
     protected ?Longlivedaccesstoken $longlivedaccesstoken = null;
 
     public function __construct(string $userId)

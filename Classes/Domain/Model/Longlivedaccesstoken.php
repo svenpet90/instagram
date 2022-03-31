@@ -17,6 +17,9 @@ final class Longlivedaccesstoken extends AbstractEntity
 
     protected ?DateTime $expiresat = null;
 
+    /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("persist")
+     */
     protected ?Account $account = null;
 
     public function getUserid(): ?string
