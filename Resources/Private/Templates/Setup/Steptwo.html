@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" data-namespace-typo3-fluid="true"
+      xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <style>
+        .pageWrap {
+            padding: 10px 20px;
+            font-family: 'Arial';
+        }
+
+        .form-group {
+            width: 50%;
+            margin-bottom: 20px;
+
+        }
+
+        label {
+            display: block;
+            float: left;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        input {
+            width: 250px;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+    </style>
+    <f:be.container>
+        <div class="pageWrap">
+            <h1>Schritt 2/3: Instagram API-Token Generator</h1>
+
+            <ol>
+                <li>Diesen Link klicken: <a target="_blank" href="{link}">{link}</a></li>
+                <li>Die angeforderten Rechte bestätigen.</li>
+                <li>Anschließend erfolgt eine Weiterleitung auf die angegebene ReturnUrl. In der URL befindet sich der
+                    Parameter "code".
+                </li>
+                <li>Diesen Code kopieren und in dem Formular unten eintragen:</li>
+            </ol>
+        </div>
+
+        <f:form action="stepthree" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="code">Code*</label>
+                <f:form.textfield name="code" value="" required="true" placeholder="Code"/>
+            </div>
+            <div class="form-group">
+                <label for="clientid">Instagram-App-ID*</label>
+                <f:form.textfield name="clientid" value="{appId}" placeholder="Instagram-App-ID"/>
+            </div>
+            <div class="form-group">
+                <label for="clientsecret">Instagram App-Geheimcode*</label>
+                <f:form.textfield type="password" id="clientsecret" name="clientsecret" value="{appSecret}"
+                                  placeholder="Instagram App-Geheimcode"/>
+            </div>
+            <div class="form-group">
+                <label for="returnurl">Gültige OAuth Redirect URI*</label>
+                <f:form.textfield name="returnurl" value="{returnUrl}" placeholder="Gültige OAuth Redirect URI"/>
+            </div>
+
+            <f:form.submit value="Token erhalten" class="btn btn-success"/>
+        </f:form>
+    </f:be.container>
+</f:section>
+
+</html>

@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <div class="row">
+        <f:for each="{posts}" as="post" iteration="i">
+            <f:render partial="Post/RenderMedia" arguments="{post:post}"/>
+        </f:for>
+    </div>
+
+    <f:if condition="{settings.flexform.showLinkButtonToInstagramProfile}">
+        <div class="row d-flex justify-content-center">
+            <f:link.external uri="https://www.instagram.com/{posts.0.account.username}"
+                             target="_blank"
+                             class="btn btn-default"
+            >
+                {posts.0.account.username} @ Instagram
+            </f:link.external>
+        </div>
+    </f:if>
+</f:section>
+
+</html>

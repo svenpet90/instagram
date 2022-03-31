@@ -1,0 +1,23 @@
+plugin.tx_instagram {
+  view {
+    templateRootPaths {
+      0 = {$plugin.tx_instagram.view.templateRootPath}
+    }
+
+    partialRootPaths {
+      0 = {$plugin.tx_instagram.view.partialRootPath}
+    }
+
+    layoutRootPaths {
+      0 = {$plugin.tx_instagram.view.layoutRootPath}
+    }
+  }
+
+  persistence {
+    storagePid = {$plugin.tx_instagram.persistence.storagePid}
+  }
+
+  mvc {
+    callDefaultActionIfActionCantBeResolved = 1
+  }
+}

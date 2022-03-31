@@ -1,0 +1,102 @@
+{
+	"name": "svenpetersen/instagram",
+	"description": "",
+	"type": "typo3-cms-extension",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Sven Petersen",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^7.4 || ^8.0",
+		"typo3/cms-core": "^10.4 || ^11.5"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.24",
+		"friendsofphp/php-cs-fixer": "^3.1",
+		"helmich/typo3-typoscript-lint": "^2.1",
+		"justinrainbow/json-schema": "^5.2",
+		"phpspec/prophecy-phpunit": "^2.0",
+		"phpstan/extension-installer": "^1.1",
+		"phpstan/phpstan": "^0.12.99",
+		"phpunit/phpcov": "^8.2",
+		"saschaegerer/phpstan-typo3": "^0.13.3",
+		"typo3/coding-standards": "^0.5.0",
+		"typo3/testing-framework": "^6"
+	},
+	"replace": {
+		"typo3-ter/instagram": "self.version"
+	},
+	"suggest": {
+		"typo3/cms-scheduler": "^10.4 || ^11.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"SvenPetersen\\Instagram\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"SvenPetersen\\Instagram\\Tests\\": "Tests"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true,
+			"ergebnis/composer-normalize": true,
+			"phpstan/extension-installer": true
+		},
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"extension-key": "instagram",
+			"web-dir": ".Build/public"
+		}
+	},
+	"scripts": {
+		"ci:composer:normalize": "@composer normalize --dry-run",
+		"ci:coverage": [
+			"@ci:coverage:functional"
+		],
+		"ci:coverage:functional": "phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/functional.cov Tests/Functional",
+		"ci:coverage:merge": "phpcov merge --clover=./coverage/clover.xml coverage/",
+		"ci:coverage:unit": "phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/unit.cov Tests/Unit",
+		"ci:lint:typoscript": [
+			"typoscript-lint --ansi -n --fail-on-warnings -vvv Configuration/TypoScript"
+		],
+		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --using-cache no --diff",
+		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:stan": "phpstan --no-progress",
+		"ci:test": [
+			"@ci:php:cs-fixer",
+			"@ci:php:stan",
+			"@ci:test:functional"
+		],
+		"ci:test:functional": [
+			"phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1"
+		],
+		"ci:test:unit": [
+			"phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1"
+		],
+		"fix:php:cs-fixer": [
+			"php-cs-fixer fix -v --using-cache no"
+		],
+		"prepare-release": [
+			"rm .gitignore",
+			"rm -rf .Build",
+			"rm -rf .github",
+			"rm -rf Tests",
+			"rm -rf Resources",
+			"rm .editorconfig",
+			"rm .gitattributes",
+			"rm .php-cs-fixer.php",
+			"rm CONTRIBUTING.rst"
+		]
+	}
+}

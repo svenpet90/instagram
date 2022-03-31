@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="userid.description">
+				<source>userid</source>
+			</trans-unit>
+			<trans-unit id="username.description">
+				<source>username</source>
+			</trans-unit>
+			<trans-unit id="profilepicture.description">
+				<source>profilepicture</source>
+			</trans-unit>
+			<trans-unit id="fullname.description">
+				<source>fullname</source>
+			</trans-unit>
+			<trans-unit id="bio.description">
+				<source>Bio</source>
+			</trans-unit>
+			<trans-unit id="website.description">
+				<source>website</source>
+			</trans-unit>
+			<trans-unit id="isbusiness.description">
+				<source>isbusiness</source>
+			</trans-unit>
+			<trans-unit id="media.description">
+				<source>media</source>
+			</trans-unit>
+            <trans-unit id="follows.description">
+                <source>follows</source>
+            </trans-unit>
+            <trans-unit id="followedby.description">
+                <source>followedby</source>
+            </trans-unit>
+            <trans-unit id="lastupdate.description">
+                <source>lastupdate</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

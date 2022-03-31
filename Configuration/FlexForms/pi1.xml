@@ -1,0 +1,104 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Instagram config</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.accounts>
+                        <TCEforms>
+                            <label>Selectbox aus DB</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <foreign_table>tx_instagram_domain_model_account</foreign_table>
+                            </config>
+                        </TCEforms>
+                    </settings.accounts>
+                    <settings.limit>
+                        <TCEforms>
+                            <label>Wieviele Bilder sollen maximal angezeigt werden?</label>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <max>30</max>
+                                <eval>integer</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.limit>
+
+                    <settings.showLinkToInstagramProfile>
+                        <TCEforms>
+                            <label>Zeige Button zum Instagramprofil</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showLinkToInstagramProfile>
+
+                    <settings.types.image>
+                        <TCEforms>
+                            <label>Zeige Bilder</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.types.image>
+
+                    <settings.types.carousel>
+                        <TCEforms>
+                            <label>Zeige Posts mit mehreren Bildern (Carousel)</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.types.carousel>
+
+                    <settings.types.video>
+                        <TCEforms>
+                            <label>Zeige Videos</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.types.video>
+
+                    <settings.hashtags.tags>
+                        <TCEforms>
+                            <label>Nur Bilder mit diesen Hashtags anzeigen (mit #, komma-separiert):</label>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <max>255</max>
+                                <eval>trim</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.hashtags.tags>
+
+                    <settings.hashtags.logicalConstraint>
+                        <TCEforms>
+                            <label>Hashtags constraint</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Logical Or</numIndex>
+                                        <numIndex index="1">logicalOr</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Logical And</numIndex>
+                                        <numIndex index="1">logicalAnd</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.hashtags.logicalConstraint>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+
+</T3DataStructure>

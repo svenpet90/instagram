@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="tx_instagram_domain_model_post">
+				<source>Post</source>
+			</trans-unit>
+            <trans-unit id="tx_instagram_domain_model_post.text">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.createdtime">
+				<source>Createdtime</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+				<source>Instagramid</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.likes">
+				<source>Likes</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.commentcount">
+				<source>Commentcount</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.filter">
+				<source>Filter</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.tags">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.images">
+                <source>Images</source>
+            </trans-unit>
+ 			<trans-unit id="tx_instagram_domain_model_post.videos">
+                <source>Videos</source>
+            </trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.importedbyhashtag">
+				<source>Imported by hashtag</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.latitude">
+				<source>Latitude</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.locationname">
+				<source>Locationname</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
+				<source>Lastupdate</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.taggedpeople">
+				<source>Taggedpeople</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.account">
+				<source>Account</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_person">
+				<source>Person</source>
+			</trans-unit>
+            <trans-unit id="tx_instagram_domain_model_person.username">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_person.fullname">
+				<source>Fullname</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_person.profilepicture">
+				<source>Profilepicture</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_person.userid">
+				<source>Userid</source>
+			</trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account">
+                <source>Account</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.userid">
+                <source>Userid</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.username">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.profilepicture">
+                <source>Profilepicture</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.fullname">
+                <source>Fullname</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.bio">
+                <source>Bio</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.website">
+                <source>Website</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.isbusiness">
+                <source>isbusiness</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.media">
+                <source>media</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.follows">
+                <source>follows</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.followedby">
+                <source>followed_by</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.posts">
+                <source>images</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_account.lastupdate">
+                <source>lastupdate</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_longlivedaccesstoken">
+                <source>Long Lived Access Token</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_longlivedaccesstoken.token">
+                <source>Token</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_longlivedaccesstoken.userid">
+                <source>Instagram User ID</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_longlivedaccesstoken.expiresat">
+                <source>Expires at</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_longlivedaccesstoken.type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="instagram">
+                <source>Instagram Token Generator</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

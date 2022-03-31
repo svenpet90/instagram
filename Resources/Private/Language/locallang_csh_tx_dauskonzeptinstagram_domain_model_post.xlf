@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="text.description">
+				<source>text</source>
+			</trans-unit>
+			<trans-unit id="images.description">
+				<source>images</source>
+			</trans-unit>
+			<trans-unit id="createdtime.description">
+				<source>createdtime</source>
+			</trans-unit>
+			<trans-unit id="instagramid.description">
+				<source>instagramid</source>
+			</trans-unit>
+			<trans-unit id="likes.description">
+				<source>likes</source>
+			</trans-unit>
+			<trans-unit id="commentcount.description">
+				<source>commentcount</source>
+			</trans-unit>
+			<trans-unit id="filter.description">
+				<source>filter</source>
+			</trans-unit>
+			<trans-unit id="tags.description">
+				<source>tags</source>
+			</trans-unit>
+			<trans-unit id="longitude.description">
+				<source>longitude</source>
+			</trans-unit>
+			<trans-unit id="latitude.description">
+				<source>latitude</source>
+			</trans-unit>
+			<trans-unit id="locationname.description">
+				<source>locationname</source>
+			</trans-unit>
+			<trans-unit id="link.description">
+				<source>link</source>
+			</trans-unit>
+			<trans-unit id="type.description">
+				<source>type</source>
+			</trans-unit>
+			<trans-unit id="lastupdate.description">
+				<source>lastupdate</source>
+			</trans-unit>
+			<trans-unit id="taggedpeople.description">
+				<source>taggedpeople</source>
+			</trans-unit>
+			<trans-unit id="taggedpeople.description">
+				<source>taggedpeople</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

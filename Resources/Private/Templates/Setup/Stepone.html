@@ -1,0 +1,62 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <style>
+        .pageWrap {
+            padding: 10px 20px;
+            font-family: 'Arial';
+        }
+
+        .form-group {
+            width: 50%;
+            margin-bottom: 20px;
+
+        }
+
+        label {
+            display: block;
+            float: left;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        input {
+            width: 250px;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+        .gray {
+            color: gray;
+        }
+    </style>
+    <f:be.container>
+        <div class="pageWrap">
+            <h1>Schritt 1/3: Instagram API-Token Generator</h1>
+            <p>Dieser Wizard dient dem Generieren des Instagram API-Zugriffstokens.</p>
+
+            <f:form action="steptwo" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="clientid">Instagram-App-ID*</label>
+                    <f:form.textfield name="clientid" value="{clientid}" placeholder="Instagram-App-ID"/>
+                </div>
+                <div class="form-group">
+                    <label for="clientsecret">Instagram App-Geheimcode*</label>
+                    <f:form.textfield name="clientsecret" value="{clientsecret}"
+                                      placeholder="Instagram App-Geheimcode"/>
+                </div>
+                <div class="form-group">
+                    <label for="returnurl">Gültige OAuth Redirect URI*</label>
+                    <f:form.textfield name="returnurl" value="{returnurl}" placeholder="Gültige OAuth Redirect URI"/>
+                </div>
+
+                <f:form.submit value="Link generieren" class="btn btn-success"/>
+            </f:form>
+        </div>
+    </f:be.container>
+</f:section>
+
+</html>

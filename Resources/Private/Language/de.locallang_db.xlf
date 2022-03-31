@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="tx_instagram_domain_model_post">
+				<source>Post</source>
+				<target>Post</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.text">
+				<source>Text</source>
+				<target>Text</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.createdtime">
+				<source>Createdtime</source>
+				<target>Erstellt am</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+				<source>Instagramid</source>
+				<target>Instagram ID</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.likes">
+				<source>Likes</source>
+				<target>Anzahl der Likes</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.commentcount">
+				<source>Commentcount</source>
+				<target>Anzahl der Kommentare</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.filter">
+				<source>Filter</source>
+				<target>Filter</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.tags">
+				<source>Tags</source>
+				<target>Hashtags</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.image">
+                <source>Image/s</source>
+                <target>Bild/er</target>
+            </trans-unit>
+ 			<trans-unit id="tx_instagram_domain_model_post.videos">
+                <source>Videos</source>
+                <target>Video(s)</target>
+            </trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.owner">
+				<source>Owner</source>
+				<target>Account der das Bild gepostet hat</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.ownerfullname">
+				<source>Owner fullname</source>
+				<target>Name des Bilduploaders</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.ownerprofilepicture">
+				<source>Owner profile picture</source>
+				<target>Profilbild des Bilduploaders</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.ownerid">
+				<source>Owner ID</source>
+				<target>ID des Bilduploaders</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.importedbyhashtag">
+				<source>Imported by hashtag</source>
+				<target>Importiert anhand eines Hashtags</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.longitude">
+				<source>Longitude</source>
+				<target>Longitude</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.latitude">
+				<source>Latitude</source>
+				<target>Latitude</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.locationname">
+				<source>Locationname</source>
+				<target>Aufnahmeort des Bilds</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.link">
+				<source>Link</source>
+				<target>Link zum Bild</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.type">
+				<source>Type</source>
+				<target>Art des Posts</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
+				<source>Lastupdate</source>
+				<target>Letztes Update</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.comments">
+				<source>Comments</source>
+				<target>Anzahl der Kommentare</target>
+			</trans-unit>
+            <trans-unit id="instagram">
+                <source>Instagram Import</source>
+                <target>Instagram Token Generator</target>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

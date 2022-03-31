@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="tx_instagram_domain_model_post">
+				<target>Bild</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.text">
+				<target>Text</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.image">
+				<target>Bild</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.createdtime">
+				<target>Erstellt am</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+				<target>Instagram ID</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.likes">
+				<target>Likes</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.commentcount">
+				<target>Anzahl der Kommentare</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.filter">
+				<target>Filter</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.tags">
+				<target>Tags</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.longitude">
+				<target>Longitude</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.latitude">
+				<target>Latitude</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.locationname">
+				<target>Ort der Aufnahme</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.link">
+				<target>Link</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.type">
+				<target>Typ</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
+				<target>Zuletzt aktualisiert</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.comments">
+				<target>Kommentare</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.taggedpeople">
+				<target>Markierte Personen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

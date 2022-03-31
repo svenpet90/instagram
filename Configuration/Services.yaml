@@ -1,0 +1,28 @@
+parameters:
+  env(INSTAGRAM_API_BASEURL): 'https://graph.instagram.com'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  SvenPetersen\Instagram\:
+    resource: '../Classes/*'
+
+  SvenPetersen\Instagram\Command\AccessTokenRefresherCommand:
+    tags:
+      - name: 'console.command'
+        command: 'instagram:refresh-accesstoken'
+        description: 'Refreshes all long lived accesstokens.'
+
+  SvenPetersen\Instagram\Command\ImportPostsCommand:
+    tags:
+      - name: 'console.command'
+        command: 'instagram:account:import-posts'
+        description: 'Imports the posts for a given instagram account.'
+
+  SvenPetersen\Instagram\Client\InstagramApiClient:
+    arguments:
+      $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
+      $apiBaseUrl: '%env(INSTAGRAM_API_BASEURL)%'
