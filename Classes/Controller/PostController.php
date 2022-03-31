@@ -6,7 +6,6 @@ namespace SvenPetersen\Instagram\Controller;
 
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class PostController extends ActionController
 {

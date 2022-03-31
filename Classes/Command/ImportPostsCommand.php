@@ -51,17 +51,16 @@ class ImportPostsCommand extends Command
     private ?OutputInterface $output = null;
 
     public function __construct(
-        InstagramApiClient             $instagramApiClient,
-        PostRepository                 $postRepository,
-        AccountRepository              $accountRepository,
+        InstagramApiClient $instagramApiClient,
+        PostRepository $postRepository,
+        AccountRepository $accountRepository,
         LonglivedaccesstokenRepository $longlivedaccesstokenRepository,
-        PersistenceManagerInterface    $persistenceManager,
-        AccountFactory                 $accountFactory,
-        InstagramService               $instagramService,
-        PostFactory                    $postFactory,
-                                       $name = null
-    )
-    {
+        PersistenceManagerInterface $persistenceManager,
+        AccountFactory $accountFactory,
+        InstagramService $instagramService,
+        PostFactory $postFactory,
+        $name = null
+    ) {
         parent::__construct($name);
 
         $this->instagramApiClient = $instagramApiClient;
