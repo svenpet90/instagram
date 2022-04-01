@@ -60,8 +60,20 @@ final class InstagramApiClient
         return $this->request($endpoint);
     }
 
-    public function getPostsRecursive(string $userId, string $endpoint = '', &$posts = []): array
+    /**
+     * The API returns a paginated array of post IDs containing 25 IDs per Page.
+     * The API currently has a rate limited to 200 Requests per Hour.
+     * Keep in mind: The higher the number of "maxPostsToFetch" the more requests are needed in order to fetch all post IDs.
+     * E.g.: maxPostsToFetch = 100 / 25 Posts per Page = 4 Requests just to fetch all post IDs.
+     */
+    public function getPostsRecursive(string $userId, int $maxPostsToFetch = 100, string $endpoint = '', &$posts = []): array
     {
+        if (count($posts) >= $maxPostsToFetch) {
+            $posts = array_slice($posts, 0, $maxPostsToFetch, true);
+
+            return $posts;
+        }
+
         if ('' === $endpoint) {
             // Initial request endpoint
             $endpoint = sprintf('%s/%s/media/?access_token=%s', $this->apiBaseUrl, $userId, $this->accesstoken);
@@ -76,7 +88,7 @@ final class InstagramApiClient
 
             $endpoint = $response['paging']['next'];
 
-            $this->getPostsRecursive($userId, $endpoint, $posts);
+            $this->getPostsRecursive($userId, $maxPostsToFetch, $endpoint, $posts);
         }
 
         return $posts;

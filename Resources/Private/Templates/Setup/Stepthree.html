@@ -54,14 +54,11 @@
             <p>Lege nun einen Cronjob für den Command "instagram:refresh-accesstoken" an um das Accesstoken regelmäßig
                 zu erneuern.</p>
             <br>
-            <br>
             <p>Auch kannst du nun einen Cronjob für den Command "instagram:account:import-posts" anlegen um die Bilder
                 eines Accounts zu importieren. Beispielsweise:</p>
-
             <p>
-                <code>typo3cms instagram:account:import-posts {account.username} STORAGE_PID</code>
+                <code>typo3cms instagram:account:import-posts {account.username} STORAGE_PID|int [MAX_POSTS_TO_IMPORT|int(100)]</MAX_POSTS_TO_IMPORT> </code>
             </p>
-
             <p>um die Bilder für diesen Account zu importieren.</p>
         </div>
     </f:be.container>

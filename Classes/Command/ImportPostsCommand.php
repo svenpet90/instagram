@@ -42,8 +42,6 @@ class ImportPostsCommand extends Command
 
     private PostFactory $postFactory;
 
-    private ?OutputInterface $output = null;
-
     public function __construct(
         InstagramApiClient $instagramApiClient,
         PostRepository $postRepository,
@@ -68,7 +66,8 @@ class ImportPostsCommand extends Command
         $this
             ->setHelp('Imports Posts for a given instagram account')
             ->addArgument('username', InputArgument::REQUIRED, 'Instagram Username of the account to import posts from')
-            ->addArgument('storagePid', InputArgument::REQUIRED, 'The PID where to save the post records');
+            ->addArgument('storagePid', InputArgument::REQUIRED, 'The PID where to save the post records')
+            ->addArgument('maxPostsToImport', InputArgument::OPTIONAL, 'The maximum number of latest posts to import.', 100);
     }
 
     /**
@@ -176,10 +175,9 @@ class ImportPostsCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $this->output = $output;
-
         $username = $input->getArgument('username');
         $storagePid = (int)$input->getArgument('storagePid');
+        $maxPostsToImport = (int)$input->getArgument('maxPostsToImport');
 
         $account = $this->accountRepository->findOneByUsername($username);
 
@@ -193,7 +191,7 @@ class ImportPostsCommand extends Command
             throw new \Exception('No Longlivedaccesstoken found in given account!');
         }
 
-        $this->output->writeln([
+        $output->writeln([
             'Importing posts for IG-Account: ' . $account->getUsername(),
             '============',
             '',
@@ -203,7 +201,7 @@ class ImportPostsCommand extends Command
             $accesstoken = $longLivedAccessToken->getToken();
             $this->instagramApiClient->setAccesstoken($accesstoken);
 
-            $posts = $this->instagramApiClient->getPostsRecursive($account->getUserid());
+            $posts = $this->instagramApiClient->getPostsRecursive($account->getUserid(), $maxPostsToImport);
         } catch (ClientException $exception) {
             $message = $exception->getMessage();
 
@@ -214,30 +212,17 @@ class ImportPostsCommand extends Command
             }
         }
 
-        $this->output->writeln('Got ' . count($posts) . ' Posts for the given Account from the API');
-
-        $alreadyImportedPostsForAccount = clone $account->getPosts();
+        $output->writeln('Got ' . count($posts) . ' Posts for the given Account from the API');
 
         foreach ($posts as $postData) {
             $post = $this->postRepository->findOneByInstagramid($postData['id']);
 
             if (null === $post) {
-                $this->output->writeln('Importing new Post with ID: ' . $postData['id']);
+                $output->writeln('Importing new Post with ID: ' . $postData['id']);
                 $this->importPost((int)$postData['id'], $account, $storagePid);
             } else {
-                $this->output->writeln('Skipping already imported Post with ID: ' . $postData['id']);
-                $alreadyImportedPostsForAccount->detach($post);
+                $output->writeln('Skipping already imported Post with ID: ' . $postData['id']);
             }
-        }
-
-        // Delete all posts that have once been imported but are no longer returned from the API.
-        // They therefore appear to be deleted by the user via instagram.
-        /** @var Post $deletedPost */
-        foreach ($alreadyImportedPostsForAccount as $deletedPost) {
-            $this->postRepository->remove($deletedPost);
-            $this->persistenceManager->persistAll();
-
-            $this->output->writeln(sprintf('!!! Post with ID: %s ("%s") was not found in API response anymore and was therefore deleted.', $deletedPost->getInstagramid(), $deletedPost->getText()));
         }
 
         return self::SUCCESS;
