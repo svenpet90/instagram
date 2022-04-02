@@ -161,7 +161,7 @@ return [
         'pid' => [
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
     ],
 ];
