@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Controller;
 
-use SvenPetersen\Instagram\Domain\Repository\AccountRepository;
+use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class PostController extends ActionController
 {
@@ -19,18 +17,9 @@ final class PostController extends ActionController
         $this->postRepository = $postRepository;
     }
 
-    public function listByAccountsAction(): void
+    public function listAction(): void
     {
-        $accountIds = explode(',', $this->settings['accounts']);
-        $accounts = [];
-
-        $accountRepository = GeneralUtility::makeInstance(AccountRepository::class);
-        foreach ($accountIds as $accountId) {
-            $accounts[] = $accountRepository->findByUid($accountId);
-        }
-
         $settings = [
-            'accounts' => $accounts,
             'types' => [],
             'hashtags' => [
                 'tags' => [],
@@ -54,9 +43,11 @@ final class PostController extends ActionController
 
         $posts = $this->postRepository->findBySettings($settings);
 
-        DebuggerUtility::var_dump($posts);
-        die();
-
         $this->view->assign('posts', $posts);
+    }
+
+    public function showAction(Post $post): void
+    {
+        $this->view->assign('post', $post);
     }
 }

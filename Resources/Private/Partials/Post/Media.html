@@ -5,13 +5,11 @@
 <f:switch expression="{post.type}">
     <f:case value="IMAGE">
         <f:for each="{post.images}" as="falimage">
-            <f:render partial="Post/Singleimage" arguments="{falimage:falimage, post:post}"/>
+            <f:render partial="Post/Image" arguments="{falimage:falimage, post:post}"/>
         </f:for>
     </f:case>
     <f:case value="CAROUSEL_ALBUM">
-        <f:for each="{post.images}" as="falimage">
-            <f:render partial="Post/Singleimage" arguments="{falimage:falimage, post:post}"/>
-        </f:for>
+        <f:render partial="CarouselAlbum" arguments="{post:post}"/>
     </f:case>
     <f:case value="VIDEO">
         <f:for each="{post.videos}" as="video">

@@ -28,7 +28,6 @@ final class PostRepository extends Repository
         $query = $this->createQuery();
 
         $constraints = [
-         //   $this->getAccountConstraints($settings['accounts'], $query),
             $this->getHashtagConstraints($settings['hashtags'], $query),
             $this->getTypeConstraints($settings['types'], $query),
         ];
@@ -41,17 +40,6 @@ final class PostRepository extends Repository
             ->matching($query->logicalAnd($constraints))
             ->execute()
             ->toArray();
-    }
-
-    private function getAccountConstraints(array $accounts, QueryInterface $query)
-    {
-        $accountConstraints = [];
-
-        foreach ($accounts as $account) {
-            $accountConstraints[] = $query->equals('account', $account);
-        }
-
-        return $query->logicalOr($accountConstraints);
     }
 
     private function getHashtagConstraints($config, QueryInterface $query)

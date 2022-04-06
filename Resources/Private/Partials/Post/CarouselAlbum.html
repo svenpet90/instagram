@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:instagram="http://typo3.org/ns/SvenPetersen/Instagram/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="post-carousel-album">
+    <f:for each="{post.images}" as="falimage">
+        <div class="col-6 col-sm-4 col-md-3">
+            <div class="instagram-image-wrap">
+                <f:link.external uri="{post.link}" target="_blank" title="{post.text}">
+                    <f:image image="{falimage}" width="640c" height="640c" class="img-fluid"/>
+                </f:link.external>
+            </div>
+        </div>
+    </f:for>
+</div>
+</html>
