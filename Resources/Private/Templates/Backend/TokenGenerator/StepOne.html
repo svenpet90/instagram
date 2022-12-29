@@ -1,0 +1,80 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <f:be.container>
+        <div class="row m-3">
+            <div class="col-12">
+                <h1>Instagram API-Token Generator</h1>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="card">
+                    <div class="card-header">
+                        Schritt 1/3: Basisdaten
+                    </div>
+
+                    <div class="card-body">
+                        <p>
+                            Dieser Wizard dient dem importieren eines Instagram Feeds und generieren eines dazugehörigen 'langlebigen API-Tokens".
+                        </p>
+
+                        <f:form action="stepTwo"
+                                method="post"
+                                enctype="multipart/form-data"
+                        >
+                            <div class="form-group col-12">
+                                <label for="clientid">
+                                    Instagram-App-ID*
+                                </label>
+
+                                <f:form.textfield name="clientid"
+                                                  value="{clientid}"
+                                                  placeholder="Instagram-App-ID"
+                                                  required="true"
+                                                  class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="clientsecret">
+                                    Instagram App-Geheimcode*
+                                </label>
+
+                                <f:form.textfield name="clientsecret"
+                                                  value="{clientsecret}"
+                                                  placeholder="Instagram App-Geheimcode"
+                                                  required="true"
+                                                  class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="returnurl">
+                                    Gültige OAuth Redirect URI*
+                                </label>
+
+                                <f:form.textfield name="returnurl"
+                                                  value="{returnurl}"
+                                                  placeholder="Gültige OAuth Redirect URI"
+                                                  required="true"
+                                                  class="form-control"
+                                />
+                            </div>
+
+                            <f:form.submit value="Next Step"
+                                           class="btn btn-success w-100"
+                            />
+                        </f:form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </f:be.container>
+</f:section>
+
+</html>

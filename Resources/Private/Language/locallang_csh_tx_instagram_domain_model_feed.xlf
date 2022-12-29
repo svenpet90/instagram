@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+        <header/>
+        <body>
+            <trans-unit id="token.description">
+                <source>token</source>
+            </trans-unit>
+            <trans-unit id="typedescription">
+                <source>type</source>
+            </trans-unit>
+            <trans-unit id="expiresat.description">
+                <source>expiresat</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

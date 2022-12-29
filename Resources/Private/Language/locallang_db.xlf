@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="tx_instagram_domain_model_post">
+				<source>Post</source>
+			</trans-unit>
+            <trans-unit id="tx_instagram_domain_model_post.caption">
+				<source>Caption</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.posted_at">
+				<source>Createdtime</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+				<source>Instagramid</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.feed">
+				<source>Feed</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.hashtags">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.images">
+                <source>Image(s)</source>
+            </trans-unit>
+ 			<trans-unit id="tx_instagram_domain_model_post.videos">
+                <source>Videos</source>
+            </trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.media_type">
+				<source>Media type</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
+				<source>Last update</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed">
+                <source>Feed</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.token">
+                <source>Token</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.userid">
+                <source>Instagram User ID</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.expires_at">
+                <source>Expires at</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="instagram">
+                <source>Instagram Token Generator</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

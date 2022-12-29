@@ -1,0 +1,11 @@
+paths:
+  - ./Configuration
+
+filePatterns:
+  - "*.typoscript"
+
+sniffs:
+  - class: Indentation
+    parameters:
+      useSpaces: true
+      indentPerLevel: 2

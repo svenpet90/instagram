@@ -1,0 +1,89 @@
+{
+	"name": "svenpetersen/instagram",
+	"type": "typo3-cms-extension",
+	"authors": [
+		{
+			"name": "Sven Petersen",
+			"email": "sven_harders@gmx.de"
+		}
+	],
+	"require": {
+		"php": ">=7.4",
+		"psr/http-factory": "^1.0",
+		"symfony/console": ">=5.0",
+		"typo3/cms-core": "^10.4 || ^11.5",
+		"typo3/cms-extbase": "^10.4 || ^11.5",
+		"typo3/cms-scheduler": "^10.4 || ^11.5"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.24",
+		"phpstan/phpstan": "^1.4",
+		"typo3/coding-standards": "^0.7.1",
+		"typo3/testing-framework": "^6.16"
+	},
+	"autoload": {
+		"psr-4": {
+			"SvenPetersen\\Instagram\\": "Classes/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true,
+			"ergebnis/composer-normalize": true,
+			"phpstan/extension-installer": true
+		},
+		"preferred-install": {
+			"*": "dist"
+		},
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"extension-key": "instagram",
+			"web-dir": ".Build/public"
+		}
+	},
+	"scripts": {
+		"ci:composer:normalize": "@composer normalize --dry-run",
+		"ci:coverage": [
+			"@ci:coverage:functional"
+		],
+		"ci:coverage:functional": "phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/functional.cov Tests/Functional",
+		"ci:coverage:merge": "phpcov merge --clover=./coverage/clover.xml coverage/",
+		"ci:coverage:unit": "phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/unit.cov Tests/Unit",
+		"ci:lint:typoscript": [
+			"typoscript-lint --ansi -n --fail-on-warnings -vvv Configuration/TypoScript"
+		],
+		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --using-cache no --diff",
+		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:stan": "phpstan --no-progress",
+		"ci:test": [
+			"@ci:php:cs-fixer",
+			"@ci:php:stan",
+			"@ci:test:functional"
+		],
+		"ci:test:functional": [
+			"phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1"
+		],
+		"ci:test:unit": [
+			"phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1"
+		],
+		"fix:php:cs-fixer": [
+			"php-cs-fixer fix -v --using-cache no"
+		],
+		"prepare-release": [
+			"rm .gitignore",
+			"rm -rf .Build",
+			"rm -rf .github",
+			"rm -rf Tests",
+			"rm -rf Resources",
+			"rm .editorconfig",
+			"rm .gitattributes",
+			"rm .php-cs-fixer.php",
+			"rm CONTRIBUTING.rst"
+		]
+	}
+}

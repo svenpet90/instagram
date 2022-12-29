@@ -1,0 +1,44 @@
+parameters:
+  env(INSTAGRAM_API_BASEURL): 'https://api.instagram.com'
+  env(INSTAGRAM_GRAPH_API_BASEURL): 'https://graph.instagram.com'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  SvenPetersen\Instagram\:
+    resource: '../Classes/*'
+
+  # Service Aliases
+  SvenPetersen\Instagram\Factory\ApiClientFactoryInterface: '@SvenPetersen\Instagram\Factory\ApiClientFactory'
+  SvenPetersen\Instagram\Factory\FeedFactoryInterface: '@SvenPetersen\Instagram\Factory\FeedFactory'
+
+  # Services
+  SvenPetersen\Instagram\Service\AccessTokenService:
+    arguments:
+      $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
+      $feedFactory: '@SvenPetersen\Instagram\Factory\FeedFactoryInterface'
+      $apiBaseUrl: '%env(INSTAGRAM_API_BASEURL)%'
+      $graphApiBaseUrl: '%env(INSTAGRAM_GRAPH_API_BASEURL)%'
+
+  SvenPetersen\Instagram\Factory\ApiClientFactory:
+    arguments:
+      $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
+      $apiBaseUrl: '%env(INSTAGRAM_GRAPH_API_BASEURL)%'
+
+  # Commands
+  SvenPetersen\Instagram\Command\AccessTokenRefresherCommand:
+    tags:
+      - name: 'console.command'
+        command: 'instagram:accesstoken:refresh-all'
+        description: 'Refreshes all accesstokens'
+        schedulable: true
+
+  SvenPetersen\Instagram\Command\ImportPostsCommand:
+    tags:
+      - name: 'console.command'
+        command: 'instagram:import:posts'
+        description: 'Imports the latest posts of a given username.'
+        schedulable: true

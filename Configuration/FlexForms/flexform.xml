@@ -1,0 +1,94 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Instagram config</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.maxImagesToDisplay>
+                        <TCEforms>
+                            <label>Wieviele Bilder sollen maximal angezeigt werden?</label>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <max>30</max>
+                                <eval>integer</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.maxImagesToDisplay>
+
+                    <settings.showLinkToInstagramProfile>
+                        <TCEforms>
+                            <label>Zeige Button zum Instagramprofil</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showLinkToInstagramProfile>
+
+                    <settings.show.images>
+                        <TCEforms>
+                            <label>Zeige Bilder</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.show.images>
+
+                    <settings.show.carousels>
+                        <TCEforms>
+                            <label>Zeige Posts mit mehreren Bildern (Carousel)</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.show.carousels>
+
+                    <settings.show.videos>
+                        <TCEforms>
+                            <label>Zeige Videos</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.show.videos>
+
+                    <settings.showImagesByHashtag>
+                        <TCEforms>
+                            <label>Nur Bilder mit diesen Hashtags anzeigen (mit #, komma-separiert):</label>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <max>255</max>
+                                <eval>trim</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.showImagesByHashtag>
+
+                    <settings.logicalConstraint>
+                        <TCEforms>
+                            <label>Hashtags constraint</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Logical Or</numIndex>
+                                        <numIndex index="1">logicalOr</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Logical And</numIndex>
+                                        <numIndex index="1">logicalAnd</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.logicalConstraint>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+
+</T3DataStructure>

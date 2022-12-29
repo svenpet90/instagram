@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
+		<header/>
+		<body>
+			<trans-unit id="tx_instagram_domain_model_post">
+				<target>Post</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.caption">
+				<target>Caption</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.images">
+				<target>Bild(er)</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.posted_at">
+				<target>Gepostet am</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+				<target>Instagram ID</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.hashtags">
+				<target>Tags</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.link">
+				<target>Link</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.media_type">
+				<target>Typ</target>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
+				<target>Zuletzt aktualisiert</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

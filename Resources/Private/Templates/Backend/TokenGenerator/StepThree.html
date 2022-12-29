@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en"
+      data-namespace-typo3-fluid="true"
+      xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
+>
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <f:be.container>
+        <div class="row m-3">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="card">
+                    <div class="card-header">
+                        Schritt 3/3: Token erstellt
+                    </div>
+
+                    <div class="card-body">
+                        <p class="mb-4">
+                            Der Feed samt "lang-lebigen access token" wurde erfolgreich generiert und gespeichert.
+                        </p>
+
+                        <h4>
+                            Feed & Token Info
+                        </h4>
+
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Username</th>
+                                <td>{feed.username}</td>
+                            </tr>
+                            <tr>
+                                <th>User ID</th>
+                                <td>{feed.userId}</td>
+                            </tr>
+                            <tr>
+                                <th>Token</th>
+                                <td>{feed.token}</td>
+                            </tr>
+                            <tr>
+                                <th>Expires at</th>
+                                <td>{feed.expiresAt -> f:format.date(format: 'd.m.Y H:i:s')}</td>
+                            </tr>
+                            <tr>
+                                <th>Storage PID</th>
+                                <td>{feed.pid}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="text-danger">Achtung!</h4>
+                        <p>
+                            Lege nun einen Cronjob für den Command <strong>instagram:accesstoken:refresh-all</strong> an
+                            um das Token regelmäßig zu erneuern. Empfohlenes Ausführungsintervall: 1x am Tag.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:be.container>
+</f:section>
+
+</html>
