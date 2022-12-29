@@ -66,38 +66,38 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        php-versions: [7.4, 8.0]
-        typo3-versions:
-          - {typo3: 11, testing: 6}
-          - {typo3: 10, testing: 6}
+        versions:
+          - { typo3: 11, testing: 6, php: 7.4 }
+          - { typo3: 11, testing: 6, php: 8.0 }
+          - { typo3: 10, testing: 6, php: 7.4 }
     name: "Run tests with PHP ${{ matrix.php-versions }}
-          using TYPO3 ${{ matrix.typo3-versions.typo3 }}
-          with testing framework version ${{ matrix.typo3-versions.testing }}"
+          using TYPO3 ${{ matrix.versions.typo3 }}
+          with testing framework version ${{ matrix.versions.testing }}"
     steps:
       - uses: actions/checkout@v2
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.versions.php }}
           extensions: intl, mbstring, pdo_sqlite
 
       - name: "Cache composer dependencies"
         uses: actions/cache@v1
         with:
           path: ~/.composer/cache
-          key: php-${{ matrix.php-versions }}
-            -typo3-${{ matrix.typo3-versions.typo3 }}
-            -testing-${{ matrix.typo3-versions.testing }}
+          key: php-${{ matrix.versions.php }}
+            -typo3-${{ matrix.versions.typo3 }}
+            -testing-${{ matrix.versions.testing }}
             -composer-${{ hashFiles('composer.json') }}
           restore-keys: |
             php-${{ matrix.php-versions }}
-            -typo3-${{ matrix.typo3-versions.typo3 }}
-            -testing-${{ matrix.typo3-versions.testing }}composer-
-            php-${{ matrix.php-versions }}-typo3-
+            -typo3-${{ matrix.versions.typo3 }}
+            -testing-${{ matrix.versions.testing }}composer-
+            php-${{ matrix.versions.php }}-typo3-
       - name: "Install composer dependencies"
         run: composer require typo3/minimal
-          "^${{ matrix.typo3-versions.typo3 }}"
-          typo3/testing-framework "^${{ matrix.typo3-versions.testing }}"
+          "^${{ matrix.versions.typo3 }}"
+          typo3/testing-framework "^${{ matrix.versions.testing }}"
           --prefer-dist --no-progress --no-suggest
 
       #      - name: "Run Unit tests"
