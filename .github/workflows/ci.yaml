@@ -57,7 +57,7 @@ jobs:
       fail-fast: false
       matrix:
         command:
-          - "php:cs-fixer"
+          - "test"
         php-version:
           - 7.4
           - 8.0
