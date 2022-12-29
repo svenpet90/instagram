@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Controller\Backend;
 
-use Psr\Http\Message\ResponseInterface;
 use SvenPetersen\Instagram\Service\AccessTokenService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -17,12 +16,11 @@ class TokenGeneratorController extends ActionController
         $this->accessTokenService = $accessTokenService;
     }
 
-    public function stepOneAction(): ResponseInterface
+    public function stepOneAction(): void
     {
-        return $this->htmlResponse();
     }
 
-    public function stepTwoAction(): ResponseInterface
+    public function stepTwoAction(): void
     {
         $appId = $this->request->getArgument('clientid');
         $returnUrl = $this->request->getArgument('returnurl');
@@ -36,11 +34,9 @@ class TokenGeneratorController extends ActionController
             'returnUrl' => $returnUrl,
             'appSecret' => $appSecret,
         ]);
-
-        return $this->htmlResponse();
     }
 
-    public function stepThreeAction(): ResponseInterface
+    public function stepThreeAction(): void
     {
         $instagramAppId = $this->request->getArgument('clientid');
         $clientSecret = $this->request->getArgument('clientsecret');
@@ -57,7 +53,5 @@ class TokenGeneratorController extends ActionController
         $this->view->assignMultiple([
             'feed' => $feed,
         ]);
-
-        return $this->htmlResponse();
     }
 }
