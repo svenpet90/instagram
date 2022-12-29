@@ -36,7 +36,7 @@ class FeedFactory implements FeedFactoryInterface
             $feed = new Feed();
         }
 
-        $feed->setPid(0);
+        $feed->setPid(0); // todo: make configurable
         $feed
             ->setToken($token)
             ->setType($type)
