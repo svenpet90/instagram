@@ -70,7 +70,7 @@ jobs:
           - { typo3: 11, testing: 6, php: 7.4 }
           - { typo3: 11, testing: 6, php: 8.0 }
           - { typo3: 10, testing: 6, php: 7.4 }
-    name: "Run tests with PHP ${{ matrix.php-versions }}
+    name: "Run tests with PHP ${{ matrix.versions.php }}
           using TYPO3 ${{ matrix.versions.typo3 }}
           with testing framework version ${{ matrix.versions.testing }}"
     steps:
@@ -90,7 +90,7 @@ jobs:
             -testing-${{ matrix.versions.testing }}
             -composer-${{ hashFiles('composer.json') }}
           restore-keys: |
-            php-${{ matrix.php-versions }}
+            php-${{ matrix.versions.php }}
             -typo3-${{ matrix.versions.typo3 }}
             -testing-${{ matrix.versions.testing }}composer-
             php-${{ matrix.versions.php }}-typo3-
