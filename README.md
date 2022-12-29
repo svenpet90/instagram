@@ -1,11 +1,11 @@
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
-
-[![CI Status](https://github.com/svaen90/instagram/workflows/CI/badge.svg)](https://github.com/svenpet90/instagram/actions)
 [![Code Coverage Badge](https://github.com/svaen90/instagram/blob/code-coverage-badge/badge.svg)](https://github.com/svaen90/instagram/blob/code-coverage-badge/clover.xml)
-[![Total Downloads](http://poser.pugx.org/svenpet90/headless-bootstrap-package/downloads)](https://packagist.org/packages/svenpetersen/instagram)
+[![CI Status](https://github.com/svaen90/instagram/workflows/CI/badge.svg)](https://github.com/svenpet90/instagram/actions)
 [![Latest Stable Version](http://poser.pugx.org/svenpetersen/instagram/v)](https://packagist.org/packages/svenpetersen/instagram)
+[![Total Downloads](http://poser.pugx.org/svenpetersen/instagram/downloads)](https://packagist.org/packages/svenpetersen/instagram)
+[![Latest Unstable Version](http://poser.pugx.org/svenpetersen/instagram/v/unstable)](https://packagist.org/packages/svenpetersen/instagram)
 [![License](http://poser.pugx.org/svenpetersen/instagram/license)](https://packagist.org/packages/svenpetersen/instagram)
 [![PHP Version Require](http://poser.pugx.org/svenpetersen/instagram/require/php)](https://packagist.org/packages/svenpetersen/instagram)
 
