@@ -18,7 +18,7 @@
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.24",
 		"phpstan/phpstan": "^1.4",
-		"typo3/coding-standards": "^0.7.1",
+		"typo3/coding-standards": "^0.6.1",
 		"typo3/testing-framework": "^6.16"
 	},
 	"autoload": {
