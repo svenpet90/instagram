@@ -18,7 +18,7 @@ class PostDTOFactory
      */
     public static function create(array $data): PostDTO
     {
-        return (new PostDTO(
+        return new PostDTO(
             $data['id'],
             $data['caption'] ?? '',
             $data['media_url'],
@@ -27,6 +27,6 @@ class PostDTOFactory
             $data['username'],
             $data['thumbnail_url'] ?? '',
             $data['media_type']
-        ));
+        );
     }
 }

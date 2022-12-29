@@ -8,7 +8,6 @@ use SvenPetersen\Instagram\Client\ApiClientInterface;
 use SvenPetersen\Instagram\Domain\DTO\PostDTO;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
-use SvenPetersen\Instagram\Factory\PostFactory;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\File;
@@ -23,10 +22,9 @@ class PostUpserter
     private PersistenceManagerInterface $persistenceManager;
 
     public function __construct(
-        PostRepository              $postRepository,
+        PostRepository $postRepository,
         PersistenceManagerInterface $persistenceManager
-    )
-    {
+    ) {
         $this->postRepository = $postRepository;
         $this->persistenceManager = $persistenceManager;
     }

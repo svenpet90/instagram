@@ -31,8 +31,7 @@ final class PostDTO
         string $username,
         string $thumbnailUrl,
         string $mediaType
-    )
-    {
+    ) {
         $this->id = $id;
         $this->caption = $caption;
         $this->mediaUrl = $mediaUrl;

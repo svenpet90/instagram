@@ -163,7 +163,7 @@ return [
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_instagram_domain_model_post',
-                'foreign_field' => 'feed'
+                'foreign_field' => 'feed',
             ],
 
         ],
