@@ -1,3 +1,14 @@
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
+[![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
+[![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
+
+[![CI Status](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/workflows/CI/badge.svg)](https://github.com/svenpet90/instagram/actions)
+[![Code Coverage Badge](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/blob/code-coverage-badge/badge.svg)](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/blob/code-coverage-badge/clover.xml)
+[![Total Downloads](http://poser.pugx.org/svenpet90/headless-bootstrap-package/downloads)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
+[![Latest Stable Version](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/v)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
+[![License](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/license)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
+[![PHP Version Require](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/require/php)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
+
 __EXPERIMENTAL__ This extension is currently still in active development and is
 likely to change, or even change drastically.
 
@@ -33,9 +44,9 @@ __Recommended__:
 
 ### Enable/disable Backend Modul "Token Generator"
 
-To disable the BE Module - e.g. after you generated all needed Tokens - add this
+To disable the BE Module - e.g. after you generated all needed tokens - add this
 line to the <code>AdditionalConfiguration.php</code>:
-<pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = true; // or false</pre>
+<pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
 
 ### Automatic Access Token Refreshing
 
