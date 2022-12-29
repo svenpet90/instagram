@@ -2,12 +2,12 @@
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
 
-[![CI Status](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/workflows/CI/badge.svg)](https://github.com/svenpet90/instagram/actions)
-[![Code Coverage Badge](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/blob/code-coverage-badge/badge.svg)](https://github.com/FriendsOfTYPO3Headless/headless_bootstrap_package/blob/code-coverage-badge/clover.xml)
-[![Total Downloads](http://poser.pugx.org/svenpet90/headless-bootstrap-package/downloads)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
-[![Latest Stable Version](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/v)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
-[![License](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/license)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
-[![PHP Version Require](http://poser.pugx.org/friendsoftypo3headless/headless-bootstrap-package/require/php)](https://packagist.org/packages/friendsoftypo3headless/headless-bootstrap-package)
+[![CI Status](https://github.com/svaen90/instagram/workflows/CI/badge.svg)](https://github.com/svenpet90/instagram/actions)
+[![Code Coverage Badge](https://github.com/svaen90/instagram/blob/code-coverage-badge/badge.svg)](https://github.com/svaen90/instagram/blob/code-coverage-badge/clover.xml)
+[![Total Downloads](http://poser.pugx.org/svenpet90/headless-bootstrap-package/downloads)](https://packagist.org/packages/svenpetersen/instagram)
+[![Latest Stable Version](http://poser.pugx.org/svenpetersen/instagram/v)](https://packagist.org/packages/svenpetersen/instagram)
+[![License](http://poser.pugx.org/svenpetersen/instagram/license)](https://packagist.org/packages/svenpetersen/instagram)
+[![PHP Version Require](http://poser.pugx.org/svenpetersen/instagram/require/php)](https://packagist.org/packages/svenpetersen/instagram)
 
 __EXPERIMENTAL__ This extension is currently still in active development and is
 likely to change, or even change drastically.
