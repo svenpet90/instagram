@@ -9,11 +9,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Feed extends AbstractEntity implements FeedInterface
 {
-    protected ?string $userId = null;
+    protected string $userId = '';
 
-    protected ?string $token = null;
+    protected string $token = '';
 
-    protected ?string $type = null;
+    protected string $type = '';
 
     protected string $username = '';
 
@@ -24,36 +24,36 @@ class Feed extends AbstractEntity implements FeedInterface
 
     protected ?\DateTimeImmutable $expiresAt = null;
 
-    public function getUserId(): ?string
+    public function getUserId(): string
     {
         return $this->userId;
     }
 
-    public function setUserId(?string $userId): self
+    public function setUserId(string $userId): self
     {
         $this->userId = $userId;
 
         return $this;
     }
 
-    public function getToken(): ?string
+    public function getToken(): string
     {
         return $this->token;
     }
 
-    public function setToken(?string $token): self
+    public function setToken(string $token): self
     {
         $this->token = $token;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(?string $type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -65,7 +65,7 @@ class Feed extends AbstractEntity implements FeedInterface
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(?\DateTimeImmutable $expiresAt): self
+    public function setExpiresAt(\DateTimeImmutable $expiresAt): self
     {
         $this->expiresAt = $expiresAt;
 
@@ -87,7 +87,7 @@ class Feed extends AbstractEntity implements FeedInterface
     /**
      * @return ObjectStorage<\SvenPetersen\Instagram\Domain\Model\Post>
      */
-    public function getPosts()
+    public function getPosts(): ?ObjectStorage
     {
         return $this->posts;
     }

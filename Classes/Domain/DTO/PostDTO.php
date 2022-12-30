@@ -22,6 +22,11 @@ final class PostDTO
 
     private string $mediaType;
 
+    /**
+     * @var PostDTO[]
+     */
+    private array $children;
+
     public function __construct(
         string $id,
         string $caption,
@@ -80,5 +85,23 @@ final class PostDTO
     public function getMediaType(): string
     {
         return $this->mediaType;
+    }
+
+    /**
+     * @param PostDTO[] $children
+     */
+    public function setChildren(array $children): self
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * @return PostDTO[]
+     */
+    public function getChildren(): array
+    {
+        return $this->children;
     }
 }

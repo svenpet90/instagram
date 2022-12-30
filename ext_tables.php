@@ -24,7 +24,7 @@ if (TYPO3) {
             'accessTokenGenerator',
             '',
             [
-                \SvenPetersen\Instagram\Controller\Backend\TokenGeneratorController::class => 'stepOne, stepTwo, stepThree',
+                \SvenPetersen\Instagram\Controller\TokenGeneratorController::class => 'stepOne, stepTwo, stepThree',
             ],
             [
                 'access' => 'user,group',

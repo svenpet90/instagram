@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 class PostUpserter
 {
+    private const TABLENAME = 'tx_instagram_domain_model_post';
+
     private PostRepository $postRepository;
 
     private PersistenceManagerInterface $persistenceManager;
@@ -32,7 +34,7 @@ class PostUpserter
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
     {
         $action = 'UPDATE';
-        $post = $this->postRepository->findOneByInstagramid($dto->getId());
+        $post = $this->postRepository->findOneBy(['instagramid' => $dto->getId(), 'pid' => $storagePid]);
 
         if ($post === null) {
             $action = 'NEW';
@@ -50,30 +52,34 @@ class PostUpserter
             return $post;
         }
 
+        return $this->processPost($post, $dto);
+    }
+
+    private function processPost(Post $post, PostDTO $dto): Post
+    {
         switch ($post->getMediaType()) {
             case Post::MEDIA_TYPE_IMAGE:
-                $fileObject = $this->downloadFile($dto->getMediaUrl(), 'jpg');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+                $fileObject = $this->downloadFile($dto->getMediaUrl(), Post::IMAGE_FILE_EXT);
+                $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
 
                 break;
             case Post::MEDIA_TYPE_CAROUSEL_ALBUM:
-                $childMediaIds = $apiClient->getChildrenMediaIds($dto->getId());
-                $childMedias = $apiClient->getCarouselMedia($childMediaIds);
+                $children = $dto->getChildren();
 
-                foreach ($childMedias as $item) {
-                    switch ($item['media_type']) {
+                foreach ($children as $child) {
+                    switch ($child->getMediaType()) {
                         case Post::MEDIA_TYPE_IMAGE:
                             $fileObject = $this->downloadFile(
-                                $item['media_url'],
-                                'jpg'
+                                $child->getMediaUrl(),
+                                Post::IMAGE_FILE_EXT
                             );
 
-                            $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+                            $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
 
                             break;
                         case Post::MEDIA_TYPE_VIDEO:
-                            $fileObject = $this->downloadFile($item['media_url'], 'mp4');
-                            $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
+                            $fileObject = $this->downloadFile($child->getMediaUrl(), Post::VIDEO_FILE_EXT);
+                            $this->addToFal($post, $fileObject, self::TABLENAME, 'videos');
 
                             break;
                     }
@@ -81,12 +87,12 @@ class PostUpserter
 
                 break;
             case Post::MEDIA_TYPE_VIDEO:
-                $fileObject = $this->downloadFile($dto->getMediaUrl(), 'mp4');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'videos');
+                $fileObject = $this->downloadFile($dto->getMediaUrl(), Post::VIDEO_FILE_EXT);
+                $this->addToFal($post, $fileObject, self::TABLENAME, 'videos');
 
                 // Download thumbnail image
-                $fileObject = $this->downloadFile($dto->getThumbnailUrl(), 'jpg');
-                $this->addToFal($post, $fileObject, 'tx_instagram_domain_model_post', 'images');
+                $fileObject = $this->downloadFile($dto->getThumbnailUrl(), Post::IMAGE_FILE_EXT);
+                $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
 
                 break;
         }
@@ -97,8 +103,7 @@ class PostUpserter
         return $post;
     }
 
-    /** Extract to service */
-    private function downloadFile(string $fileUrl, string $fileExtension)
+    private function downloadFile(string $fileUrl, string $fileExtension): File
     {
         $directory = sprintf('%s/fileadmin/instagram', Environment::getPublicPath());
         GeneralUtility::mkdir_deep($directory);
@@ -109,7 +114,13 @@ class PostUpserter
         $data = file_get_contents($fileUrl);
         file_put_contents($filePath, $data);
 
-        return GeneralUtility::makeInstance(ResourceFactory::class)->retrieveFileOrFolderObject($filePath);
+        /** @var ResourceFactory $resourceFactory */
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+
+        /** @var File $file */
+        $file = $resourceFactory->retrieveFileOrFolderObject($filePath);
+
+        return $file;
     }
 
     private function addToFal(Post $newElement, File $file, string $tablename, string $fieldname): void
@@ -127,6 +138,7 @@ class PostUpserter
             'crdate' => time(),
         ];
 
+        /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
         $databaseConn = $connectionPool->getConnectionForTable('sys_file_reference');

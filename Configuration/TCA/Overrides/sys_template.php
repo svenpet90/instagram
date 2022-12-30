@@ -7,5 +7,5 @@ if (! defined('TYPO3')) {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
     'instagram',
     'Configuration/TypoScript',
-    'TYPO3 Instagram Client'
+    'Instagram'
 );

@@ -9,10 +9,19 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Post extends AbstractEntity
 {
+    /** @var string */
+    public const IMAGE_FILE_EXT = 'jpg';
+
+    /** @var string */
+    public const VIDEO_FILE_EXT = 'mp4';
+
+    /** @var string */
     public const MEDIA_TYPE_IMAGE = 'IMAGE';
 
+    /** @var string */
     public const MEDIA_TYPE_CAROUSEL_ALBUM = 'CAROUSEL_ALBUM';
 
+    /** @var string */
     public const MEDIA_TYPE_VIDEO = 'VIDEO';
 
     /**
@@ -20,7 +29,7 @@ class Post extends AbstractEntity
      */
     protected $_languageUid;
 
-    protected ?string $caption = null;
+    protected string $caption = '';
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
@@ -34,13 +43,13 @@ class Post extends AbstractEntity
 
     protected ?\DateTimeImmutable $postedAt = null;
 
-    protected ?string $instagramid = null;
+    protected string $instagramid = '';
 
-    protected ?string $hashtags = null;
+    protected string $hashtags = '';
 
-    protected ?string $link = null;
+    protected string $link = '';
 
-    protected ?string $mediaType = null;
+    protected string $mediaType = '';
 
     protected ?\DateTimeImmutable $lastupdate = null;
 
@@ -63,7 +72,7 @@ class Post extends AbstractEntity
         return $this->caption;
     }
 
-    public function setCaption(?string $caption): self
+    public function setCaption(string $caption): self
     {
         $this->caption = $caption;
 
@@ -87,7 +96,7 @@ class Post extends AbstractEntity
         return $this->instagramid;
     }
 
-    public function setInstagramid(?string $instagramid): self
+    public function setInstagramid(string $instagramid): self
     {
         $this->instagramid = $instagramid;
 
@@ -118,7 +127,7 @@ class Post extends AbstractEntity
         return $this;
     }
 
-    public function getMediaType(): ?string
+    public function getMediaType(): string
     {
         return $this->mediaType;
     }
@@ -165,7 +174,7 @@ class Post extends AbstractEntity
         return $this->videos;
     }
 
-    public function setVideos($videos): self
+    public function setVideos(ObjectStorage $videos): self
     {
         $this->videos = $videos;
 
@@ -179,6 +188,7 @@ class Post extends AbstractEntity
 
     public function setFeed(?FeedInterface $feed): self
     {
+        /** @phpstan-ignore-next-line */
         $this->feed = $feed;
 
         return $this;

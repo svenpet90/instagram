@@ -9,7 +9,9 @@ use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
-/** @internal */
+/**
+ * @internal
+ */
 class AccessTokenRefresher
 {
     private FeedRepository $feedRepository;
@@ -46,6 +48,7 @@ class AccessTokenRefresher
 
     public function refreshAccessToken(Feed $feed): Feed
     {
+        /** @var \DateTimeImmutable $expiresAt */
         $expiresAt = $feed->getExpiresat();
         $now = new DateTime();
         $diffInDays = $expiresAt->diff($now)->days;
@@ -57,7 +60,7 @@ class AccessTokenRefresher
 
         $updatedTokenData = $this->accessTokenService->refreshAccessToken($feed);
 
-        $expiresAt = (new DateTime())->modify(sprintf('+ %s seconds', $updatedTokenData['expires_in']));
+        $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $updatedTokenData['expires_in']));
 
         $feed
             ->setToken($updatedTokenData['access_token'])
@@ -67,6 +70,6 @@ class AccessTokenRefresher
         $this->feedRepository->update($feed);
         $this->persistenceManager->persistAll();
 
-        return $token;
+        return $feed;
     }
 }

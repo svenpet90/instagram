@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Client;
 
-use Psr\Http\Message\RequestFactoryInterface;
+use SvenPetersen\Instagram\Domain\DTO\PostDTO;
+use SvenPetersen\Instagram\Domain\DTO\UserDTO;
 use SvenPetersen\Instagram\Domain\Model\FeedInterface;
 use SvenPetersen\Instagram\Factory\PostDTOFactory;
+use SvenPetersen\Instagram\Factory\UserDTOFactory;
+use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface
 {
     private FeedInterface $feed;
 
-    private RequestFactoryInterface $requestFactory;
+    private RequestFactory $requestFactory;
 
     private string $apiBaseUrl;
 
     public function __construct(
         FeedInterface $feed,
-        RequestFactoryInterface $requestFactory,
+        RequestFactory $requestFactory,
         string $apiBaseUrl
     ) {
         $this->feed = $feed;
@@ -27,23 +30,10 @@ class ApiClient implements ApiClientInterface
     }
 
     /**
-     * @return string[]
+     * @return PostDTO[]
+     *
+     * @throws \Exception
      */
-    public function getDefaultMediaFields(): array
-    {
-        return [
-            'caption',
-            'id',
-            'is_shared_to_feed',
-            'media_type',
-            'media_url',
-            'permalink',
-            'thumbnail_url',
-            'timestamp',
-            'username',
-        ];
-    }
-
     public function getPosts(int $limit = 25): array
     {
         $return = [];
@@ -77,6 +67,13 @@ class ApiClient implements ApiClientInterface
         return $return;
     }
 
+    /**
+     * @param PostDTO[] $posts
+     *
+     * @return PostDTO[]
+     *
+     * @throws \Exception
+     */
     private function getPaginatedPosts(array $posts, int $limit, string $nextPageUrl): array
     {
         while (count($posts) < $limit && $nextPageUrl) {
@@ -95,59 +92,10 @@ class ApiClient implements ApiClientInterface
         return $posts;
     }
 
-    public function getMedia(string $mediaId, array $fields = null)
-    {
-        $fields = $fields ?? $this->getDefaultMediaFields();
-        $fieldsString = strtolower(implode(',', $fields));
-
-        $endpoint = sprintf(
-            '%s/%s?fields=%s&access_token=%s',
-            $this->apiBaseUrl,
-            $mediaId,
-            $fieldsString,
-            $this->feed->getToken()
-        );
-
-        return $this->request($endpoint);
-    }
-
     /**
-     * @return int[]
-     *
      * @throws \Exception
      */
-    public function getChildrenMediaIds(string $mediaId): array
-    {
-        $endpoint = sprintf('%s/%s/children?access_token=%s', $this->apiBaseUrl, $mediaId, $this->feed->getToken());
-        $response = $this->request($endpoint);
-
-        $return = [];
-
-        foreach ($response['data'] as $imageData) {
-            $return[] = (int)$imageData['id'];
-        }
-
-        return $return;
-    }
-
-    /**
-     * @param string[] $mediaIds
-     *
-     * @return array
-     */
-    public function getCarouselMedia(array $mediaIds): array
-    {
-        $return = [];
-
-        /** @var string $mediaId */
-        foreach ($mediaIds as $mediaId) {
-            $return[] = $this->getMedia($mediaId, ['media_url', 'media_type']);
-        }
-
-        return $return;
-    }
-
-    public function getUserdata(): array
+    public function getUserdata(): UserDTO
     {
         $endpoint = sprintf(
             '%s/%s/?access_token=%s&fields=id,username,account_type,media_count',
@@ -156,10 +104,14 @@ class ApiClient implements ApiClientInterface
             $this->feed->getToken()
         );
 
-        return $this->request($endpoint);
+        $response = $this->request($endpoint);
+
+        return UserDTOFactory::createFromApiResponse($response);
     }
 
     /**
+     * @param array<string, mixed> $additionalOptions
+     *
      * @return mixed[]
      *
      * @throws \Exception
@@ -169,7 +121,7 @@ class ApiClient implements ApiClientInterface
         $response = $this->requestFactory->request($url, $method, $additionalOptions);
 
         if ($response->getStatusCode() !== 200) {
-            throw new \Exception($response);
+            throw new \Exception($response->getReasonPhrase());
         }
 
         $contents = $response->getBody()->getContents();
@@ -180,5 +132,24 @@ class ApiClient implements ApiClientInterface
     public function getFeed(): FeedInterface
     {
         return $this->feed;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getDefaultMediaFields(): array
+    {
+        return [
+            'caption',
+            'id',
+            'is_shared_to_feed',
+            'media_type',
+            'media_url',
+            'permalink',
+            'thumbnail_url',
+            'timestamp',
+            'username',
+            'children',
+        ];
     }
 }

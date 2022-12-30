@@ -6,13 +6,13 @@ if (! defined('TYPO3')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'SvenPetersen.Instagram',
-    'Pi1',
+    'List',
     'Instagram'
 );
 
-$pluginSignature = 'instagram_pi1';
+$pluginSignature = 'instagram_list';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
-    'FILE:EXT:instagram/Configuration/FlexForms/flexform.xml'
+    'FILE:EXT:instagram/Configuration/FlexForms/List.xml'
 );

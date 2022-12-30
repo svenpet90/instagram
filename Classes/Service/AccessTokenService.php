@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Service;
 
-use Psr\Http\Message\RequestFactoryInterface;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Factory\FeedFactoryInterface;
+use TYPO3\CMS\Core\Http\RequestFactory;
 
-/** @internal */
+/**
+ * @internal
+ */
 class AccessTokenService
 {
-    private RequestFactoryInterface $requestFactory;
+    private RequestFactory $requestFactory;
 
     private FeedFactoryInterface $feedFactory;
 
@@ -20,7 +22,7 @@ class AccessTokenService
     private string $graphApiBaseUrl;
 
     public function __construct(
-        RequestFactoryInterface $requestFactory,
+        RequestFactory $requestFactory,
         FeedFactoryInterface $feedFactory,
         string $apiBaseUrl,
         string $graphApiBaseUrl
@@ -70,6 +72,9 @@ class AccessTokenService
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function refreshAccessToken(Feed $feed): array
     {
         $endpoint = sprintf(
@@ -82,7 +87,7 @@ class AccessTokenService
     }
 
     /**
-     * @return array{'access_token': string, 'user_id': int}
+     * @return mixed[] array{'access_token': string, 'user_id': int}
      *
      * @throws \Exception
      */
@@ -144,7 +149,7 @@ class AccessTokenService
         $response = $this->requestFactory->request($url, $method, $additionalOptions);
 
         if ($response->getStatusCode() !== 200) {
-            throw new \Exception($response);
+            throw new \Exception($response->getReasonPhrase());
         }
 
         $contents = $response->getBody()->getContents();
@@ -153,7 +158,7 @@ class AccessTokenService
     }
 
     /**
-     * @return array{'id': string, 'username': string}
+     * @return mixed[] array{'id': string, 'username': string}
      *
      * @throws \Exception
      */

@@ -1,0 +1,7 @@
+module.tx_instagram {
+  view {
+    templateRootPaths.0 = EXT:instagram/Resources/Private/Backend/Templates/
+    partialRootPaths.0 = EXT:instagram/Resources/Private/Backend/Partials/
+    layoutRootPaths.0 = EXT:instagram/Resources/Private/Backend/Layouts/
+  }
+}
