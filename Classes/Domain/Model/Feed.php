@@ -7,7 +7,7 @@ namespace SvenPetersen\Instagram\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Feed extends AbstractEntity implements FeedInterface
+class Feed extends AbstractEntity
 {
     protected string $userId = '';
 

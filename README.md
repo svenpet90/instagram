@@ -72,7 +72,6 @@ To disable the Backend module - e.g. after you generated all needed tokens - add
 line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
 <pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
 
-
 ## Testing
 This Extension comes with a testsuite for coding styles.
 To run the tests simply use the provided composer script:

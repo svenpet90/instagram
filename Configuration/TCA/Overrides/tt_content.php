@@ -7,7 +7,7 @@ if (! defined('TYPO3')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'SvenPetersen.Instagram',
     'List',
-    'Instagram'
+    'Instagram: List of posts'
 );
 
 $pluginSignature = 'instagram_list';
@@ -15,4 +15,10 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
     'FILE:EXT:instagram/Configuration/FlexForms/List.xml'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'SvenPetersen.Instagram',
+    'Show',
+    'Instagram: Show single post'
 );

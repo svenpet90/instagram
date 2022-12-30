@@ -181,14 +181,13 @@ class Post extends AbstractEntity
         return $this;
     }
 
-    public function getFeed(): ?FeedInterface
+    public function getFeed(): ?Feed
     {
         return $this->feed;
     }
 
-    public function setFeed(?FeedInterface $feed): self
+    public function setFeed(?Feed $feed): self
     {
-        /** @phpstan-ignore-next-line */
         $this->feed = $feed;
 
         return $this;

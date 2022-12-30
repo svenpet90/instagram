@@ -6,21 +6,21 @@ namespace SvenPetersen\Instagram\Client;
 
 use SvenPetersen\Instagram\Domain\DTO\PostDTO;
 use SvenPetersen\Instagram\Domain\DTO\UserDTO;
-use SvenPetersen\Instagram\Domain\Model\FeedInterface;
+use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Factory\PostDTOFactory;
 use SvenPetersen\Instagram\Factory\UserDTOFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface
 {
-    private FeedInterface $feed;
+    private Feed $feed;
 
     private RequestFactory $requestFactory;
 
     private string $apiBaseUrl;
 
     public function __construct(
-        FeedInterface $feed,
+        Feed $feed,
         RequestFactory $requestFactory,
         string $apiBaseUrl
     ) {
@@ -129,7 +129,7 @@ class ApiClient implements ApiClientInterface
         return json_decode($contents, true);
     }
 
-    public function getFeed(): FeedInterface
+    public function getFeed(): Feed
     {
         return $this->feed;
     }

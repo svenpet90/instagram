@@ -15,3 +15,15 @@ if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGenera
         \SvenPetersen\Instagram\Controller\PostController::class => '',
     ]
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'SvenPetersen.Instagram',
+    'Show',
+    [
+        \SvenPetersen\Instagram\Controller\PostController::class => 'show',
+    ],
+    // non-cacheable actions
+    [
+        \SvenPetersen\Instagram\Controller\PostController::class => '',
+    ]
+);

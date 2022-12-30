@@ -17,6 +17,7 @@
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.24",
+		"helmich/typo3-typoscript-lint": "^3.0",
 		"phpstan/phpstan": "^1.4",
 		"typo3/coding-standards": "^0.6.1",
 		"typo3/testing-framework": "^6.16"
@@ -61,6 +62,7 @@
 		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:stan": "phpstan --no-progress",
 		"ci:test": [
+			"@ci:lint:typoscript",
 			"@ci:php:cs-fixer",
 			"@ci:php:stan",
 			"@ci:test:functional"
