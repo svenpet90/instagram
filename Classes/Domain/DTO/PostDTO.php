@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Domain\DTO;
 
-final class PostDTO
+class PostDTO
 {
     private string $id;
 

@@ -52,6 +52,11 @@ class ImportPostsCommand extends Command
         }
 
         $feed = $this->feedRepository->findOneByUsername($username);
+
+        if ($feed === null) {
+            throw new \InvalidArgumentException(sprintf('No feed entity found for given username "%s".', $username));
+        }
+
         $apiClient = $this->apiClientFactory->create($feed);
 
         $posts = $apiClient->getPosts($limit);
