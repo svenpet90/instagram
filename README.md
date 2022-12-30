@@ -12,10 +12,11 @@
 __EXPERIMENTAL__ This extension is currently still in active development and is
 likely to change, or even change drastically.
 
-# instagram
+# TYPO3 Extension "instagram"
+TYPO3 Extension to display a users instagram feed in a TYPO3 Website.
 
-TYPO3 Extension to create and auto-refresh long-lived api access tokens, import
-instagram feeds as entities to the database and output feeds via
+Creates and auto-refreshes long-lived api access tokens, imports
+instagram feeds/posts as entities to the database and output feeds/posts via
 Frontend-Plugin.
 
 ## Installation
@@ -35,21 +36,27 @@ Frontend-Plugin.
 5. Add a Frontend-Plugin on a page to output the imported posts in the frontend.
 
 __Recommended__:
-
 * Add a cronjob/scheduler task to refresh the API Access tokens automatically -
   see "Automatic Access Token refresh" for details.
 * Add a cronjob/scheduler task to import the postings on a regular basis
 
 ## Funtionalities
 
-### Enable/disable Backend Modul "Token Generator"
+### Automatic import of postings
+This extension comes with a command to import (new) posts of a given instagram user.
+It is recommended to set this command up to run regularly - e.g. once a day.
 
-To disable the BE Module - e.g. after you generated all needed tokens - add this
-line to the <code>AdditionalConfiguration.php</code>:
-<pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
+<pre>instagram:import:posts {username} {storagePid} [limit|25]</pre>
+
+__Arguments:__
+
+| Name        | Description                                                         |
+| ----------- |---------------------------------------------------------------------|
+| username    | The instagram username to import posts for                          |
+| storagePid  | The PID to save the imported posts                                |
+| limit       | The maximum number of latest posts to import (Optional. Default: 25) |
 
 ### Automatic Access Token Refreshing
-
 The generated long-lived access token is valid for 60 days.
 It can be refreshed when at least 24 hours old.
 
@@ -60,3 +67,14 @@ command
 Make sure to run this command regularly - e.g. once a day via a
 cronjob/scheduler - in order to keep your access token valid.
 
+### Disable/enable Backend module "Token Generator"
+To disable the Backend module - e.g. after you generated all needed tokens - add this
+line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
+<pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
+
+
+## Testing
+This Extension comes with a testsuite for coding styles.
+To run the tests simply use the provided composer script:
+
+<pre>composer ci:test</pre>
