@@ -13,7 +13,7 @@ __EXPERIMENTAL__ This extension is currently still in active development and is
 likely to change, or even change drastically.
 
 # TYPO3 Extension "instagram"
-TYPO3 Extension to display a users instagram feed in a TYPO3 Website.
+TYPO3 Extension to display instagram posts/feeds in a TYPO3 Website.
 
 Creates and auto-refreshes long-lived api access tokens, imports
 instagram feeds/posts as entities to the database and output feeds/posts via
