@@ -38,11 +38,11 @@ Frontend-Plugin.
 __Recommended__:
 * Add a cronjob/scheduler task to refresh the API Access tokens automatically -
   see "Automatic Access Token refresh" for details.
-* Add a cronjob/scheduler task to import the postings on a regular basis
+* Add a cronjob/scheduler task to import the posts on a regular basis
 
 ## Funtionalities
 
-### Automatic import of postings
+### Automatic import of posts
 This extension comes with a command to import (new) posts of a given instagram user.
 It is recommended to set this command up to run regularly - e.g. once a day.
 
