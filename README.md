@@ -27,7 +27,7 @@ Frontend-Plugin.
 
 1. Include the provided static TypoScript
 2. Create a Facebook "Instagram Basic Display" App: See the
-   official [Documentation](https://developers.facebook.com/docs/instagram-basic-display-api/getting-started)
+   [official Documentation](https://developers.facebook.com/docs/instagram-basic-display-api/getting-started)
    for a step by step guide
 3. Use the Backend Module provided by this Extension to create a "long-lived
    access token" in a "Feed" Entity.
