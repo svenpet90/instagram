@@ -82,6 +82,7 @@ class PostRepository extends Repository
     public function findOneBy(array $constraints)
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
         $constrains = [];
         foreach ($constraints as $field => $value) {
