@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Client;
 
+use SvenPetersen\Instagram\Domain\Model\Dto\FeedDTO;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
-use SvenPetersen\Instagram\Domain\Model\Dto\UserDTO;
 use SvenPetersen\Instagram\Domain\Model\Feed;
+use SvenPetersen\Instagram\Factory\Dto\FeedDTOFactory;
 use SvenPetersen\Instagram\Factory\Dto\PostDTOFactory;
-use SvenPetersen\Instagram\Factory\Dto\UserDTOFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface
@@ -57,7 +57,7 @@ class ApiClient implements ApiClientInterface
             }
         }
 
-        // Get paginated posts if nessesary
+        // Get paginated posts if necessary
         $nextPageUrl = $response['paging']['next'] ?? null;
 
         if (count($return) < $limit && $nextPageUrl) {
@@ -95,7 +95,7 @@ class ApiClient implements ApiClientInterface
     /**
      * @throws \Exception
      */
-    public function getUserdata(): UserDTO
+    public function getFeedData(): FeedDTO
     {
         $endpoint = sprintf(
             '%s/%s/?access_token=%s&fields=id,username,account_type,media_count',
@@ -106,7 +106,7 @@ class ApiClient implements ApiClientInterface
 
         $response = $this->request($endpoint);
 
-        return UserDTOFactory::createFromApiResponse($response);
+        return FeedDTOFactory::createFromApiResponse($response);
     }
 
     /**

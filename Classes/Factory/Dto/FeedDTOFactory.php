@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Factory\Dto;
 
-use SvenPetersen\Instagram\Domain\Model\Dto\UserDTO;
+use SvenPetersen\Instagram\Domain\Model\Dto\FeedDTO;
 
 /**
  * @internal
  */
-class UserDTOFactory
+class FeedDTOFactory
 {
     /**
      * @param mixed[] $apiResponseDate
      */
-    public static function createFromApiResponse(array $apiResponseDate): UserDTO
+    public static function createFromApiResponse(array $apiResponseDate): FeedDTO
     {
-        return new UserDTO(
+        return new FeedDTO(
             $apiResponseDate['id'],
             $apiResponseDate['username'],
             $apiResponseDate['account_type'],

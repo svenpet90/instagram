@@ -60,7 +60,7 @@ class AccessTokenService
         $expiresIn = $responseArray['expires_in'];
         $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $expiresIn));
 
-        $userdata = $this->getUserdata($userId, $shortLivedAccessToken);
+        $userdata = $this->getFeedData($shortLivedAccessToken);
         $username = $userdata['username'];
 
         return $this->feedFactory->upsert(
@@ -158,16 +158,15 @@ class AccessTokenService
     }
 
     /**
-     * @return mixed[] array{'id': string, 'username': string}
+     * @return array<string, string>
      *
      * @throws \Exception
      */
-    public function getUserdata(string $userId, string $accessToken): array
+    private function getFeedData(string $accessToken): array
     {
         $endpoint = sprintf(
-            '%s/%s/?access_token=%s&fields=id,username',
+            '%s/me/?access_token=%s&fields=id,username',
             $this->graphApiBaseUrl,
-            $userId,
             $accessToken
         );
 

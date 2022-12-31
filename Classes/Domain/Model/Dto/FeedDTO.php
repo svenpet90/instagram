@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Domain\Model\Dto;
 
-class UserDTO
+class FeedDTO
 {
     private string $id;
 
