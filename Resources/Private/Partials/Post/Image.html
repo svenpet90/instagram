@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      data-namespace-typo3-fluid="true"
+      xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
+>
+
+<div class="col-6 col-sm-4 col-md-3">
+    <f:link.external uri="{post.link}"
+                     target="_blank"
+                     title="{post.caption}"
+    >
+        <f:image image="{falImage}"
+                 width="640c"
+                 height="640c"
+                 class="img-fluid"
+        />
+    </f:link.external>
+
+    <p>
+        {post.caption}
+    </p>
+</div>
+
+</html>

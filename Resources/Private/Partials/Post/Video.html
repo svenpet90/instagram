@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      data-namespace-typo3-fluid="true"
+      xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers"
+>
+
+<div class="col-6 col-sm-4 col-md-3">
+    <f:link.page pageUid="{post.link}" target="_blank">
+        <video width="640"
+               height="640"
+               autoplay
+               controls
+               style="max-width: 100%; height:auto"
+        >
+            <source src="{video.originalResource.publicUrl}"
+                    type="video/mp4"
+            >
+            Your browser does not support the video tag.
+        </video>
+    </f:link.page>
+
+    <p>
+        {post.caption}
+    </p>
+</div>
+
+</html>
