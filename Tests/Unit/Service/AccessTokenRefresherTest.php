@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Tests\Unit\Service;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
 use SvenPetersen\Instagram\Service\AccessTokenRefresher;
@@ -16,7 +15,7 @@ class AccessTokenRefresherTest extends BaseTest
 {
     private ?AccessTokenRefresher $accessTokenRefresher = null;
 
-    private AccessTokenService|MockObject $accessTokenService;
+    private AccessTokenService $accessTokenService;
 
     public function setUp(): void
     {
