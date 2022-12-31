@@ -71,6 +71,7 @@
 			"@ci:lint:typoscript",
 			"@ci:php:cs-fixer",
 			"@ci:php:stan",
+			"@ci:test:unit",
 			"@ci:test:functional"
 		],
 		"ci:test:functional": [

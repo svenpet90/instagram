@@ -7,6 +7,8 @@ namespace SvenPetersen\Instagram\Service;
 use DateTime;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 /**
@@ -36,6 +38,12 @@ class AccessTokenRefresher
     public function refreshAll(): array
     {
         $return = [];
+
+        /** @var Typo3QuerySettings $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+
+        $this->feedRepository->setDefaultQuerySettings($querySettings);
         $feeds = $this->feedRepository->findAll();
 
         /** @var Feed $feed */

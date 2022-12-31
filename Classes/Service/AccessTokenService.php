@@ -79,7 +79,7 @@ class AccessTokenService
     {
         $endpoint = sprintf(
             '%s/refresh_access_token/?grant_type=ig_refresh_token&access_token=%s',
-            $this->apiBaseUrl,
+            $this->graphApiBaseUrl,
             $feed->getToken()
         );
 
