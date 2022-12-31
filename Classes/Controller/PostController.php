@@ -19,7 +19,7 @@ class PostController extends ActionController
 
     public function listAction(): void
     {
-        $posts = $this->postRepository->findAll();
+        $posts = $this->postRepository->findBySettings($this->settings);
 
         $this->view->assign('posts', $posts);
     }

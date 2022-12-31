@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Domain\Repository;
 
 use SvenPetersen\Instagram\Domain\Model\Post;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -20,13 +19,43 @@ class PostRepository extends Repository
         'postedAt' => QueryInterface::ORDER_DESCENDING,
     ];
 
-    public function initializeObject(): void
+    /**
+     * @param array<string, string> $settings
+     *
+     * @throws InvalidQueryException
+     */
+    public function findBySettings(array $settings): QueryResultInterface
     {
-        /** @var Typo3QuerySettings $querySettings */
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
+        $query = $this->createQuery();
+        $constraints = [];
 
-        $this->setDefaultQuerySettings($querySettings);
+        // MediaType constraints
+        if ($settings['mediaTypes'] !== '') {
+            $mediaTypeConstraints = [];
+
+            foreach (explode(',', $settings['mediaTypes']) as $mediaType) {
+                $mediaTypeConstraints[] = $query->equals('mediaType', $mediaType);
+            }
+
+            $constraints[] = $query->logicalOr($mediaTypeConstraints);
+        }
+
+        // Hashtag constraints
+        if ($settings['hashtagConstraints'] !== '') {
+            $hashtagConstraints = [];
+
+            foreach (explode(',', $settings['hashtagConstraints']) as $hashtag) {
+                $hashtagConstraints[] = $query->like('hashtags', sprintf('%%%s %%', trim($hashtag)));
+            }
+
+            $constraints[] = $query->{$settings['logicalConstraint']}($hashtagConstraints);
+        }
+
+        if ($settings['maxPostsToShow']) {
+            $query->setLimit((int)$settings['maxPostsToShow']);
+        }
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
     /**
@@ -38,7 +67,7 @@ class PostRepository extends Repository
 
         $constrains = [];
         foreach ($types as $type) {
-            $constrains[] = $query->equals('type', $type);
+            $constrains[] = $query->equals('mediaType', $type);
         }
 
         $query->matching($query->logicalOr($constrains));
@@ -62,7 +91,7 @@ class PostRepository extends Repository
         $query->matching($query->logicalAnd($constrains));
 
         /** @var Post|null $result */
-        $result =  $query
+        $result = $query
             ->setLimit(1)
             ->execute()
             ->getFirst();
@@ -73,7 +102,7 @@ class PostRepository extends Repository
     /**
      * @param string[] $hashtags
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws InvalidQueryException
      */
     public function findByHashtags(array $hashtags, string $logicalConstraint): QueryResultInterface
     {

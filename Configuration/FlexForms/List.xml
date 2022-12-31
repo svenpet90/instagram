@@ -7,48 +7,45 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <settings.maxImagesToDisplay>
+                    <settings.mediaTypes>
+                        <TCEforms>
+                            <label>Arten von Posts die angezeigt werden sollen</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Image</numIndex>
+                                        <numIndex index="1">IMAGE</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Video</numIndex>
+                                        <numIndex index="1">VIDEO</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">Carousel</numIndex>
+                                        <numIndex index="1">CAROUSEL_ALBUM</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.mediaTypes>
+
+                    <settings.maxPostsToShow>
                         <TCEforms>
                             <label>Wieviele Bilder sollen maximal angezeigt werden?</label>
                             <config>
                                 <type>input</type>
                                 <size>20</size>
                                 <max>30</max>
-                                <eval>integer</eval>
+                                <eval>int</eval>
                             </config>
                         </TCEforms>
-                    </settings.maxImagesToDisplay>
+                    </settings.maxPostsToShow>
 
-                    <settings.show.images>
+                    <settings.hashtagConstraints>
                         <TCEforms>
-                            <label>Zeige Bilder</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.show.images>
-
-                    <settings.show.carousels>
-                        <TCEforms>
-                            <label>Zeige Posts mit mehreren Bildern (Carousel)</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.show.carousels>
-
-                    <settings.show.videos>
-                        <TCEforms>
-                            <label>Zeige Videos</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.show.videos>
-
-                    <settings.showImagesByHashtag>
-                        <TCEforms>
-                            <label>Nur Bilder mit diesen Hashtags anzeigen (mit #, komma-separiert):</label>
+                            <label>Nur Posts mit diesen Hashtags anzeigen (mit #, komma-separiert):</label>
                             <config>
                                 <type>input</type>
                                 <size>20</size>
@@ -56,7 +53,7 @@
                                 <eval>trim</eval>
                             </config>
                         </TCEforms>
-                    </settings.showImagesByHashtag>
+                    </settings.hashtagConstraints>
 
                     <settings.logicalConstraint>
                         <TCEforms>

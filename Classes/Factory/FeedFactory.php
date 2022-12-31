@@ -29,7 +29,7 @@ class FeedFactory implements FeedFactoryInterface
 
     public function upsert(
         string $token,
-        string $type,
+        string $tokenType,
         string $userId,
         \DateTimeImmutable $expiresAt,
         string $username = ''
@@ -43,7 +43,7 @@ class FeedFactory implements FeedFactoryInterface
         $feed->setPid(0); // todo: make configurable
         $feed
             ->setToken($token)
-            ->setType($type)
+            ->setTokenType($tokenType)
             ->setExpiresAt($expiresAt)
             ->setUserId($userId)
             ->setUsername($username);

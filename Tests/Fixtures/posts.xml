@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_instagram_domain_model_post>
+        <uid>1</uid>
+        <pid>1</pid>
+        <instagramid>0</instagramid>
+        <link>https://www.instagram.com/p/abcdefghijk/</link>
+        <media_type>IMAGE</media_type>
+        <lastupdate>1672427948</lastupdate>
+        <videos>0</videos>
+        <caption>this is just a test #instagram #typo3 #testing</caption>
+        <hashtags>#instagram #typo3 #testing</hashtags>
+        <images>1</images>
+        <posted_at>1597698050</posted_at>
+        <feed>1</feed>
+    </tx_instagram_domain_model_post>
+
+    <tx_instagram_domain_model_post>
+        <uid>2</uid>
+        <pid>1</pid>
+        <instagramid>0</instagramid>
+        <link>https://www.instagram.com/p/abcdefghijk/</link>
+        <media_type>IMAGE</media_type>
+        <lastupdate>1672427948</lastupdate>
+        <videos>0</videos>
+        <caption>this is just a test #instagram #typo3 #testing</caption>
+        <hashtags>#instagram #typo3 #testing</hashtags>
+        <images>1</images>
+        <posted_at>1597698050</posted_at>
+        <feed>1</feed>
+    </tx_instagram_domain_model_post>
+
+    <tx_instagram_domain_model_post>
+        <uid>3</uid>
+        <pid>1</pid>
+        <instagramid>0</instagramid>
+        <link>https://www.instagram.com/p/abcdefghijk/</link>
+        <media_type>IMAGE</media_type>
+        <lastupdate>1672427948</lastupdate>
+        <videos>0</videos>
+        <caption>this is just a test #instagram #typo3 #testing</caption>
+        <hashtags>#instagram #typo3 #testing</hashtags>
+        <images>1</images>
+        <posted_at>1597698050</posted_at>
+        <feed>1</feed>
+    </tx_instagram_domain_model_post>
+</dataset>

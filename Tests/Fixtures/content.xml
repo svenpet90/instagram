@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tt_content>
+        <uid>1</uid>
+        <pid>2</pid>
+        <CType>list</CType>
+        <list_type>instagram_list</list_type>
+        <pages>1</pages>
+        <colPos>1</colPos>
+        <pi_flexform>
+            <![CDATA[<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+                <T3FlexForms>
+                    <data>
+                        <sheet index="sDEF">
+                            <language index="lDEF">
+                                <field index="settings.maxImagesToDisplay">
+                                    <value index="vDEF"></value>
+                                </field>
+                                <field index="settings.showLinkToInstagramProfile">
+                                    <value index="vDEF">0</value>
+                                </field>
+                                <field index="settings.show.images">
+                                    <value index="vDEF">1</value>
+                                </field>
+                                <field index="settings.show.carousels">
+                                    <value index="vDEF">1</value>
+                                </field>
+                                <field index="settings.show.videos">
+                                    <value index="vDEF">1</value>
+                                </field>
+                                <field index="settings.showImagesByHashtag">
+                                    <value index="vDEF"></value>
+                                </field>
+                                <field index="settings.logicalConstraint">
+                                    <value index="vDEF">logicalOr</value>
+                                </field>
+                            </language>
+                        </sheet>
+                    </data>
+                </T3FlexForms>]]>
+        </pi_flexform>
+        <sectionIndex>1</sectionIndex>
+        <linkToTop>1</linkToTop>
+        <categories>1</categories>
+    </tt_content>
+</dataset>

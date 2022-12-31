@@ -48,8 +48,8 @@
             <trans-unit id="tx_instagram_domain_model_feed.expires_at">
                 <source>Expires at</source>
             </trans-unit>
-            <trans-unit id="tx_instagram_domain_model_feed.type">
-                <source>Type</source>
+            <trans-unit id="tx_instagram_domain_model_feed.token_type">
+                <source>Token type</source>
             </trans-unit>
             <trans-unit id="instagram">
                 <source>Instagram Token Generator</source>

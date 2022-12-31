@@ -19,13 +19,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'username,token,expires_at,type,user_id,posts',
+        'searchFields' => 'username,token,token_type,expires_at,user_id,posts',
         'iconfile' => 'EXT:instagram/Resources/Public/Icons/tx_instagram_domain_model_feed.gif',
     ],
     'interface' => [],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, token, username, user_id, expires_at, type, posts, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
+            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, token, username, user_id, expires_at, token_type, posts, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
         ],
     ],
     'palettes' => [
@@ -149,9 +149,9 @@ return [
                 'eval' => 'datetime',
             ],
         ],
-        'type' => [
+        'token_type' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_feed.type',
+            'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_feed.token_type',
             'config' => [
                 'type' => 'input',
                 'size' => 30,

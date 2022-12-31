@@ -27,6 +27,11 @@
 			"SvenPetersen\\Instagram\\": "Classes/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"SvenPetersen\\Instagram\\Tests\\": "Tests/"
+		}
+	},
 	"config": {
 		"allow-plugins": {
 			"typo3/class-alias-loader": true,
@@ -38,7 +43,8 @@
 			"*": "dist"
 		},
 		"sort-packages": true,
-		"vendor-dir": ".Build/vendor"
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/vendor/bin"
 	},
 	"extra": {
 		"typo3/cms": {

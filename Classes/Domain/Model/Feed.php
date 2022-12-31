@@ -13,7 +13,7 @@ class Feed extends AbstractEntity
 
     protected string $token = '';
 
-    protected string $type = '';
+    protected string $tokenType = 'bearer';
 
     protected string $username = '';
 
@@ -48,14 +48,14 @@ class Feed extends AbstractEntity
         return $this;
     }
 
-    public function getType(): string
+    public function getTokenType(): string
     {
-        return $this->type;
+        return $this->tokenType;
     }
 
-    public function setType(string $type): self
+    public function setTokenType(string $tokenType): self
     {
-        $this->type = $type;
+        $this->tokenType = $tokenType;
 
         return $this;
     }

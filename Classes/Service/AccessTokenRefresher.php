@@ -53,7 +53,7 @@ class AccessTokenRefresher
         $now = new DateTime();
         $diffInDays = $expiresAt->diff($now)->days;
 
-        if ($diffInDays > 10) {
+        if ($diffInDays >= 10) {
             // only update token if it's valid for less than 10 days
             return $feed;
         }
@@ -64,7 +64,7 @@ class AccessTokenRefresher
 
         $feed
             ->setToken($updatedTokenData['access_token'])
-            ->setType($updatedTokenData['token_type'])
+            ->setTokenType($updatedTokenData['token_type'])
             ->setExpiresat($expiresAt);
 
         $this->feedRepository->update($feed);
