@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Client;
 
-use SvenPetersen\Instagram\Domain\DTO\PostDTO;
-use SvenPetersen\Instagram\Domain\DTO\UserDTO;
+use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
+use SvenPetersen\Instagram\Domain\Model\Dto\UserDTO;
 use SvenPetersen\Instagram\Domain\Model\Feed;
-use SvenPetersen\Instagram\Factory\PostDTOFactory;
-use SvenPetersen\Instagram\Factory\UserDTOFactory;
+use SvenPetersen\Instagram\Factory\Dto\PostDTOFactory;
+use SvenPetersen\Instagram\Factory\Dto\UserDTOFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface

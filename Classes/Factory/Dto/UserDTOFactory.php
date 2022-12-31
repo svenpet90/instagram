@@ -1,8 +1,10 @@
 <?php
 
-namespace SvenPetersen\Instagram\Factory;
+declare(strict_types=1);
 
-use SvenPetersen\Instagram\Domain\DTO\UserDTO;
+namespace SvenPetersen\Instagram\Factory\Dto;
+
+use SvenPetersen\Instagram\Domain\Model\Dto\UserDTO;
 
 /**
  * @internal

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SvenPetersen\Instagram\Domain\DTO;
+namespace SvenPetersen\Instagram\Domain\Model\Dto;
 
 class UserDTO
 {

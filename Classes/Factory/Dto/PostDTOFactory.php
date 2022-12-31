@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SvenPetersen\Instagram\Factory;
+namespace SvenPetersen\Instagram\Factory\Dto;
 
-use SvenPetersen\Instagram\Domain\DTO\PostDTO;
+use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
 
 /**
  * @internal
@@ -18,7 +18,7 @@ class PostDTOFactory
      */
     public static function create(array $data): PostDTO
     {
-        $postDTP = self::createFromArray($data);
+        $postDTO = self::createFromArray($data);
 
         if (array_key_exists('children', $data)) {
             $children = [];
@@ -27,10 +27,10 @@ class PostDTOFactory
                 $children[] = self::createFromArray($data);
             }
 
-            $postDTP->setChildren($children);
+            $postDTO->setChildren($children);
         }
 
-        return $postDTP;
+        return $postDTO;
     }
 
     /**

@@ -1,5 +1,6 @@
 paths:
   - ./Configuration
+  - ./
 
 filePatterns:
   - "*.typoscript"

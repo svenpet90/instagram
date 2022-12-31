@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Service;
 
 use SvenPetersen\Instagram\Client\ApiClientInterface;
-use SvenPetersen\Instagram\Domain\DTO\PostDTO;
+use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Core\Environment;
