@@ -73,7 +73,7 @@ line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
 <pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
 
 ## Testing
-This Extension comes with a testsuite for coding styles.
+This Extension comes with a testsuite for coding styles and unit/functional tests.
 To run the tests simply use the provided composer script:
 
 <pre>composer ci:test</pre>
