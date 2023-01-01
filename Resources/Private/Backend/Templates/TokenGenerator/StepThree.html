@@ -9,19 +9,29 @@
 <f:section name="main">
     <f:be.container>
         <div class="row m-3">
+            <div class="col-12">
+                <h1>
+                    <f:translate key="beModule.headline"/>
+                </h1>
+            </div>
+
             <div class="col-12 col-md-6 col-lg-5">
                 <div class="card">
                     <div class="card-header">
-                        Schritt 3/3: Token erstellt
+                        <f:translate key="beModule.step3.headline"/>
                     </div>
 
                     <div class="card-body">
-                        <p class="mb-4">
-                            Der Feed samt "lang-lebigen access token" wurde erfolgreich generiert und gespeichert.
+                        <h3>
+                            The long-lived api access token has been successfully created and saved!
+                        </h3>
+
+                        <p class="mb-4"></p>
+                        The Token has been saved in an instance of a "Feed" entity.
                         </p>
 
                         <h4>
-                            Feed & Token Info
+                            Generated Token information
                         </h4>
 
                         <table class="table">
@@ -49,10 +59,14 @@
                             </tbody>
                         </table>
 
-                        <h4 class="text-danger">Achtung!</h4>
+                        <h4 class="text-danger">Attention!</h4>
                         <p>
-                            Lege nun einen Cronjob für den Command <strong>instagram:accesstoken:refresh-all</strong> an
-                            um das Token regelmäßig zu erneuern. Empfohlenes Ausführungsintervall: 1x am Tag.
+                            The generated api access token is valid for 60 days.<br>
+                            You are advised to now create a cronjob/scheduler task to handle automatic refreshing of the
+                            token. Run this task at least once per day.
+                        </p>
+                        <p>
+                            To do so use the following command: <strong>instagram:accesstoken:refresh-all</strong><br>
                         </p>
                     </div>
                 </div>

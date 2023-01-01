@@ -9,7 +9,7 @@
                 <el>
                     <settings.mediaTypes>
                         <TCEforms>
-                            <label>Arten von Posts die angezeigt werden sollen</label>
+                            <label>Types of posts to show</label>
                             <config>
                                 <type>select</type>
                                 <renderType>selectMultipleSideBySide</renderType>
@@ -31,9 +31,18 @@
                         </TCEforms>
                     </settings.mediaTypes>
 
+                    <settings.feeds>
+                        <label>Only show posts from following feeds</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectMultipleSideBySide</renderType>
+                            <foreign_table>tx_instagram_domain_model_feed</foreign_table>
+                        </config>
+                    </settings.feeds>
+
                     <settings.maxPostsToShow>
                         <TCEforms>
-                            <label>Wieviele Bilder sollen maximal angezeigt werden?</label>
+                            <label>Maximum number of posts to show</label>
                             <config>
                                 <type>input</type>
                                 <size>20</size>
@@ -45,7 +54,7 @@
 
                     <settings.hashtagConstraints>
                         <TCEforms>
-                            <label>Nur Posts mit diesen Hashtags anzeigen (mit #, komma-separiert):</label>
+                            <label>Only show posts containing the following hashtags (with #, comma-separated)</label>
                             <config>
                                 <type>input</type>
                                 <size>20</size>

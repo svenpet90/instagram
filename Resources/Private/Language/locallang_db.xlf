@@ -12,8 +12,8 @@
 			<trans-unit id="tx_instagram_domain_model_post.posted_at">
 				<source>Createdtime</source>
 			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.instagramid">
-				<source>Instagramid</source>
+			<trans-unit id="tx_instagram_domain_model_post.instagram_id">
+				<source>Instagram ID</source>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.feed">
 				<source>Feed</source>
@@ -33,16 +33,16 @@
 			<trans-unit id="tx_instagram_domain_model_post.media_type">
 				<source>Media type</source>
 			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
-				<source>Last update</source>
-			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_feed">
                 <source>Feed</source>
+            </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.username">
+                <source>Username</source>
             </trans-unit>
             <trans-unit id="tx_instagram_domain_model_feed.token">
                 <source>Token</source>
             </trans-unit>
-            <trans-unit id="tx_instagram_domain_model_feed.userid">
+            <trans-unit id="tx_instagram_domain_model_feed.user_id">
                 <source>Instagram User ID</source>
             </trans-unit>
             <trans-unit id="tx_instagram_domain_model_feed.expires_at">
@@ -51,6 +51,11 @@
             <trans-unit id="tx_instagram_domain_model_feed.token_type">
                 <source>Token type</source>
             </trans-unit>
+            <trans-unit id="tx_instagram_domain_model_feed.posts">
+				<source>Posts</source>
+			</trans-unit>
+
+
             <trans-unit id="instagram">
                 <source>Instagram Token Generator</source>
             </trans-unit>

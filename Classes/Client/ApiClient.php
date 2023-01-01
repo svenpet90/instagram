@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Client;
 
 use SvenPetersen\Instagram\Domain\Model\Dto\FeedDTO;
@@ -121,7 +128,7 @@ class ApiClient implements ApiClientInterface
         $response = $this->requestFactory->request($url, $method, $additionalOptions);
 
         if ($response->getStatusCode() !== 200) {
-            throw new \Exception($response->getReasonPhrase());
+            throw new \HttpRequestException($response->getReasonPhrase());
         }
 
         $contents = $response->getBody()->getContents();

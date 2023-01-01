@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Service;
 
 use SvenPetersen\Instagram\Client\ApiClientInterface;
@@ -34,7 +41,7 @@ class PostUpserter
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
     {
         $action = 'UPDATE';
-        $post = $this->postRepository->findOneBy(['instagramid' => $dto->getId(), 'pid' => $storagePid]);
+        $post = $this->postRepository->findOneBy(['instagram_id' => $dto->getId(), 'pid' => $storagePid]);
 
         if ($post === null) {
             $action = 'NEW';
@@ -52,14 +59,23 @@ class PostUpserter
             return $post;
         }
 
-        return $this->processPost($post, $dto);
+        return $this->processPostMedia($post, $dto);
     }
 
-    private function processPost(Post $post, PostDTO $dto): Post
+    private function processPostMedia(Post $post, PostDTO $dto): Post
     {
         switch ($post->getMediaType()) {
             case Post::MEDIA_TYPE_IMAGE:
                 $fileObject = $this->downloadFile($dto->getMediaUrl(), Post::IMAGE_FILE_EXT);
+                $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
+
+                break;
+            case Post::MEDIA_TYPE_VIDEO:
+                $fileObject = $this->downloadFile($dto->getMediaUrl(), Post::VIDEO_FILE_EXT);
+                $this->addToFal($post, $fileObject, self::TABLENAME, 'videos');
+
+                // Download thumbnail image
+                $fileObject = $this->downloadFile($dto->getThumbnailUrl(), Post::IMAGE_FILE_EXT);
                 $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
 
                 break;
@@ -84,15 +100,6 @@ class PostUpserter
                             break;
                     }
                 }
-
-                break;
-            case Post::MEDIA_TYPE_VIDEO:
-                $fileObject = $this->downloadFile($dto->getMediaUrl(), Post::VIDEO_FILE_EXT);
-                $this->addToFal($post, $fileObject, self::TABLENAME, 'videos');
-
-                // Download thumbnail image
-                $fileObject = $this->downloadFile($dto->getThumbnailUrl(), Post::IMAGE_FILE_EXT);
-                $this->addToFal($post, $fileObject, self::TABLENAME, 'images');
 
                 break;
         }
@@ -154,9 +161,8 @@ class PostUpserter
         $post
             ->setPostedAt($dto->getTimestamp())
             ->setMediaType($dto->getMediatype())
-            ->setInstagramid($dto->getId())
+            ->setInstagramId($dto->getId())
             ->setLink($dto->getPermalink())
-            ->setLastupdate(new \DateTimeImmutable())
             ->setCaption(EmojiRemover::filter($dto->getCaption()));
 
         if ($dto->getCaption() !== '') {

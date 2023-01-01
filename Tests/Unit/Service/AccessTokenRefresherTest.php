@@ -21,11 +21,11 @@ class AccessTokenRefresherTest extends BaseTest
     {
         parent::setUp();
 
-        $FeedRepoMock = $this->createMock(FeedRepository::class);
+        $feedRepoMock = $this->createMock(FeedRepository::class);
         $persistenceManagerInterfaceMock = $this->createMock(PersistenceManagerInterface::class);
         $this->accessTokenService = $this->createMock(AccessTokenService::class);
 
-        $this->accessTokenRefresher = new AccessTokenRefresher($FeedRepoMock, $persistenceManagerInterfaceMock, $this->accessTokenService);
+        $this->accessTokenRefresher = new AccessTokenRefresher($feedRepoMock, $persistenceManagerInterfaceMock, $this->accessTokenService);
     }
 
     /**

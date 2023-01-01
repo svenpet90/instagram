@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -27,7 +34,7 @@ class Post extends AbstractEntity
     /**
      * @var int
      */
-    protected $_languageUid;
+    protected $_languageUid = -1;
 
     protected string $caption = '';
 
@@ -43,7 +50,7 @@ class Post extends AbstractEntity
 
     protected ?\DateTimeImmutable $postedAt = null;
 
-    protected string $instagramid = '';
+    protected string $instagramId = '';
 
     protected string $hashtags = '';
 
@@ -51,21 +58,7 @@ class Post extends AbstractEntity
 
     protected string $mediaType = '';
 
-    protected ?\DateTimeImmutable $lastupdate = null;
-
     protected ?Feed $feed = null;
-
-    public function setSysLanguageUid(int $_languageUid): self
-    {
-        $this->_languageUid = $_languageUid;
-
-        return $this;
-    }
-
-    public function getSysLanguageUid(): int
-    {
-        return $this->_languageUid;
-    }
 
     public function getCaption(): string
     {
@@ -91,14 +84,14 @@ class Post extends AbstractEntity
         return $this;
     }
 
-    public function getInstagramid(): string
+    public function getInstagramId(): string
     {
-        return $this->instagramid;
+        return $this->instagramId;
     }
 
-    public function setInstagramid(string $instagramid): self
+    public function setInstagramId(string $instagramId): self
     {
-        $this->instagramid = $instagramid;
+        $this->instagramId = $instagramId;
 
         return $this;
     }
@@ -135,18 +128,6 @@ class Post extends AbstractEntity
     public function setMediaType(string $mediaType): self
     {
         $this->mediaType = $mediaType;
-
-        return $this;
-    }
-
-    public function getLastupdate(): ?\DateTimeImmutable
-    {
-        return $this->lastupdate;
-    }
-
-    public function setLastupdate(\DateTimeImmutable $lastupdate): self
-    {
-        $this->lastupdate = $lastupdate;
 
         return $this;
     }

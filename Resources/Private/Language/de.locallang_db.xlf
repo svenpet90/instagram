@@ -15,12 +15,12 @@
 				<source>Posted at</source>
 				<target>Gepostet am</target>
 			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.instagramid">
-				<source>Instagramid</source>
+			<trans-unit id="tx_instagram_domain_model_post.instagram_id">
+				<source>Instagram ID</source>
 				<target>Instagram ID</target>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.hashtags">
-				<source>Tags</source>
+				<source>Hashtags</source>
 				<target>Hashtags</target>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.images">
@@ -32,16 +32,12 @@
                 <target>Video(s)</target>
             </trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.link">
-				<source>Link</source>
-				<target>Link zum Bild</target>
+				<source>Link to post</source>
+				<target>Link zum Post</target>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.media_type">
 				<source>Media Type</source>
 				<target>Art des Posts</target>
-			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
-				<source>Lastupdate</source>
-				<target>Letztes Update</target>
 			</trans-unit>
 		    <trans-unit id="instagram">
                 <source>Instagram Token Generator</source>

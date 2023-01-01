@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Service;
 
 use SvenPetersen\Instagram\Domain\Model\Feed;
@@ -33,11 +40,12 @@ class AccessTokenService
         $this->graphApiBaseUrl = $graphApiBaseUrl;
     }
 
-    public function getLongLivedAccessToken(
+    public function createFeed(
         string $instagramAppId,
         string $clientSecret,
         string $redirect_uri,
-        string $code
+        string $code,
+        int $storagePid
     ): Feed {
         $shortLivedAccessTokenData = $this->getAccessToken(
             $instagramAppId,
@@ -49,15 +57,11 @@ class AccessTokenService
         $shortLivedAccessToken = $shortLivedAccessTokenData['access_token'];
         $userId = (string)$shortLivedAccessTokenData['user_id'];
 
-        $responseArray = $this->requestLongLivedAccessToken($clientSecret, $shortLivedAccessToken);
+        $longLivedTokenResponse = $this->requestLongLivedAccessToken($clientSecret, $shortLivedAccessToken);
 
-        if (!isset($responseArray['access_token'])) {
-            throw new \Exception('Kein access_token Key in der Response!');
-        }
-
-        $token = $responseArray['access_token'];
-        $type = $responseArray['token_type'];
-        $expiresIn = $responseArray['expires_in'];
+        $token = $longLivedTokenResponse['access_token'];
+        $type = $longLivedTokenResponse['token_type'];
+        $expiresIn = $longLivedTokenResponse['expires_in'];
         $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $expiresIn));
 
         $userdata = $this->getFeedData($shortLivedAccessToken);
@@ -68,7 +72,8 @@ class AccessTokenService
             $type,
             $userId,
             $expiresAt,
-            $username
+            $username,
+            $storagePid
         );
     }
 
@@ -149,7 +154,7 @@ class AccessTokenService
         $response = $this->requestFactory->request($url, $method, $additionalOptions);
 
         if ($response->getStatusCode() !== 200) {
-            throw new \Exception($response->getReasonPhrase());
+            throw new \HttpRequestException($response->getReasonPhrase());
         }
 
         $contents = $response->getBody()->getContents();

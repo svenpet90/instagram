@@ -3,6 +3,24 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
 		<header/>
 		<body>
+			<trans-unit id="beModule.headline">
+				<source>Instagram API-Token Generator</source>
+			</trans-unit>
+			<trans-unit id="beModule.description">
+				<source>This wizard is designed to generate a 'long-lived API token' to access the Instagram API.</source>
+			</trans-unit>
+			<trans-unit id="beModule.step1.headline">
+				<source>Step 1/3: Instagram/Facebook-App Data</source>
+			</trans-unit>
+			<trans-unit id="beModule.step1.description">
+				<source>Please enter the following information you optained after creating a "Instagram Basic Display"-App in die Facebook Developer Tools.</source>
+			</trans-unit>
+			<trans-unit id="beModule.step2.headline">
+				<source>Step 2/3: Auth-Code</source>
+			</trans-unit>
+			<trans-unit id="beModule.step3.headline">
+				<source>Step 3/3: Access Token successfully generated</source>
+			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post">
 				<source>Post</source>
 			</trans-unit>
@@ -15,8 +33,8 @@
 			<trans-unit id="tx_instagram_domain_model_post.posted_at">
 				<source>Posted at</source>
 			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.instagramid">
-				<source>Instagramid</source>
+			<trans-unit id="tx_instagram_domain_model_post.instagram_id">
+				<source>Instagram ID</source>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.hashtags">
 				<source>Tags</source>
@@ -26,9 +44,6 @@
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.media_type">
 				<source>Media type</source>
-			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
-				<source>Lastupdate</source>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.feed">
 				<source>Feed</source>

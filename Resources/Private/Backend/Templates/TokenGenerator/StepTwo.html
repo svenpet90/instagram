@@ -7,26 +7,29 @@
     <f:be.container>
         <div class="row m-3">
             <div class="col-12">
-                Instagram API-Token Generator
+                <h1>
+                    <f:translate key="beModule.headline"/>
+                </h1>
             </div>
 
-            <div class="col-12 col-md-7 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-5">
                 <div class="card">
                     <div class="card-header">
-                        Schritt 2/3: Auth-Code
+                        <f:translate key="beModule.step2.headline"/>
                     </div>
 
                     <div class="card-body">
                         <ol>
-                            <li>Diesen Link klicken: <a target="_blank" href="{link}" class="text-primary">{link}</a>
+                            <li>
+                                Click the following link: <a target="_blank" href="{link}" class="text-primary">{link}</a>
                             </li>
-                            <li>Die angeforderten Rechte bestätigen.</li>
-                            <li>Anschließend erfolgt eine Weiterleitung auf die angegebene ReturnUrl. In der URL
-                                befindet
-                                sich der
-                                Parameter "code".
+                            <li>
+                                Confirm the access control dialog.
                             </li>
-                            <li>Diesen Code kopieren und in dem Formular unten eintragen:</li>
+                            <li>
+                                You'll be redirected to the given "OAuth Redirect URI". In the URL you'll find a query parameter named "code".
+                            </li>
+                            <li>Copy the value of the "code" query parameter and paste it in the input below:</li>
                         </ol>
 
                         <f:form action="stepThree"
@@ -41,7 +44,7 @@
                                 <f:form.textfield name="code"
                                                   value=""
                                                   required="true"
-                                                  placeholder="Code"
+                                                  placeholder="Value of code query parameter"
                                                   class="form-control"
                                 />
                             </div>
@@ -61,7 +64,7 @@
 
                             <div class="form-group col-12">
                                 <label for="clientsecret">
-                                    Instagram App-Geheimcode*
+                                    Instagram-App-Secret*
                                 </label>
 
                                 <f:form.textfield type="password"
@@ -76,18 +79,31 @@
 
                             <div class="form-group col-12">
                                 <label for="returnurl">
-                                    Gültige OAuth Redirect URI*
+                                    Valid OAuth Redirect URI*
                                 </label>
 
                                 <f:form.textfield name="returnurl"
                                                   value="{returnUrl}"
-                                                  placeholder="Gültige OAuth Redirect URI"
+                                                  placeholder="Valid OAuth Redirect URI"
                                                   readonly="true"
                                                   class="form-control"
                                 />
                             </div>
-                            
-                            <f:form.submit value="Request long-lived access token"
+
+                            <div class="form-group col-12">
+                                <label for="storagePid">
+                                    Storage PID
+                                </label>
+
+                                <f:form.textfield name="storagePid"
+                                                  value="{storagePid}"
+                                                  placeholder="Storage PID"
+                                                  readonly="true"
+                                                  class="form-control"
+                                />
+                            </div>
+
+                            <f:form.submit value="Generate API access token"
                                            class="btn btn-success w-100"
                                 />
                         </f:form>

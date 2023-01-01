@@ -12,8 +12,8 @@
 			<trans-unit id="posted_at.description">
 				<source>posted at</source>
 			</trans-unit>
-			<trans-unit id="instagramid.description">
-				<source>instagramid</source>
+			<trans-unit id="instagram_id.description">
+				<source>Instagram ID</source>
 			</trans-unit>
 			<trans-unit id="hashtags.description">
 				<source>tags</source>
@@ -23,9 +23,6 @@
 			</trans-unit>
 			<trans-unit id="media_type.description">
 				<source>mediaType</source>
-			</trans-unit>
-			<trans-unit id="lastupdate.description">
-				<source>lastupdate</source>
 			</trans-unit>
 		</body>
 	</file>

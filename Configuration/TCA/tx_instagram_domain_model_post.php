@@ -20,13 +20,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'media_type,caption,images,videos,posted_at,instagramid,link,lastupdate,feed',
+        'searchFields' => 'media_type,caption,images,videos,posted_at,instagram_id,link,feed',
         'iconfile' => 'EXT:instagram/Resources/Public/Icons/tx_instagram_domain_model_post.gif',
     ],
     'interface' => [],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, feed, media_type, caption, images, videos, posted_at, instagramid, hashtags, link, lastupdate, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
+            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, feed, media_type, caption, images, videos, posted_at, instagram_id, hashtags, link, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime',
         ],
     ],
     'palettes' => [
@@ -132,9 +132,9 @@ return [
                 'eval' => 'datetime',
             ],
         ],
-        'instagramid' => [
+        'instagram_id' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_post.instagramid',
+            'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_post.instagram_id',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -167,15 +167,6 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'readOnly' => 1,
-            ],
-        ],
-        'lastupdate' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_post.lastupdate',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime',
             ],
         ],
         'videos' => [

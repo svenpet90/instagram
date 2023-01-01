@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -16,6 +23,11 @@ class Feed extends AbstractEntity
     protected string $tokenType = 'bearer';
 
     protected string $username = '';
+
+    /**
+     * @var int
+     */
+    protected $_languageUid = -1;
 
     /**
      * @var ObjectStorage<\SvenPetersen\Instagram\Domain\Model\Post>

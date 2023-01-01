@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Factory;
 
 use SvenPetersen\Instagram\Domain\Model\Feed;
@@ -32,7 +39,8 @@ class FeedFactory implements FeedFactoryInterface
         string $tokenType,
         string $userId,
         \DateTimeImmutable $expiresAt,
-        string $username = ''
+        string $username,
+        int $storagePid
     ): Feed {
         $feed = $this->feedRepository->findOneByUsername($username);
 
@@ -40,7 +48,7 @@ class FeedFactory implements FeedFactoryInterface
             $feed = $this->create();
         }
 
-        $feed->setPid(0); // todo: make configurable
+        $feed->setPid($storagePid);
         $feed
             ->setToken($token)
             ->setTokenType($tokenType)

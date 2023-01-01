@@ -3,6 +3,34 @@
 	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-10-08T19:40:35Z" product-name="instagram">
 		<header/>
 		<body>
+			<trans-unit id="beModule.headline">
+				<source>Instagram API-Token Generator</source>
+				<target>Instagram API-Token Generator</target>
+			</trans-unit>
+			<trans-unit id="beModule.description">
+				<source>This wizard is designed to generate a 'long-lived API token' to access the Instagram API.</source>
+				<target>Dieser Assistent dient dem generieren eine "langlebigen API-Tokens" für den Zugriff auf die Instagram-API</target>
+			</trans-unit>
+			<trans-unit id="beModule.step1.headline">
+				<source>Step 1/3: Instagram/Facebook-App Data</source>
+				<target>Step 1/3: Instagram/Facebook-App Daten</target>
+			</trans-unit>
+			<trans-unit id="beModule.step1.description">
+				<source>Please enter the following information you optained after creating a "Instagram Basic Display"-App in die Facebook Developer Tools.</source>
+				<target>Bitte geben Sie die folgenden Informationen ein, die Sie erhalten haben, nachdem Sie eine "Instagram Basic Display“-App in den Facebook-Entwicklertools erstellt haben.</target>
+			</trans-unit>
+			<trans-unit id="beModule.step2.headline">
+				<source>Step 2/3: Auth-Code</source>
+				<target>Schritt 2/3: Auth-Code</target>
+			</trans-unit>
+			<trans-unit id="beModule.step3.headline">
+				<source>Step 3/3: Access Token successfully generated.</source>
+				<target>Schritt 3/3: API-Zugriffsschlüssel erfolgreich generiert und gespeichert.</target>
+			</trans-unit>
+
+
+
+
 			<trans-unit id="tx_instagram_domain_model_post">
 				<target>Post</target>
 			</trans-unit>
@@ -15,7 +43,7 @@
 			<trans-unit id="tx_instagram_domain_model_post.posted_at">
 				<target>Gepostet am</target>
 			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.instagramid">
+			<trans-unit id="tx_instagram_domain_model_post.instagram_id">
 				<target>Instagram ID</target>
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.hashtags">
@@ -26,9 +54,6 @@
 			</trans-unit>
 			<trans-unit id="tx_instagram_domain_model_post.media_type">
 				<target>Typ</target>
-			</trans-unit>
-			<trans-unit id="tx_instagram_domain_model_post.lastupdate">
-				<target>Zuletzt aktualisiert</target>
 			</trans-unit>
 		</body>
 	</file>

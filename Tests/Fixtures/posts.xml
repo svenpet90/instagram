@@ -3,10 +3,9 @@
     <tx_instagram_domain_model_post>
         <uid>1</uid>
         <pid>1</pid>
-        <instagramid>0</instagramid>
+        <instagram_id>0</instagram_id>
         <link>https://www.instagram.com/p/abcdefghijk/</link>
         <media_type>IMAGE</media_type>
-        <lastupdate>1672427948</lastupdate>
         <videos>0</videos>
         <caption>this is just a test #instagram #typo3 #testing</caption>
         <hashtags>#instagram #typo3 #testing</hashtags>
@@ -18,10 +17,9 @@
     <tx_instagram_domain_model_post>
         <uid>2</uid>
         <pid>1</pid>
-        <instagramid>0</instagramid>
+        <instagram_id>0</instagram_id>
         <link>https://www.instagram.com/p/abcdefghijk/</link>
         <media_type>IMAGE</media_type>
-        <lastupdate>1672427948</lastupdate>
         <videos>0</videos>
         <caption>this is just a test #instagram #typo3 #testing</caption>
         <hashtags>#instagram #typo3 #testing</hashtags>
@@ -33,10 +31,9 @@
     <tx_instagram_domain_model_post>
         <uid>3</uid>
         <pid>1</pid>
-        <instagramid>0</instagramid>
+        <instagram_id>0</instagram_id>
         <link>https://www.instagram.com/p/abcdefghijk/</link>
         <media_type>IMAGE</media_type>
-        <lastupdate>1672427948</lastupdate>
         <videos>0</videos>
         <caption>this is just a test #instagram #typo3 #testing</caption>
         <hashtags>#instagram #typo3 #testing</hashtags>

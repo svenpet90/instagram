@@ -24,10 +24,14 @@ class TokenGeneratorController extends ActionController
     {
         /** @var string $appId */
         $appId = $this->request->getArgument('clientid');
+
         /** @var string $returnUrl */
         $returnUrl = $this->request->getArgument('returnurl');
+
         /** @var string $appSecret */
         $appSecret = $this->request->getArgument('clientsecret');
+
+        $storagePid = (int)$this->request->getArgument('storagePid');
 
         $link = $this->accessTokenService->getAuthorizationLink($appId, $returnUrl);
 
@@ -36,6 +40,7 @@ class TokenGeneratorController extends ActionController
             'appId' => $appId,
             'returnUrl' => $returnUrl,
             'appSecret' => $appSecret,
+            'storagePid' => $storagePid,
         ]);
     }
 
@@ -43,18 +48,24 @@ class TokenGeneratorController extends ActionController
     {
         /** @var string $instagramAppId */
         $instagramAppId = $this->request->getArgument('clientid');
+
         /** @var string $clientSecret */
         $clientSecret = $this->request->getArgument('clientsecret');
+
         /** @var string $redirect_uri */
         $redirect_uri = $this->request->getArgument('returnurl');
+
         /** @var string $code */
         $code = $this->request->getArgument('code');
 
-        $feed = $this->accessTokenService->getLongLivedAccessToken(
+        $storagePid = (int)$this->request->getArgument('storagePid');
+
+        $feed = $this->accessTokenService->createFeed(
             $instagramAppId,
             $clientSecret,
             $redirect_uri,
-            $code
+            $code,
+            $storagePid
         );
 
         $this->view->assignMultiple([

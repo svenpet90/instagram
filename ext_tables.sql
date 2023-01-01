@@ -28,11 +28,10 @@ CREATE TABLE tx_instagram_domain_model_post
 
 	caption     mediumtext,
 	posted_at   int(11) unsigned DEFAULT NULL,
-	instagramid varchar(255)  DEFAULT '',
+	instagram_id varchar(255)  DEFAULT '',
 	hashtags    varchar(5000) DEFAULT '',
 	link        varchar(255)  DEFAULT '',
 	media_type  varchar(255)  DEFAULT '',
-	lastupdate  int(11) unsigned DEFAULT NULL,
 	images      varchar(255)  DEFAULT NULL,
 	videos      varchar(255)  DEFAULT NULL,
 	feed        int(11) DEFAULT '0' NOT NULL,

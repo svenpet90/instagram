@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the Extension "instagram" for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 namespace SvenPetersen\Instagram\Domain\Repository;
 
 use SvenPetersen\Instagram\Domain\Model\Post;
@@ -28,6 +35,17 @@ class PostRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = [];
+
+        // Feed constraints
+        if ($settings['feeds'] !== '') {
+            $feedConstraints = [];
+
+            foreach (explode(',', $settings['feeds']) as $feed) {
+                $feedConstraints[] = $query->equals('feed', $feed);
+            }
+
+            $constraints[] = $query->logicalOr($feedConstraints);
+        }
 
         // MediaType constraints
         if ($settings['mediaTypes'] !== '') {
@@ -59,23 +77,6 @@ class PostRepository extends Repository
     }
 
     /**
-     * @param string[] $types
-     */
-    public function findByTypes(array $types): QueryResultInterface
-    {
-        $query = $this->createQuery();
-
-        $constrains = [];
-        foreach ($types as $type) {
-            $constrains[] = $query->equals('mediaType', $type);
-        }
-
-        $query->matching($query->logicalOr($constrains));
-
-        return $query->execute();
-    }
-
-    /**
      * @param array<string, mixed> $constraints
      * @return Post|null
      */
@@ -98,24 +99,5 @@ class PostRepository extends Repository
             ->getFirst();
 
         return $result;
-    }
-
-    /**
-     * @param string[] $hashtags
-     *
-     * @throws InvalidQueryException
-     */
-    public function findByHashtags(array $hashtags, string $logicalConstraint): QueryResultInterface
-    {
-        $constraints = [];
-        $query = $this->createQuery();
-
-        foreach ($hashtags as $tag) {
-            $constraints[] = $query->like('tags', '%,' . $tag . ',%');
-        }
-
-        $query->matching($query->{$logicalConstraint}($constraints));
-
-        return $query->execute();
     }
 }

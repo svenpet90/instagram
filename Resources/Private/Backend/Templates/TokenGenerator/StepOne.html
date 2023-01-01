@@ -8,20 +8,25 @@
     <f:be.container>
         <div class="row m-3">
             <div class="col-12">
-                <h1>Instagram API-Token Generator</h1>
+                <h1>
+                    <f:translate key="beModule.headline"/>
+                </h1>
             </div>
 
             <div class="col-12 col-md-6 col-lg-5">
+
+                <p class="mb-3">
+                    <f:translate key="beModule.description"/>
+                </p>
+
                 <div class="card">
                     <div class="card-header">
-                        Schritt 1/3: Basisdaten
+                        <f:translate key="beModule.step1.headline"/>
                     </div>
 
                     <div class="card-body">
-                        <p>
-                            Dieser Wizard dient dem importieren eines Instagram Feeds und generieren eines dazugehörigen 'langlebigen API-Tokens".
-                        </p>
-
+                        <f:translate key="beModule.step1.description"/><br>
+                        <br>
                         <f:form action="stepTwo"
                                 method="post"
                                 enctype="multipart/form-data"
@@ -41,12 +46,12 @@
 
                             <div class="form-group col-12">
                                 <label for="clientsecret">
-                                    Instagram App-Geheimcode*
+                                    Instagram-App-Secret*
                                 </label>
 
                                 <f:form.textfield name="clientsecret"
                                                   value="{clientsecret}"
-                                                  placeholder="Instagram App-Geheimcode"
+                                                  placeholder="Instagram-App-Secret"
                                                   required="true"
                                                   class="form-control"
                                 />
@@ -54,12 +59,25 @@
 
                             <div class="form-group col-12">
                                 <label for="returnurl">
-                                    Gültige OAuth Redirect URI*
+                                    Valid OAuth Redirect URI*
                                 </label>
 
                                 <f:form.textfield name="returnurl"
                                                   value="{returnurl}"
-                                                  placeholder="Gültige OAuth Redirect URI"
+                                                  placeholder="Valid OAuth Redirect URI"
+                                                  required="true"
+                                                  class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="storagePid">
+                                    Storage PID*
+                                </label>
+
+                                <f:form.textfield name="storagePid"
+                                                  type="number"
+                                                  placeholder="Storage PID for the Token"
                                                   required="true"
                                                   class="form-control"
                                 />
