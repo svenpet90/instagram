@@ -23,8 +23,8 @@ Frontend-Plugin.
 * Automatic refreshing of API access tokens to keep them valid
 * Import multiple Instagram users feeds/posts
 * Uses official Instagram-API to access a users feed.
-* Provides commands to refresh access tokens/import feeds via cronjob/scheduler
-* Downloads the posts (images/videos). No API calls needed when displaying them. No performance impact.
+* Provides commands to refresh access tokens and to import feeds via cronjob/scheduler
+* Downloads the posts (images/videos). No API calls needed when displaying them = no frontend performance impact.
 * Display users feeds/posts in any way you like
 * Based on Extbase and Fluid
 
