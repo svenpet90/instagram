@@ -7,6 +7,9 @@
 			"email": "sven_harders@gmx.de"
 		}
 	],
+	"license": [
+		"GPL-2.0-or-later"
+	],
 	"require": {
 		"php": ">=7.4",
 		"psr/http-factory": "^1.0",
