@@ -89,6 +89,12 @@ this
 line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
 <pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
 
+## Extending
+
+### Additional Template Selector
+If you need a kind of template selector inside a plugin, you can add your own selections by adding those to:
+<pre>$GLOBALS['TYPO3_CONF_VARS']['EXT']['instagram']['templateLayouts']['myext'] = ['My Title', 'my value'];</pre>
+
 ## Contributing
 Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.
 
