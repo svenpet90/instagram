@@ -17,6 +17,9 @@
 		"typo3/cms-core": "^10.4 || ^11.5",
 		"typo3/cms-extbase": "^10.4 || ^11.5"
 	},
+	"suggest": {
+		"typo3/cms-scheduler": "^10.4 || ^11.5"
+	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.24",
 		"friendsoftypo3/phpstan-typo3": "^0.9.0",
