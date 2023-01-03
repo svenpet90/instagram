@@ -95,6 +95,10 @@ line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
 If you need a kind of template selector inside a plugin, you can add your own selections by adding those to:
 <pre>$GLOBALS['TYPO3_CONF_VARS']['EXT']['instagram']['templateLayouts']['myext'] = ['My Title', 'my value'];</pre>
 
+### Local path to save downloaded files
+By default all images/videos in imported posts are saved in <code>/public/fileadmin/instagram</code>
+You can change this path via the Extensions settings <code>local_file_storage_path</code> option.
+
 ## Contributing
 Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.
 
