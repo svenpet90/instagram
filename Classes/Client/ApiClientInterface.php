@@ -18,9 +18,12 @@ use SvenPetersen\Instagram\Domain\Model\Feed;
 interface ApiClientInterface
 {
     /**
+     * @param ?int $since UNIX Timestamp to return posts since
+     * @param ?int $until UNIX Timestamp to return posts until
+     *
      * @return PostDTO[]
      */
-    public function getPosts(int $limit = 25): array;
+    public function getPosts(int $limit = 25, int $since = null, int $until = null): array;
 
     public function getFeedData(): FeedDTO;
 
