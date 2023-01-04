@@ -57,7 +57,7 @@ class AccessTokenRefresherTest extends BaseTest
         return [
             [(new Feed())
                 ->setToken('abcde12345')
-                ->setExpiresAt((new \DateTimeImmutable())->modify('+ 10 days'))
+                ->setExpiresAt((new \DateTimeImmutable())->modify('+ 9 days'))
                 ->setTokenType('bearer'),
                 1,
                 'newAccessToken',
