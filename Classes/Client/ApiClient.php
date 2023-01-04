@@ -57,11 +57,6 @@ class ApiClient implements ApiClientInterface
         $posts = $response['data'];
 
         foreach ($posts as $postData) {
-            if (array_key_exists('children', $postData)) {
-                $children = $this->getChildren($postData);
-                $postData['children'] = $children;
-            }
-
             $return[] = PostDTOFactory::create($postData);
 
             if (count($return) >= $limit) {
@@ -77,51 +72,6 @@ class ApiClient implements ApiClientInterface
         }
 
         return $return;
-    }
-
-    /**
-     * @param array<string, mixed> $postData
-     *
-     * @return mixed[]
-     */
-    public function getChildren(array $postData): array
-    {
-        $children = [];
-
-        foreach ($postData['children']['data'] as $childData) {
-            $children[] = $this->getMedia($childData['id']);
-        }
-
-        return $children;
-    }
-
-    /**
-     * @param string $mediaId
-     *
-     * @return array<string, mixed>
-     *
-     * @throws \Exception@return array<string, mixed>
-     */
-    public function getMedia(string $mediaId): array
-    {
-        $endpoint = sprintf(
-            '%s/%s?access_token=%s&fields=%s',
-            $this->apiBaseUrl,
-            $mediaId,
-            $this->feed->getToken(),
-            implode(',', [
-                'id',
-                'is_shared_to_feed',
-                'media_type',
-                'media_url',
-                'permalink',
-                'thumbnail_url',
-                'timestamp',
-                'username',
-            ])
-        );
-
-        return $this->request($endpoint);
     }
 
     /**
@@ -206,7 +156,7 @@ class ApiClient implements ApiClientInterface
             'thumbnail_url',
             'timestamp',
             'username',
-            'children',
+            'children{id,media_type,media_url,thumbnail_url,timestamp,permalink,username}',
         ];
     }
 }
