@@ -30,8 +30,8 @@ class PostDTOFactory
         if (array_key_exists('children', $data)) {
             $children = [];
 
-            foreach ($data['children'] as $data) {
-                $children[] = self::createFromArray($data);
+            foreach ($data['children'] as $child) {
+                $children[] = self::createFromArray($child);
             }
 
             $postDTO->setChildren($children);
