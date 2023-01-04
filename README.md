@@ -62,15 +62,24 @@ This extension comes with a command to import (new) posts of a given instagram
 user.
 It is recommended to set this command up to run regularly - e.g. once a day.
 
-<pre>instagram:import:posts {username} {storagePid} [limit|25]</pre>
+<pre>instagram:import:posts {username} {storagePid} [limit|25] [--since="01/01/2022 00:00:00" --until="12/31/2022 23:59:59"
+]</pre>
 
 __Arguments:__
 
-| Name       | Description                                                          |
-|------------|----------------------------------------------------------------------|
-| username   | The instagram username to import posts for                           |
-| storagePid | The PID to save the imported posts                                   |
-| limit      | The maximum number of latest posts to import (Optional. Default: 25) |
+| Name       | Description                                                   |
+|------------|---------------------------------------------------------------|
+| username   | The instagram username to import posts for                    |
+| storagePid | The PID to save the imported posts                            |
+| limit      | The maximum number of posts to import (Optional. Default: 25) |
+
+__Options:__
+
+| Name    | Description                                                    |
+|---------|----------------------------------------------------------------|
+| --since | Date string to fetch posts since (Format: "MM/DD/YYYY H:i:s"). |
+| --until | Date string to fetch posts until (Format: "MM/DD/YYYY H:i:s"). |
+
 
 ### Automatic Access Token Refreshing
 The generated long-lived access token is valid for 60 days.
