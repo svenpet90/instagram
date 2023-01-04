@@ -54,10 +54,18 @@ class ImportPostsCommand extends Command
     {
         $username = $input->getArgument('username');
         $storagePid = $input->getArgument('storagePid');
-        $limit = (int)$input->getArgument('limit');
+        $limit = $input->getArgument('limit');
 
         if (is_numeric($storagePid) === false) {
-            throw new \InvalidArgumentException(sprintf('The StoragePid argument must be numeric. "%s" given.', $storagePid));
+            $output->writeln(sprintf('<fg=red>The StoragePid argument must be an Integer. "%s" given.</>', $storagePid));
+
+            return Command::FAILURE;
+        }
+
+        if (is_numeric($limit) === false) {
+            $output->writeln(sprintf('<fg=red>The limit argument must be an Integer. "%s" given.</>', $limit));
+
+            return Command::FAILURE;
         }
 
         /** @var Typo3QuerySettings $querySettings */
@@ -68,16 +76,20 @@ class ImportPostsCommand extends Command
         $feed = $this->feedRepository->findOneByUsername($username);
 
         if ($feed === null) {
-            throw new \InvalidArgumentException(sprintf('No feed entity found for given username "%s".', $username));
+            $output->writeln(sprintf('<fg=red>No feed entity found for given username "%s".</>', $username));
+
+            return Command::FAILURE;
         }
 
         $apiClient = $this->apiClientFactory->create($feed);
 
-        $posts = $apiClient->getPosts($limit);
+        $posts = $apiClient->getPosts((int)$limit);
 
         foreach ($posts as $postDTO) {
             $this->postUpserter->upsertPost($postDTO, (int)$storagePid, $apiClient);
         }
+
+        $output->writeln(sprintf('<fg=green>The posts have been successfully imported/updated</>'));
 
         return Command::SUCCESS;
     }
