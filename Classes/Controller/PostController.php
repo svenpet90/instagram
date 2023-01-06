@@ -13,6 +13,7 @@ namespace SvenPetersen\Instagram\Controller;
 
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
+use SvenPetersen\Instagram\Event\Controller\PreRenderActionEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -25,10 +26,20 @@ class PostController extends ActionController
         $posts = $postRepository->findBySettings($this->settings);
 
         $this->view->assign('posts', $posts);
+
+        /** @var PreRenderActionEvent $event */
+        $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
+
+        $this->view = $event->getView();
     }
 
     public function showAction(Post $post): void
     {
         $this->view->assign('post', $post);
+
+        /** @var PreRenderActionEvent $event */
+        $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
+
+        $this->view = $event->getView();
     }
 }
