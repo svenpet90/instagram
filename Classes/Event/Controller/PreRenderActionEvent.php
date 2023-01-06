@@ -18,24 +18,14 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  */
 class PreRenderActionEvent
 {
-    private ViewInterface $view;
+    public ViewInterface $view;
 
     private string $action;
 
-    public function __construct(ViewInterface $view, string $action)
+    public function __construct(ViewInterface &$view, string $action)
     {
-        $this->view = $view;
+        $this->view = &$view;
         $this->action = $action;
-    }
-
-    public function getView(): ViewInterface
-    {
-        return $this->view;
-    }
-
-    public function setView(ViewInterface $view): void
-    {
-        $this->view = $view;
     }
 
     public function getAction(): string

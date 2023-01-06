@@ -30,7 +30,7 @@ class PostController extends ActionController
         /** @var PreRenderActionEvent $event */
         $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
 
-        $this->view = $event->getView();
+        $this->view = $event->view;
     }
 
     public function showAction(Post $post): void
@@ -40,6 +40,6 @@ class PostController extends ActionController
         /** @var PreRenderActionEvent $event */
         $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
 
-        $this->view = $event->getView();
+        $this->view = $event->view;
     }
 }
