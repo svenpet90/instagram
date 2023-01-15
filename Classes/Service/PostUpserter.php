@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Service;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use SvenPetersen\Instagram\Client\ApiClientInterface;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
+use SvenPetersen\Instagram\Event\Post\PostPersistPostEvent;
+use SvenPetersen\Instagram\Event\Post\PrePersistPostEvent;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -31,6 +34,8 @@ class PostUpserter
 
     private PersistenceManagerInterface $persistenceManager;
 
+    private EventDispatcherInterface $eventDispatcher;
+
     /**
      * @var array<string, string>
      */
@@ -38,10 +43,12 @@ class PostUpserter
 
     public function __construct(
         PostRepository $postRepository,
-        PersistenceManagerInterface $persistenceManager
+        PersistenceManagerInterface $persistenceManager,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->postRepository = $postRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->eventDispatcher = $eventDispatcher;
 
         /** @var ExtensionConfiguration $extensionConfiguration */
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
@@ -62,10 +69,16 @@ class PostUpserter
             ->setFeed($apiClient->getFeed())
             ->setPid($storagePid);
 
+        /** @var PrePersistPostEvent $event */
+        $event = $this->eventDispatcher->dispatch(new PrePersistPostEvent($post, $action));
+        $post = $event->getPost();
+
         $this->postRepository->add($post);
         $this->persistenceManager->persistAll();
 
         if ($action === 'UPDATE') {
+            $this->eventDispatcher->dispatch(new PostPersistPostEvent($post));
+
             return $post;
         }
 
@@ -116,6 +129,8 @@ class PostUpserter
 
         $this->postRepository->update($post);
         $this->persistenceManager->persistAll();
+
+        $this->eventDispatcher->dispatch(new PostPersistPostEvent($post));
 
         return $post;
     }
@@ -186,8 +201,6 @@ class PostUpserter
     }
 
     /**
-     * todo: add test
-     *
      * @return string[]
      */
     private function extractHashtags(string $text): array
