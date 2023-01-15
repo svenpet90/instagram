@@ -1,27 +1,29 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      data-namespace-typo3-fluid="true"
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
 >
 
 <f:layout name="Default"/>
 
 <f:section name="main">
     <div class="row">
-        <f:for each="{posts}" as="post" iteration="i">
-            <f:if condition="{settings.flexform.maximagestodisplay}">
-                <f:then>
-                    <f:if condition="{i.cycle} <= {settings.flexform.maximagestodisplay}">
-                        <f:render partial="Post/RenderMedia"
-                                  arguments="{post:post}"
-                        />
-                    </f:if>
-                </f:then>
-                <f:else>
+        <f:if condition="{settings.showPagination}">
+            <f:then>
+                <f:for each="{pagination.paginator.paginatedItems}" as="post" iteration="i">
                     <f:render partial="Post/RenderMedia"
                               arguments="{post:post}"
                     />
-                </f:else>
-            </f:if>
-        </f:for>
+                </f:for>
+                <f:render partial="Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}"/>
+            </f:then>
+            <f:else>
+                <f:for each="{posts}" as="post" iteration="i">
+                    <f:render partial="Post/RenderMedia"
+                              arguments="{post:post}"
+                    />
+                </f:for>
+            </f:else>
+        </f:if>
     </div>
 </f:section>
 

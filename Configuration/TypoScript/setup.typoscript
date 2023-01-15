@@ -6,6 +6,7 @@ plugin.tx_instagram {
 
     partialRootPaths {
       0 = {$plugin.tx_instagram.view.partialRootPath}
+      10 = EXT:numbered_pagination/Resources/Private/Partials/
     }
 
     layoutRootPaths {

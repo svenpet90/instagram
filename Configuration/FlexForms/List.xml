@@ -2,33 +2,29 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>Instagram config</sheetTitle>
-                </TCEforms>
+                <sheetTitle>Instagram config</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.mediaTypes>
-                        <TCEforms>
-                            <label>Types of posts to show</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectMultipleSideBySide</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">Image</numIndex>
-                                        <numIndex index="1">IMAGE</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">Video</numIndex>
-                                        <numIndex index="1">VIDEO</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3" type="array">
-                                        <numIndex index="0">Carousel</numIndex>
-                                        <numIndex index="1">CAROUSEL_ALBUM</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>Types of posts to show</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectMultipleSideBySide</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">Image</numIndex>
+                                    <numIndex index="1">IMAGE</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">Video</numIndex>
+                                    <numIndex index="1">VIDEO</numIndex>
+                                </numIndex>
+                                <numIndex index="3" type="array">
+                                    <numIndex index="0">Carousel</numIndex>
+                                    <numIndex index="1">CAROUSEL_ALBUM</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.mediaTypes>
 
                     <settings.feeds>
@@ -41,47 +37,80 @@
                     </settings.feeds>
 
                     <settings.maxPostsToShow>
-                        <TCEforms>
-                            <label>Maximum number of posts to show</label>
-                            <config>
-                                <type>input</type>
-                                <size>20</size>
-                                <max>30</max>
-                                <eval>int</eval>
-                            </config>
-                        </TCEforms>
+                        <label>Maximum number of posts to show</label>
+                        <config>
+                            <type>input</type>
+                            <size>20</size>
+                            <max>30</max>
+                            <eval>int</eval>
+                        </config>
                     </settings.maxPostsToShow>
 
+                    <settings.showPagination>
+                        <label>Show Pagination</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.showPagination>
+
+                    <settings.pagination.itemsPerPage>
+                        <label>Items per Page</label>
+                        <required>true</required>
+                        <displayCond>FIELD:settings.showPagination:REQ:true</displayCond>
+                        <config>
+                            <type>input</type>
+                            <size>2</size>
+                            <eval>int</eval>
+                            <range>
+                                <lower>1</lower>
+                                <upper>99</upper>
+                            </range>
+                        </config>
+                    </settings.pagination.itemsPerPage>
+
+                    <settings.pagination.maxLinks>
+                        <label>Max links in Pagination</label>
+                        <required>true</required>
+                        <displayCond>FIELD:settings.showPagination:REQ:true</displayCond>
+                        <config>
+                            <type>input</type>
+                            <default>5</default>
+                            <size>2</size>
+                            <eval>int</eval>
+                            <range>
+                                <lower>1</lower>
+                                <upper>99</upper>
+                            </range>
+                        </config>
+                    </settings.pagination.maxLinks>
+
                     <settings.hashtagConstraints>
-                        <TCEforms>
-                            <label>Only show posts containing the following hashtags (with #, comma-separated)</label>
-                            <config>
-                                <type>input</type>
-                                <size>20</size>
-                                <max>255</max>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>Only show posts containing the following hashtags (with #, comma-separated)</label>
+                        <config>
+                            <type>input</type>
+                            <size>20</size>
+                            <max>255</max>
+                            <eval>trim</eval>
+                        </config>
                     </settings.hashtagConstraints>
 
                     <settings.logicalConstraint>
-                        <TCEforms>
-                            <label>Hashtags constraint</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">Logical Or</numIndex>
-                                        <numIndex index="1">logicalOr</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">Logical And</numIndex>
-                                        <numIndex index="1">logicalAnd</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>Hashtags constraint</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">Logical Or</numIndex>
+                                    <numIndex index="1">logicalOr</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">Logical And</numIndex>
+                                    <numIndex index="1">logicalAnd</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.logicalConstraint>
                 </el>
             </ROOT>
