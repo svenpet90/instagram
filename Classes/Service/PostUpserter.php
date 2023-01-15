@@ -15,6 +15,7 @@ use SvenPetersen\Instagram\Client\ApiClientInterface;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\File;
@@ -30,12 +31,21 @@ class PostUpserter
 
     private PersistenceManagerInterface $persistenceManager;
 
+    /**
+     * @var array<string, string>
+     */
+    private array $extConf;
+
     public function __construct(
         PostRepository $postRepository,
         PersistenceManagerInterface $persistenceManager
     ) {
         $this->postRepository = $postRepository;
         $this->persistenceManager = $persistenceManager;
+
+        /** @var ExtensionConfiguration $extensionConfiguration */
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $this->extConf = $extensionConfiguration->get('instagram');
     }
 
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
@@ -112,12 +122,12 @@ class PostUpserter
 
     private function downloadFile(string $fileUrl, string $fileExtension): File
     {
-        $directory = sprintf('%s/fileadmin/instagram', Environment::getPublicPath());
+        $relativeFilePath = $this->extConf['local_file_storage_path'];
+        $directory = sprintf('%s%s', Environment::getProjectPath(), $relativeFilePath);
         GeneralUtility::mkdir_deep($directory);
 
         $directory = str_replace('1:', 'uploads', $directory);
         $filePath = sprintf('%s/%s.%s', $directory, md5($fileUrl), $fileExtension);
-
         $data = file_get_contents($fileUrl);
         file_put_contents($filePath, $data);
 

@@ -112,6 +112,23 @@
                             </items>
                         </config>
                     </settings.logicalConstraint>
+
+                    <settings.templateLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:instagram/Resources/Private/Language/locallang_be.xlf:flexform_list.templateLayout</label>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>SvenPetersen\Instagram\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.templateLayout>
                 </el>
             </ROOT>
         </sDEF>

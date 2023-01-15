@@ -7,7 +7,8 @@ if (! defined('TYPO3')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'SvenPetersen.Instagram',
     'List',
-    'Instagram: List of posts'
+    'Instagram: List of posts',
+    'actions-brand-instagram'
 );
 
 $pluginSignature = 'instagram_list';

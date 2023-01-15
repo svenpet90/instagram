@@ -1,0 +1,2 @@
+# cat=General; type=string; label=Local path to store downloaded files (relativ from project root)
+local_file_storage_path = /public/fileadmin/instagram

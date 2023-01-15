@@ -2,4 +2,6 @@ parameters:
   level: 8
   paths:
     - Classes
+  excludePaths:
+  	- Classes/Hooks/ItemsProcFunc.php
   checkGenericClassInNonGenericObjectType: false

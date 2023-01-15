@@ -52,7 +52,6 @@ __Recommended__:
 ## Compatibility
 | Version | TYPO3       | PHP        | Support/Development                  |
 |---------|-------------|------------|--------------------------------------|
-| 2.x     | 12.x        | 8.1 - 8.2  | In Development                       |
 | 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Features, Bugfixes, Security Updates |
 
 ## Funtionalities
@@ -62,15 +61,24 @@ This extension comes with a command to import (new) posts of a given instagram
 user.
 It is recommended to set this command up to run regularly - e.g. once a day.
 
-<pre>instagram:import:posts {username} {storagePid} [limit|25]</pre>
+<pre>instagram:import:posts {username} {storagePid} [limit|25] [--since="01/01/2022 00:00:00" --until="12/31/2022 23:59:59"
+]</pre>
 
 __Arguments:__
 
-| Name       | Description                                                          |
-|------------|----------------------------------------------------------------------|
-| username   | The instagram username to import posts for                           |
-| storagePid | The PID to save the imported posts                                   |
-| limit      | The maximum number of latest posts to import (Optional. Default: 25) |
+| Name       | Description                                                   |
+|------------|---------------------------------------------------------------|
+| username   | The instagram username to import posts for                    |
+| storagePid | The PID to save the imported posts                            |
+| limit      | The maximum number of posts to import (Optional. Default: 25) |
+
+__Options:__
+
+| Name    | Description                                                    |
+|---------|----------------------------------------------------------------|
+| --since | Date string to fetch posts since (Format: "MM/DD/YYYY H:i:s"). |
+| --until | Date string to fetch posts until (Format: "MM/DD/YYYY H:i:s"). |
+
 
 ### Automatic Access Token Refreshing
 The generated long-lived access token is valid for 60 days.
@@ -88,6 +96,16 @@ To disable the Backend module - e.g. after you generated all needed tokens - add
 this
 line to the <code>LocalConfiguration.php/AdditionalConfiguration.php</code>:
 <pre>$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGeneratorBeModule'] = false;</pre>
+
+## Extending
+
+### Additional Template Selector
+If you need a kind of template selector inside a plugin, you can add your own selections by adding those to:
+<pre>$GLOBALS['TYPO3_CONF_VARS']['EXT']['instagram']['templateLayouts']['myext'] = ['My Title', 'my value'];</pre>
+
+### Local path to save downloaded files
+By default all images/videos in imported posts are saved in <code>/public/fileadmin/instagram</code>
+You can change this path via the Extensions settings <code>local_file_storage_path</code> option.
 
 ## Contributing
 Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.
