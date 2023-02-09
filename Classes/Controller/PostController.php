@@ -37,8 +37,6 @@ class PostController extends ActionController
                 'paginator' => $paginator,
                 'pagination' => $pagination,
             ]);
-
-            return $this->htmlResponse();
         }
         $this->view->assign('posts', $posts);
 

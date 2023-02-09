@@ -8,9 +8,9 @@
     <div class="row">
         <f:if condition="{settings.showPagination}">
             <f:then>
-                <f:for each="{pagination.paginator.paginatedItems}" as="post" iteration="i">
+                <f:for each="{pagination.paginator.paginatedItems}" as="paginatedPost" iteration="i">
                     <f:render partial="Post/RenderMedia"
-                              arguments="{post:post}"
+                              arguments="{post:paginatedPost}"
                     />
                 </f:for>
                 <f:render partial="Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}"/>
