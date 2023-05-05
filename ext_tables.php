@@ -11,10 +11,10 @@ if (! defined('TYPO3')) {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_instagram_domain_model_post');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-    'tx_Instagram_domain_model_accesstoken',
-    'EXT:instagram/Resources/Private/Language/locallang_csh_tx_Instagram_domain_model_accesstoken.xlf'
+    'tx_instagram_domain_model_feed',
+    'EXT:instagram/Resources/Private/Language/locallang_csh_tx_instagram_domain_model_feed.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_instagram_domain_model_accesstoken');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_instagram_domain_model_feed');
 
 if (TYPO3) {
     if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\Features::class)->isFeatureEnabled('instagram.tokenGeneratorBeModule')) {

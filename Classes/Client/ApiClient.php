@@ -37,11 +37,9 @@ class ApiClient implements ApiClientInterface
     }
 
     /**
-     * @return PostDTO[]
-     *
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function getPosts(int $limit = 25): array
+    public function getPosts(int $limit = 25, int $since = null, int $until = null): array
     {
         $return = [];
 
@@ -52,6 +50,14 @@ class ApiClient implements ApiClientInterface
             $this->feed->getToken(),
             implode(',', $this->getDefaultMediaFields())
         );
+
+        if ($since) {
+            $endpoint .= sprintf('&since=%d', $since);
+        }
+
+        if ($until) {
+            $endpoint .= sprintf('&until=%d', $until);
+        }
 
         $response = $this->request($endpoint);
         $posts = $response['data'];
@@ -156,7 +162,7 @@ class ApiClient implements ApiClientInterface
             'thumbnail_url',
             'timestamp',
             'username',
-            'children',
+            'children{id,media_type,media_url,thumbnail_url,timestamp,permalink,username}',
         ];
     }
 }

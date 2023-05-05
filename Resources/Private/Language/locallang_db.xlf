@@ -55,9 +55,12 @@
 				<source>Posts</source>
 			</trans-unit>
 
-
             <trans-unit id="instagram">
                 <source>Instagram Token Generator</source>
+            </trans-unit>
+
+            <trans-unit id="flexform_list.templateLayout">
+            	<source>Template layout</source>
             </trans-unit>
 		</body>
 	</file>

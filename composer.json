@@ -7,13 +7,18 @@
 			"email": "sven_harders@gmx.de"
 		}
 	],
+	"license": [
+		"GPL-2.0-or-later"
+	],
 	"require": {
 		"php": ">=7.4",
 		"psr/http-factory": "^1.0",
 		"symfony/console": ">=5.0",
 		"typo3/cms-core": "^10.4 || ^11.5",
-		"typo3/cms-extbase": "^10.4 || ^11.5",
-		"typo3/cms-scheduler": "^10.4 || ^11.5"
+		"typo3/cms-extbase": "^10.4 || ^11.5"
+	},
+	"suggest": {
+		"typo3/cms-scheduler": "To setup the cronjobs as tasks from within the backend"
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.24",

@@ -11,10 +11,14 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Service;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use SvenPetersen\Instagram\Client\ApiClientInterface;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
+use SvenPetersen\Instagram\Event\Post\PostPersistPostEvent;
+use SvenPetersen\Instagram\Event\Post\PrePersistPostEvent;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\File;
@@ -30,12 +34,25 @@ class PostUpserter
 
     private PersistenceManagerInterface $persistenceManager;
 
+    private EventDispatcherInterface $eventDispatcher;
+
+    /**
+     * @var array<string, string>
+     */
+    private array $extConf;
+
     public function __construct(
         PostRepository $postRepository,
-        PersistenceManagerInterface $persistenceManager
+        PersistenceManagerInterface $persistenceManager,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->postRepository = $postRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->eventDispatcher = $eventDispatcher;
+
+        /** @var ExtensionConfiguration $extensionConfiguration */
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $this->extConf = $extensionConfiguration->get('instagram');
     }
 
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
@@ -52,10 +69,16 @@ class PostUpserter
             ->setFeed($apiClient->getFeed())
             ->setPid($storagePid);
 
+        /** @var PrePersistPostEvent $event */
+        $event = $this->eventDispatcher->dispatch(new PrePersistPostEvent($post, $action));
+        $post = $event->getPost();
+
         $this->postRepository->add($post);
         $this->persistenceManager->persistAll();
 
         if ($action === 'UPDATE') {
+            $this->eventDispatcher->dispatch(new PostPersistPostEvent($post));
+
             return $post;
         }
 
@@ -107,17 +130,19 @@ class PostUpserter
         $this->postRepository->update($post);
         $this->persistenceManager->persistAll();
 
+        $this->eventDispatcher->dispatch(new PostPersistPostEvent($post));
+
         return $post;
     }
 
     private function downloadFile(string $fileUrl, string $fileExtension): File
     {
-        $directory = sprintf('%s/fileadmin/instagram', Environment::getPublicPath());
+        $relativeFilePath = $this->extConf['local_file_storage_path'];
+        $directory = sprintf('%s%s', Environment::getProjectPath(), $relativeFilePath);
         GeneralUtility::mkdir_deep($directory);
 
         $directory = str_replace('1:', 'uploads', $directory);
         $filePath = sprintf('%s/%s.%s', $directory, md5($fileUrl), $fileExtension);
-
         $data = file_get_contents($fileUrl);
         file_put_contents($filePath, $data);
 
@@ -176,8 +201,6 @@ class PostUpserter
     }
 
     /**
-     * todo: add test
-     *
      * @return string[]
      */
     private function extractHashtags(string $text): array

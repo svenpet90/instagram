@@ -6,21 +6,8 @@
 
 <f:section name="main">
     <div class="row">
-        <f:for each="{posts}" as="post" iteration="i">
-            <f:if condition="{settings.flexform.maximagestodisplay}">
-                <f:then>
-                    <f:if condition="{i.cycle} <= {settings.flexform.maximagestodisplay}">
-                        <f:render partial="Post/RenderMedia"
-                                  arguments="{post:post}"
-                        />
-                    </f:if>
-                </f:then>
-                <f:else>
-                    <f:render partial="Post/RenderMedia"
-                              arguments="{post:post}"
-                    />
-                </f:else>
-            </f:if>
+        <f:for each="{posts}" as="post">
+            <f:render partial="Post/RenderMedia" arguments="{post:post}"/>
         </f:for>
     </div>
 </f:section>
