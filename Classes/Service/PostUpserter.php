@@ -170,7 +170,6 @@ class PostUpserter
             'uid_local' => $file->getUid(),
             'uid_foreign' => $newElement->getUid(),
             'tablenames' => $tablename,
-            'table_local' => 'sys_file',
             'fieldname' => $fieldname,
             'l10n_diffsource' => '',
             'sorting_foreign' => $file->getUid(),
