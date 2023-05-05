@@ -13,6 +13,9 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',

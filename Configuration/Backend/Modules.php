@@ -1,8 +1,9 @@
 <?php
 
 use SvenPetersen\Instagram\Controller\TokenGeneratorController;
+use TYPO3\CMS\Core\Configuration\Features;
 
-if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\Features::class)
+if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Features::class)
     ->isFeatureEnabled('instagram.tokenGeneratorBeModule')
 ) {
     return [
