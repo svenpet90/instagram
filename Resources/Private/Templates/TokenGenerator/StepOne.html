@@ -1,0 +1,96 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <div class="row m-3">
+        <div class="col-12">
+            <h1>
+                <f:translate key="beModule.headline"/>
+            </h1>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-5">
+
+            <p class="mb-3">
+                <f:translate key="beModule.description"/>
+            </p>
+
+            <div class="card">
+                <div class="card-header">
+                    <f:translate key="beModule.step1.headline"/>
+                </div>
+
+                <div class="card-body">
+                    <f:translate key="beModule.step1.description"/>
+                    <br>
+                    <br>
+                    <f:form action="stepTwo"
+                            method="post"
+                            enctype="multipart/form-data"
+                    >
+                        <div class="form-group col-12">
+                            <label for="clientid">
+                                Instagram-App-ID*
+                            </label>
+
+                            <f:form.textfield name="clientid"
+                                              value="{clientid}"
+                                              placeholder="Instagram-App-ID"
+                                              required="true"
+                                              class="form-control"
+                            />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="clientsecret">
+                                Instagram-App-Secret*
+                            </label>
+
+                            <f:form.textfield name="clientsecret"
+                                              value="{clientsecret}"
+                                              placeholder="Instagram-App-Secret"
+                                              required="true"
+                                              class="form-control"
+                            />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="returnurl">
+                                Valid OAuth Redirect URI*
+                            </label>
+
+                            <f:form.textfield name="returnurl"
+                                              value="{returnurl}"
+                                              placeholder="Valid OAuth Redirect URI"
+                                              required="true"
+                                              class="form-control"
+                            />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="storagePid">
+                                Storage PID*
+                            </label>
+
+                            <f:form.textfield name="storagePid"
+                                              type="number"
+                                              placeholder="Storage PID for the Token"
+                                              required="true"
+                                              class="form-control"
+                            />
+                        </div>
+
+                        <f:form.submit value="Next Step"
+                                       class="btn btn-success w-100"
+                        />
+                    </f:form>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+</html>

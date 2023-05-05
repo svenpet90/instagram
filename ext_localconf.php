@@ -5,7 +5,7 @@ if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGenera
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'SvenPetersen.Instagram',
+    'Instagram',
     'List',
     [
         \SvenPetersen\Instagram\Controller\PostController::class => 'list, show',
@@ -17,7 +17,7 @@ if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['instagram.tokenGenera
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'SvenPetersen.Instagram',
+    'Instagram',
     'Show',
     [
         \SvenPetersen\Instagram\Controller\PostController::class => 'show',

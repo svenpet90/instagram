@@ -20,20 +20,11 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface
 {
-    private Feed $feed;
-
-    private RequestFactory $requestFactory;
-
-    private string $apiBaseUrl;
-
     public function __construct(
-        Feed $feed,
-        RequestFactory $requestFactory,
-        string $apiBaseUrl
+        private readonly Feed $feed,
+        private readonly RequestFactory $requestFactory,
+        private readonly string $apiBaseUrl,
     ) {
-        $this->feed = $feed;
-        $this->requestFactory = $requestFactory;
-        $this->apiBaseUrl = $apiBaseUrl;
     }
 
     /**

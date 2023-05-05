@@ -11,15 +11,15 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
-use SvenPetersen\Instagram\Event\Controller\PreRenderActionEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class PostController extends ActionController
 {
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         /** @var PostRepository $postRepository */
         $postRepository = GeneralUtility::makeInstance(PostRepository::class);
@@ -27,19 +27,13 @@ class PostController extends ActionController
 
         $this->view->assign('posts', $posts);
 
-        /** @var PreRenderActionEvent $event */
-        $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
-
-        $this->view = $event->view;
+        return $this->htmlResponse();
     }
 
-    public function showAction(Post $post): void
+    public function showAction(Post $post): ResponseInterface
     {
         $this->view->assign('post', $post);
 
-        /** @var PreRenderActionEvent $event */
-        $event = $this->eventDispatcher->dispatch(new PreRenderActionEvent($this->view, __METHOD__));
-
-        $this->view = $event->view;
+        return $this->htmlResponse();
     }
 }

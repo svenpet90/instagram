@@ -11,15 +11,11 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Domain\Repository;
 
-use SvenPetersen\Instagram\Domain\Model\Post;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * @method Post|null findOneByInstagramid($id)
- */
 class PostRepository extends Repository
 {
     protected $defaultOrderings = [
@@ -44,7 +40,7 @@ class PostRepository extends Repository
                 $feedConstraints[] = $query->equals('feed', $feed);
             }
 
-            $constraints[] = $query->logicalOr($feedConstraints);
+            $constraints[] = $query->logicalOr(...$feedConstraints);
         }
 
         // MediaType constraints
@@ -55,7 +51,7 @@ class PostRepository extends Repository
                 $mediaTypeConstraints[] = $query->equals('mediaType', $mediaType);
             }
 
-            $constraints[] = $query->logicalOr($mediaTypeConstraints);
+            $constraints[] = $query->logicalOr(...$mediaTypeConstraints);
         }
 
         // Hashtag constraints
@@ -73,31 +69,6 @@ class PostRepository extends Repository
             $query->setLimit((int)$settings['maxPostsToShow']);
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
-    }
-
-    /**
-     * @param array<string, mixed> $constraints
-     * @return Post|null
-     */
-    public function findOneBy(array $constraints)
-    {
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(false);
-
-        $constrains = [];
-        foreach ($constraints as $field => $value) {
-            $constrains[] = $query->equals($field, $value);
-        }
-
-        $query->matching($query->logicalAnd($constrains));
-
-        /** @var Post|null $result */
-        $result = $query
-            ->setLimit(1)
-            ->execute()
-            ->getFirst();
-
-        return $result;
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 }

@@ -13,43 +13,11 @@ namespace SvenPetersen\Instagram\Domain\Model\Dto;
 
 class FeedDTO
 {
-    private string $id;
-
-    private string $username;
-
-    private string $accountType;
-
-    private int $mediaCount;
-
     public function __construct(
-        string $id,
-        string $username,
-        string $accountType,
-        int $mediaCount
+        public readonly string $id,
+        public readonly string $username,
+        public readonly string $accountType,
+        public readonly int $mediaCount,
     ) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->accountType = $accountType;
-        $this->mediaCount = $mediaCount;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function getAccountType(): string
-    {
-        return $this->accountType;
-    }
-
-    public function getMediaCount(): int
-    {
-        return $this->mediaCount;
     }
 }

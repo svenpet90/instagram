@@ -24,10 +24,7 @@ class Feed extends AbstractEntity
 
     protected string $username = '';
 
-    /**
-     * @var int
-     */
-    protected $_languageUid = -1;
+    protected ?int $_languageUid = -1;
 
     /**
      * @var ObjectStorage<\SvenPetersen\Instagram\Domain\Model\Post>

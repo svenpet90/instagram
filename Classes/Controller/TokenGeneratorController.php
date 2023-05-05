@@ -4,24 +4,30 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use SvenPetersen\Instagram\Service\AccessTokenService;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class TokenGeneratorController extends ActionController
 {
-    private AccessTokenService $accessTokenService;
-
-    public function __construct(AccessTokenService $accessTokenService)
-    {
-        $this->accessTokenService = $accessTokenService;
+    public function __construct(
+        private readonly ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly AccessTokenService $accessTokenService,
+    ) {
     }
 
-    public function stepOneAction(): void
+    public function stepOneAction(): ResponseInterface
     {
+        $view = $this->moduleTemplateFactory->create($this->request);
+
+        return $view->renderResponse('StepOne');
     }
 
-    public function stepTwoAction(): void
+    public function stepTwoAction(): ResponseInterface
     {
+        $view = $this->moduleTemplateFactory->create($this->request);
+
         /** @var string $appId */
         $appId = $this->request->getArgument('clientid');
 
@@ -35,17 +41,21 @@ class TokenGeneratorController extends ActionController
 
         $link = $this->accessTokenService->getAuthorizationLink($appId, $returnUrl);
 
-        $this->view->assignMultiple([
+        $view->assignMultiple([
             'link' => $link,
             'appId' => $appId,
             'returnUrl' => $returnUrl,
             'appSecret' => $appSecret,
             'storagePid' => $storagePid,
         ]);
+
+        return $view->renderResponse('StepTwo');
     }
 
-    public function stepThreeAction(): void
+    public function stepThreeAction(): ResponseInterface
     {
+        $view = $this->moduleTemplateFactory->create($this->request);
+
         /** @var string $instagramAppId */
         $instagramAppId = $this->request->getArgument('clientid');
 
@@ -68,8 +78,10 @@ class TokenGeneratorController extends ActionController
             $storagePid
         );
 
-        $this->view->assignMultiple([
+        $view->assignMultiple([
             'feed' => $feed,
         ]);
+
+        return $view->renderResponse('StepThree');
     }
 }
