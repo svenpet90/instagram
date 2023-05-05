@@ -60,7 +60,9 @@ __Recommended__:
 
 | Version | TYPO3       | PHP        | Support/Development                  |
 |---------|-------------|------------|--------------------------------------|
-| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Features, Bugfixes, Security Updates |
+| 2.x     | 12.4 | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates |
+| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Bugfixes, Security Updates |
+
 
 ## Funtionalities
 
@@ -129,7 +131,6 @@ logic:
 
 | Name                 | Args.                                             | Description                                                                                                                                  |
 |----------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| PreRenderActionEvent | ViewInterface $view <br> string $action           | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
 | PrePersistPostEvent  | Post $post <br> string $action['new' or ‘update'] | Dispatched before a Post is saved. Can be used to modify the Post entity.                                                                    | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
 | PostPersistPostEvent | Post $post                                        | Dispatched after a Post is saved.                                                                                                            | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
 
