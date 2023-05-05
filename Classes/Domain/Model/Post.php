@@ -34,7 +34,7 @@ class Post extends AbstractEntity
     /**
      * @var int
      */
-    protected $_languageUid = -1;
+    protected ?int $_languageUid = -1;
 
     protected string $caption = '';
 

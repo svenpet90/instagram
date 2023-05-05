@@ -55,10 +55,18 @@ class PostUpserter
         $this->extConf = $extensionConfiguration->get('instagram');
     }
 
+    /**
+     * @param int<0, max> $storagePid
+     */
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
     {
         $action = 'UPDATE';
-        $post = $this->postRepository->findOneBy(['instagram_id' => $dto->getId(), 'pid' => $storagePid]);
+
+        /** @var Post|null $post */
+        $post = $this->postRepository->findOneBy([
+            'instagram_id' => $dto->getId(),
+            'pid' => $storagePid
+        ]);
 
         if ($post === null) {
             $action = 'NEW';

@@ -18,13 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class AccessTokenRefresherCommand extends Command
 {
-    private AccessTokenRefresher $accessTokenRefresher;
-
     public function __construct(
-        AccessTokenRefresher $accessTokenRefresher
+        private readonly AccessTokenRefresher $accessTokenRefresher,
     ) {
-        $this->accessTokenRefresher = $accessTokenRefresher;
-
         parent::__construct();
     }
 

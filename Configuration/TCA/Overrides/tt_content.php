@@ -1,11 +1,11 @@
 <?php
 
-if (! defined('TYPO3')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'SvenPetersen.Instagram',
+    'Instagram',
     'List',
     'Instagram: List of posts',
     'actions-brand-instagram'
@@ -19,7 +19,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'SvenPetersen.Instagram',
+    'Instagram',
     'Show',
     'Instagram: Show single post'
 );

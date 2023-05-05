@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Command;
 
+use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
 use SvenPetersen\Instagram\Factory\ApiClientFactoryInterface;
 use SvenPetersen\Instagram\Service\PostUpserter;
@@ -24,21 +25,11 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 class ImportPostsCommand extends Command
 {
-    private FeedRepository $feedRepository;
-
-    private ApiClientFactoryInterface $apiClientFactory;
-
-    private PostUpserter $postUpserter;
-
     public function __construct(
-        FeedRepository $feedRepository,
-        ApiClientFactoryInterface $apiClientFactory,
-        PostUpserter $postUpserter
+        private readonly FeedRepository $feedRepository,
+        private readonly ApiClientFactoryInterface $apiClientFactory,
+        private readonly PostUpserter $postUpserter,
     ) {
-        $this->feedRepository = $feedRepository;
-        $this->apiClientFactory = $apiClientFactory;
-        $this->postUpserter = $postUpserter;
-
         parent::__construct();
     }
 
@@ -89,7 +80,8 @@ class ImportPostsCommand extends Command
         $querySettings->setRespectStoragePage(false);
         $this->feedRepository->setDefaultQuerySettings($querySettings);
 
-        $feed = $this->feedRepository->findOneByUsername($username);
+        /** @var Feed|null $feed */
+        $feed = $this->feedRepository->findOneBy(['username' => $username]);
 
         if ($feed === null) {
             $output->writeln(sprintf('<fg=red>No feed entity found for given username "%s".</>', $username));
