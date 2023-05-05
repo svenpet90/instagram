@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Domain\Repository;
 
-use SvenPetersen\Instagram\Domain\Model\Post;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;

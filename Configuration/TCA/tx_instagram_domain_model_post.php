@@ -6,7 +6,6 @@ return [
         'label' => 'caption',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY posted_at DESC',
         'dividers2tabs' => true,
         'versioningWS' => 2,
@@ -39,14 +38,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => [
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0],
-                ],
+                'type' => 'language',
             ],
         ],
         'l10n_parent' => [
@@ -56,7 +48,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0,
+                    ],
                 ],
                 'foreign_table' => 'tx_instagram_domain_model_post',
                 'foreign_table_where' => 'AND tx_instagram_domain_model_post.pid=###CURRENT_PID### AND tx_instagram_domain_model_post.sys_language_uid IN (-1,0)',
@@ -127,9 +122,8 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xlf:tx_instagram_domain_model_post.posted_at',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime',
+                'type' => 'datetime',
+                'format' => 'datetime',
             ],
         ],
         'instagram_id' => [
