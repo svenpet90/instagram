@@ -60,6 +60,10 @@ class PostUpserter
      */
     public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
     {
+        $querySettings = $this->postRepository->createQuery()->getQuerySettings();
+        $querySettings->setStoragePageIds([$storagePid]);
+        $this->postRepository->setDefaultQuerySettings($querySettings);
+        
         $action = 'UPDATE';
 
         /** @var Post|null $post */
