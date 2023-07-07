@@ -25,7 +25,10 @@ class PostController extends ActionController
         $postRepository = GeneralUtility::makeInstance(PostRepository::class);
         $posts = $postRepository->findBySettings($this->settings);
 
-        $this->view->assign('posts', $posts);
+        $this->view->assignMultiple([
+            'cObjectData' => $this->request->getAttribute('currentContentObject')->data,
+            'posts' => $posts,
+        ]);
 
         return $this->htmlResponse();
     }
