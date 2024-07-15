@@ -50,7 +50,7 @@ class PostDTOFactory
         return new PostDTO(
             $data['id'],
             $data['caption'] ?? '',
-            $data['media_url'],
+            $data['media_url'] ?? '',
             $data['permalink'],
             new \DateTimeImmutable($data['timestamp']),
             $data['username'],
