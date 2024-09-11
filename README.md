@@ -1,3 +1,16 @@
+IMPORTANT NOTICE
+================
+This extension is build upon the "Instagram Basic Display" API.
+
+On September 4, 2024, Instagram/Facebook announced the deprecation of this API.
+Starting December 4, 2024, all requests to the Instagram Basic Display API will return an error message.
+
+This Extension will therefore no longer be able to import new posts or update the access tokens.
+But it of course will still display the already imported images and feeds.
+
+-------
+
+
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
