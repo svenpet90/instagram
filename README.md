@@ -10,6 +10,8 @@ But it of course will still display the already imported images and feeds.
 
 For any further information about this see the offical blog post: https://developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api/
 
+I am working on a v3.0 of this extension using the new "Instagram API with Instagram Login".
+
 -------
 
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
