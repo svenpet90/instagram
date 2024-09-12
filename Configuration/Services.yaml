@@ -1,6 +1,6 @@
 parameters:
   instagram.api_baseurl: 'https://api.instagram.com'
-  instagram.graph_api_baseurl: 'https://graph.instagram.com'
+  instagram.graph_api_baseurl: 'https://graph.instagram.com/v20.0'
 
 services:
   _defaults:

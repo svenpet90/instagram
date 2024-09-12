@@ -1,19 +1,3 @@
-IMPORTANT NOTICE
-================
-This extension is build upon the "Instagram Basic Display" API.
-
-On September 4, 2024, Instagram/Facebook announced the deprecation of this API.
-Starting December 4, 2024, all requests to the Instagram Basic Display API will return an error message.
-
-This Extension will therefore no longer be able to import new posts or update the access tokens.
-But it of course will still display the already imported images and feeds.
-
-For any further information about this see the offical blog post: https://developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api/
-
-I am working on a v3.0 of this extension using the new "Instagram API with Instagram Login".
-
--------
-
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
@@ -39,7 +23,7 @@ Frontend-Plugin.
 * Backend module for easy creation of long-lived API access tokens
 * Automatic refreshing of API access tokens to keep them valid
 * Import multiple Instagram users feeds/posts
-* Uses official Instagram-API to access a users feed.
+* Uses official "Instagram API with Instagram Login" to access a users feed.
 * Provides commands to refresh access tokens and to import feeds via
   cronjob/scheduler
 * Downloads the posts (images/videos). No API calls needed when displaying

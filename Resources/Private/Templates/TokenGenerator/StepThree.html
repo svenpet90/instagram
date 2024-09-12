@@ -7,72 +7,70 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-    <f:be.pageRenderer>
-        <div class="row m-3">
-            <div class="col-12">
-                <h1>
-                    <f:translate key="beModule.headline"/>
-                </h1>
-            </div>
+    <div class="row m-3">
+        <div class="col-12">
+            <h1>
+                <f:translate key="beModule.headline"/>
+            </h1>
+        </div>
 
-            <div class="col-12 col-md-6 col-lg-5">
-                <div class="card">
-                    <div class="card-header">
-                        <f:translate key="beModule.step3.headline"/>
-                    </div>
+        <div class="col-12 col-md-6 col-lg-5">
+            <div class="card">
+                <div class="card-header">
+                    <f:translate key="beModule.step3.headline"/>
+                </div>
 
-                    <div class="card-body">
-                        <h3>
-                            The long-lived api access token has been successfully created and saved!
-                        </h3>
+                <div class="card-body">
+                    <h3>
+                        The long-lived api access token has been successfully created and saved!
+                    </h3>
 
-                        <p class="mb-4"></p>
-                        The Token has been saved in an instance of a "Feed" entity.
-                        </p>
+                    <p class="mb-4"></p>
+                    The Token has been saved in an instance of a "Feed" entity.
+                    </p>
 
-                        <h4>
-                            Generated Token information
-                        </h4>
+                    <h4>
+                        Generated Token information
+                    </h4>
 
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th>Username</th>
-                                <td>{feed.username}</td>
-                            </tr>
-                            <tr>
-                                <th>User ID</th>
-                                <td>{feed.userId}</td>
-                            </tr>
-                            <tr>
-                                <th>Token</th>
-                                <td>{feed.tokenType}</td>
-                            </tr>
-                            <tr>
-                                <th>Expires at</th>
-                                <td>{feed.expiresAt -> f:format.date(format: 'd.m.Y H:i:s')}</td>
-                            </tr>
-                            <tr>
-                                <th>Storage PID</th>
-                                <td>{feed.pid}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Username</th>
+                            <td>{feed.username}</td>
+                        </tr>
+                        <tr>
+                            <th>User ID</th>
+                            <td>{feed.userId}</td>
+                        </tr>
+                        <tr>
+                            <th>Token</th>
+                            <td>{feed.tokenType}</td>
+                        </tr>
+                        <tr>
+                            <th>Expires at</th>
+                            <td>{feed.expiresAt -> f:format.date(format: 'd.m.Y H:i:s')}</td>
+                        </tr>
+                        <tr>
+                            <th>Storage PID</th>
+                            <td>{feed.pid}</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                        <h4 class="text-danger">Attention!</h4>
-                        <p>
-                            The generated api access token is valid for 60 days.<br>
-                            You are advised to now create a cronjob/scheduler task to handle automatic refreshing of the
-                            token. Run this task at least once per day.
-                        </p>
-                        <p>
-                            To do so use the following command: <strong>instagram:accesstoken:refresh-all</strong><br>
-                        </p>
-                    </div>
+                    <h4 class="text-danger">Attention!</h4>
+                    <p>
+                        The generated api access token is valid for 60 days.<br>
+                        You are advised to now create a cronjob/scheduler task to handle automatic refreshing of the
+                        token. Run this task at least once per day.
+                    </p>
+                    <p>
+                        To do so use the following command: <strong>instagram:accesstoken:refresh-all</strong><br>
+                    </p>
                 </div>
             </div>
         </div>
-    </f:be.pageRenderer>
+    </div>
 </f:section>
 
 </html>
