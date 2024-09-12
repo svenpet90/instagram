@@ -8,6 +8,7 @@ Starting December 4, 2024, all requests to the Instagram Basic Display API will 
 This Extension will therefore no longer be able to import new posts or update the access tokens.
 But it of course will still display the already imported images and feeds.
 
+For any further information about this see the offical blog post: https://developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api/
 -------
 
 
