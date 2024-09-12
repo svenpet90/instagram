@@ -18,6 +18,9 @@ Creates and auto-refreshes long-lived api access tokens, imports
 instagram feeds/posts as entities to the database and output feeds/posts via
 Frontend-Plugin.
 
+V3.x of this extension uses the "Instagram API with Instagram Login" App and API.
+V2.x uses the "Instagram Basic Display API" which will reach its EOL on Dec 4th 2024.
+
 **Summary of features**
 
 * Backend module for easy creation of long-lived API access tokens
@@ -41,8 +44,8 @@ root, just do:
 ## Setup
 
 1. Include the provided static TypoScript
-2. Create a Facebook "Instagram Basic Display" App: See the
-   [official Documentation](https://developers.facebook.com/docs/instagram-basic-display-api/getting-started)
+2. Create a Facebook "Instagram API with Instagram Login" App: See the
+   [official Documentation](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login)
    for a step by step guide
 3. Use the Backend Module provided by this Extension to create a "long-lived
    access token" in a "Feed" Entity.
@@ -58,12 +61,11 @@ __Recommended__:
 
 ## Compatibility
 
-| Version | TYPO3       | PHP        | Support/Development                  | API |
-|---------|-------------|------------|--------------------------------------|-----|
-| 3.x     | 12.4 | >= 8.1 <= 8.2 | In Development | Instagram API with Instagram Login |
-| 2.x     | 12.4 | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates. | Instagram Basic Display API |
-| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Bugfixes only | Instagram Basic Display API |
-
+| Version | TYPO3       | PHP           | Support/Development                  | API                                |
+|---------|-------------|---------------|--------------------------------------|------------------------------------|
+| 3.x     | 12.4        | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates | Instagram API with Instagram Login |
+| 2.x     | 12.4        | >= 8.1 <= 8.2 | Bugfixes, Security Updates           | Instagram Basic Display API        |
+| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️    | Bugfixes only                        | Instagram Basic Display API        |
 
 ## Funtionalities
 
@@ -130,10 +132,22 @@ local_file_storage_path</code> option.
 This extension comes with a few events for you to listen to and add your own
 logic:
 
-| Name                 | Args.                                             | Description                                                                                                                                  |
-|----------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| PrePersistPostEvent  | Post $post <br> string $action['new' or ‘update'] | Dispatched before a Post is saved. Can be used to modify the Post entity.                                                                    | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
-| PostPersistPostEvent | Post $post                                        | Dispatched after a Post is saved.                                                                                                            | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
+| Name                 | Args.                                             | Description                                                               |
+|----------------------|---------------------------------------------------|---------------------------------------------------------------------------|
+| PrePersistPostEvent  | Post $post <br> string $action['new' or ‘update'] | Dispatched before a Post is saved. Can be used to modify the Post entity. | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
+| PostPersistPostEvent | Post $post                                        | Dispatched after a Post is saved.                                         | Dispatched before the view is rendered. Can be used to modify the view object. E.g. adding additional vars to the frontend (e.g. pagination) |
+
+## UPGRADE
+
+### v2.x to v3.x
+
+Since the "Instagram Basic Display API" will reach it's EOL an Dec. 4th 2024 the underlaying mechanism for generating access tokens changes.
+It is now required to have a "Instagram Professional Account". Any regular Instagram account can be converted into a professional account via the Profile Settings.
+
+You then have to generate a new Feed entity by using the Backend module.
+
+There are no changes to the database model, templates or plugins.
+All your existing customizations etc. will work like before.
 
 ## Contributing
 
