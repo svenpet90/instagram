@@ -9,8 +9,8 @@ This Extension will therefore no longer be able to import new posts or update th
 But it of course will still display the already imported images and feeds.
 
 For any further information about this see the offical blog post: https://developers.facebook.com/blog/post/2024/09/04/update-on-instagram-basic-display-api/
--------
 
+-------
 
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
