@@ -72,10 +72,11 @@ __Recommended__:
 
 ## Compatibility
 
-| Version | TYPO3       | PHP        | Support/Development                  |
-|---------|-------------|------------|--------------------------------------|
-| 2.x     | 12.4 | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates |
-| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Bugfixes, Security Updates |
+| Version | TYPO3       | PHP        | Support/Development                  | API |
+|---------|-------------|------------|--------------------------------------|-----|
+| 3.x     | 12.4 | >= 8.1 <= 8.2 | In Development | Instagram API with Instagram Login |
+| 2.x     | 12.4 | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates. | Instagram Basic Display API |
+| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️ | Bugfixes only | Instagram Basic Display API |
 
 
 ## Funtionalities
