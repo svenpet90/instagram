@@ -67,6 +67,7 @@ __Recommended__:
 | 2.x     | 12.4        | >= 8.1 <= 8.2 | Bugfixes, Security Updates           | Instagram Basic Display API        |
 | 1.x     | 10.4 - 11.5 | 7.4 - 8.0️    | Bugfixes only                        | Instagram Basic Display API        |
 
+
 ## Funtionalities
 
 ### Automatic import of posts
