@@ -13,6 +13,8 @@ namespace SvenPetersen\Instagram\Factory;
 
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 class FeedFactory implements FeedFactoryInterface
@@ -42,7 +44,12 @@ class FeedFactory implements FeedFactoryInterface
         string $username,
         int $storagePid
     ): Feed {
-        $feed = $this->feedRepository->findOneByUsername($username);
+        /** @var Typo3QuerySettings $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $this->feedRepository->setDefaultQuerySettings($querySettings);
+
+        $feed = $this->feedRepository->findOneBy(['username' => $username]);
 
         if ($feed === null) {
             $feed = $this->create();
