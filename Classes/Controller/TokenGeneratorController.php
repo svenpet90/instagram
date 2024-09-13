@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use SvenPetersen\Instagram\Factory\FeedFactory;
 use SvenPetersen\Instagram\Service\AccessTokenService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -14,8 +15,8 @@ class TokenGeneratorController extends ActionController
     public function __construct(
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly AccessTokenService $accessTokenService,
-    ) {
-    }
+        private readonly FeedFactory $feedFactory,
+    ) {}
 
     public function stepOneAction(): ResponseInterface
     {
@@ -68,14 +69,26 @@ class TokenGeneratorController extends ActionController
         /** @var string $code */
         $code = $this->request->getArgument('code');
 
+        /** @var int<0, max> $storagePid */
         $storagePid = (int)$this->request->getArgument('storagePid');
 
-        $feed = $this->accessTokenService->createFeed(
-            $instagramAppId,
-            $clientSecret,
-            $redirect_uri,
-            $code,
-            $storagePid
+        // get access token
+        $accessTokenResponse = $this->accessTokenService->getAccessToken($instagramAppId, $clientSecret, $redirect_uri, $code);
+        $accessToken = $accessTokenResponse['access_token'];
+        $me = $this->accessTokenService->me($accessToken);
+
+        // get long-lived access token
+        $longLivedAccessTokenResponse = $this->accessTokenService->getLongLivedAccessToken($clientSecret, $accessToken);
+        $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $longLivedAccessTokenResponse['expires_in']));
+
+        $feed = $this->feedFactory->upsert(
+            $longLivedAccessTokenResponse['access_token'],
+            $longLivedAccessTokenResponse['token_type'],
+            (string)$accessTokenResponse['user_id'],
+            $expiresAt,
+            $me['username'],
+            $storagePid,
+            $me
         );
 
         $view->assignMultiple([

@@ -4,4 +4,6 @@ parameters:
     - Classes
   excludePaths:
   	- Classes/Hooks/ItemsProcFunc.php
-  checkGenericClassInNonGenericObjectType: false
+  ignoreErrors:
+  	-
+  		identifier: missingType.generics

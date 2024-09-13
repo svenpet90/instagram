@@ -63,8 +63,8 @@ class ImportPostsCommand extends Command
             return Command::FAILURE;
         }
 
-        if (is_numeric($storagePid) === false) {
-            $output->writeln(sprintf('<fg=red>The StoragePid argument must be an Integer. "%s" given.</>', $storagePid));
+        if (is_numeric($storagePid) === false || (is_numeric($storagePid) && $storagePid < 0)) {
+            $output->writeln(sprintf('<fg=red>The StoragePid argument must be an (positive) Integer. "%s" given.</>', $storagePid));
 
             return Command::FAILURE;
         }

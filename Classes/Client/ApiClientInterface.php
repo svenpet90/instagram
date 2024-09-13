@@ -28,4 +28,9 @@ interface ApiClientInterface
     public function getFeedData(): FeedDTO;
 
     public function getFeed(): Feed;
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function me(): array;
 }

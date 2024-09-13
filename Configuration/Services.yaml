@@ -19,7 +19,6 @@ services:
   SvenPetersen\Instagram\Service\AccessTokenService:
     arguments:
       $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
-      $feedFactory: '@SvenPetersen\Instagram\Factory\FeedFactoryInterface'
       $apiBaseUrl: '%instagram.api_baseurl%'
       $graphApiBaseUrl: '%instagram.graph_api_baseurl%'
 
@@ -40,3 +39,9 @@ services:
       - name: 'console.command'
         command: 'instagram:import:posts'
         description: 'Imports the latest posts of a given username.'
+
+  SvenPetersen\Instagram\Command\UpdateFeedDataCommand:
+    tags:
+      - name: 'console.command'
+        command: 'instagram:feed:update-data'
+        description: 'Updates a given feeds data like followers count, media count, follows count, profile picture url etc.'

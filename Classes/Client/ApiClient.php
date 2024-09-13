@@ -24,8 +24,7 @@ class ApiClient implements ApiClientInterface
         private readonly Feed $feed,
         private readonly RequestFactory $requestFactory,
         private readonly string $apiBaseUrl,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc
@@ -101,16 +100,37 @@ class ApiClient implements ApiClientInterface
      */
     public function getFeedData(): FeedDTO
     {
+        $me = $this->me();
+
+        return FeedDTOFactory::createFromApiResponse($me);
+    }
+
+    /**
+     * @return mixed[]
+     * @throws \Exception
+     */
+    public function me(): array
+    {
+        $fields = [
+            'id',
+            'user_id',
+            'username',
+            'name',
+            'account_type',
+            'profile_picture_url',
+            'followers_count',
+            'follows_count',
+            'media_count',
+        ];
+
         $endpoint = sprintf(
-            '%s/%s/?access_token=%s&fields=id,username,account_type,media_count',
+            '%s/me?access_token=%s&fields=%s',
             $this->apiBaseUrl,
-            $this->feed->getUserId(),
-            $this->feed->getToken()
+            $this->feed->getToken(),
+            implode(',', $fields),
         );
 
-        $response = $this->request($endpoint);
-
-        return FeedDTOFactory::createFromApiResponse($response);
+        return $this->request($endpoint);
     }
 
     /**

@@ -36,19 +36,34 @@ class FeedFactory implements FeedFactoryInterface
         return new Feed();
     }
 
+    /**
+     * @param string $token
+     * @param string $type
+     * @param string $userId
+     * @param \DateTimeImmutable $expiresAt
+     * @param string $username
+     * @param int<0,max> $storagePid
+     * @param array<string, mixed> $me
+     *
+     * @return Feed
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     */
     public function upsert(
         string $token,
-        string $tokenType,
+        string $type,
         string $userId,
         \DateTimeImmutable $expiresAt,
         string $username,
-        int $storagePid
+        int $storagePid,
+        array $me = [],
     ): Feed {
         /** @var Typo3QuerySettings $querySettings */
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
         $this->feedRepository->setDefaultQuerySettings($querySettings);
 
+        /** @var Feed|null $feed */
         $feed = $this->feedRepository->findOneBy(['username' => $username]);
 
         if ($feed === null) {
@@ -58,10 +73,12 @@ class FeedFactory implements FeedFactoryInterface
         $feed->setPid($storagePid);
         $feed
             ->setToken($token)
-            ->setTokenType($tokenType)
+            ->setTokenType($type)
             ->setExpiresAt($expiresAt)
             ->setUserId($userId)
             ->setUsername($username);
+
+        $feed->updateFromArray($me);
 
         $this->feedRepository->add($feed);
         $this->persistenceManager->persistAll();

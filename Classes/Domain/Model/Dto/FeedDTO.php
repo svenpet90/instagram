@@ -15,9 +15,13 @@ class FeedDTO
 {
     public function __construct(
         public readonly string $id,
+        public readonly string $user_id,
         public readonly string $username,
-        public readonly string $accountType,
-        public readonly int $mediaCount,
-    ) {
-    }
+        public readonly string $name,
+        public readonly string $account_type,
+        public readonly string $profile_picture_url,
+        public readonly int $followers_count,
+        public readonly int $follows_count,
+        public readonly int $media_count,
+    ) {}
 }

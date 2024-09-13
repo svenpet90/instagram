@@ -19,15 +19,10 @@ use SvenPetersen\Instagram\Domain\Model\Dto\FeedDTO;
 class FeedDTOFactory
 {
     /**
-     * @param mixed[] $apiResponseDate
+     * @param mixed[] $apiResponseData
      */
-    public static function createFromApiResponse(array $apiResponseDate): FeedDTO
+    public static function createFromApiResponse(array $apiResponseData): FeedDTO
     {
-        return new FeedDTO(
-            $apiResponseDate['id'],
-            $apiResponseDate['username'],
-            $apiResponseDate['account_type'],
-            $apiResponseDate['media_count']
-        );
+        return new FeedDTO(...$apiResponseData);
     }
 }

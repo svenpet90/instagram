@@ -13,6 +13,4 @@ namespace SvenPetersen\Instagram\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class FeedRepository extends Repository
-{
-}
+class FeedRepository extends Repository {}

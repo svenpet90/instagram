@@ -9,8 +9,16 @@ CREATE TABLE tx_instagram_domain_model_feed
 	token      mediumtext,
 	token_type varchar(255) DEFAULT NULL,
 	expires_at int(11) unsigned DEFAULT NULL,
+	id    varchar(255) DEFAULT NULL,
 	user_id    varchar(255) DEFAULT NULL,
 	username   varchar(255) DEFAULT NULL,
+	account_type   varchar(255) DEFAULT NULL,
+	name   varchar(255) DEFAULT NULL,
+	profile_picture_url   varchar(1000) DEFAULT NULL,
+	followers_count int(11) unsigned DEFAULT NULL,
+	follows_count int(11) unsigned DEFAULT NULL,
+	media_count int(11) unsigned DEFAULT NULL,
+
 	posts      int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),

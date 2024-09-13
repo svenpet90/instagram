@@ -36,14 +36,36 @@
 			<trans-unit id="tx_instagram_domain_model_feed">
                 <source>Feed</source>
             </trans-unit>
-            <trans-unit id="tx_instagram_domain_model_feed.username">
+
+			<trans-unit id="tx_instagram_domain_model_feed.id">
+				<source>ID</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.user_id">
+				<source>User ID</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.username">
                 <source>Username</source>
             </trans-unit>
-            <trans-unit id="tx_instagram_domain_model_feed.token">
+			<trans-unit id="tx_instagram_domain_model_feed.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.account_type">
+				<source>Account Type</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.profile_picture_url">
+				<source>Profile Picture URL</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.followers_count">
+				<source>Followers Count</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.follows_count">
+				<source>Follows Count</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.media_count">
+				<source>Media Count</source>
+			</trans-unit>
+			<trans-unit id="tx_instagram_domain_model_feed.token">
                 <source>Token</source>
-            </trans-unit>
-            <trans-unit id="tx_instagram_domain_model_feed.user_id">
-                <source>Instagram User ID</source>
             </trans-unit>
             <trans-unit id="tx_instagram_domain_model_feed.expires_at">
                 <source>Expires at</source>

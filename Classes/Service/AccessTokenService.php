@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Service;
 
 use SvenPetersen\Instagram\Domain\Model\Feed;
-use SvenPetersen\Instagram\Factory\FeedFactoryInterface;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 /**
@@ -22,59 +21,18 @@ class AccessTokenService
 {
     private RequestFactory $requestFactory;
 
-    private FeedFactoryInterface $feedFactory;
-
     private string $apiBaseUrl;
 
     private string $graphApiBaseUrl;
 
     public function __construct(
         RequestFactory $requestFactory,
-        FeedFactoryInterface $feedFactory,
         string $apiBaseUrl,
         string $graphApiBaseUrl
     ) {
         $this->requestFactory = $requestFactory;
-        $this->feedFactory = $feedFactory;
         $this->apiBaseUrl = $apiBaseUrl;
         $this->graphApiBaseUrl = $graphApiBaseUrl;
-    }
-
-    public function createFeed(
-        string $instagramAppId,
-        string $clientSecret,
-        string $redirect_uri,
-        string $code,
-        int $storagePid
-    ): Feed {
-        $shortLivedAccessTokenData = $this->getAccessToken(
-            $instagramAppId,
-            $clientSecret,
-            $redirect_uri,
-            $code
-        );
-
-        $shortLivedAccessToken = $shortLivedAccessTokenData['access_token'];
-        $userId = (string)$shortLivedAccessTokenData['user_id'];
-
-        $longLivedTokenResponse = $this->requestLongLivedAccessToken($clientSecret, $shortLivedAccessToken);
-
-        $token = $longLivedTokenResponse['access_token'];
-        $type = $longLivedTokenResponse['token_type'];
-        $expiresIn = $longLivedTokenResponse['expires_in'];
-        $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $expiresIn));
-
-        $userdata = $this->getFeedData($shortLivedAccessToken);
-        $username = $userdata['username'];
-
-        return $this->feedFactory->upsert(
-            $token,
-            $type,
-            $userId,
-            $expiresAt,
-            $username,
-            $storagePid
-        );
     }
 
     /**
@@ -118,7 +76,7 @@ class AccessTokenService
      *
      * @throws \Exception
      */
-    public function requestLongLivedAccessToken(
+    public function getLongLivedAccessToken(
         string $clientSecret,
         string $accessToken
     ): array {
@@ -166,12 +124,25 @@ class AccessTokenService
      *
      * @throws \Exception
      */
-    private function getFeedData(string $accessToken): array
+    public function me(string $accessToken): array
     {
+        $fields = [
+            'id',
+            'user_id',
+            'username',
+            'name',
+            'account_type',
+            'profile_picture_url',
+            'followers_count',
+            'follows_count',
+            'media_count',
+        ];
+
         $endpoint = sprintf(
-            '%s/me/?access_token=%s&fields=id,username',
+            '%s/me/?access_token=%s&fields=%s',
             $this->graphApiBaseUrl,
-            $accessToken
+            $accessToken,
+            implode(',', $fields)
         );
 
         return $this->request($endpoint);
