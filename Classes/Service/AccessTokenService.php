@@ -135,10 +135,9 @@ class AccessTokenService
     public function getAuthorizationLink(string $instagramAppId, string $returnUri): string
     {
         return sprintf(
-            '%s/oauth/authorize/?client_id=%s&redirect_uri=%s&response_type=code&scope=user_profile,user_media',
-            $this->apiBaseUrl,
+            'https://www.instagram.com/oauth/authorize/?client_id=%s&redirect_uri=%s&response_type=code&scope=business_basic',
             $instagramAppId,
-            $returnUri
+            $returnUri,
         );
     }
 
