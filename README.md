@@ -145,7 +145,8 @@ logic:
 Since the "Instagram Basic Display API" will reach it's EOL an Dec. 4th 2024 the underlaying mechanism for generating access tokens changes.
 It is now required to have a "Instagram Professional Account". Any regular Instagram account can be converted into a professional account via the Profile Settings.
 
-You then have to generate a new Feed entity by using the Backend module.
+You then have to use the "Instagram Token Generator" Backend Module and re-run the token generation process.
+This extension will then update your exsiting Feed Entity with a new access token.
 
 There are no changes to the database model, templates or plugins.
 All your existing customizations etc. will work like before.
