@@ -13,7 +13,6 @@ namespace SvenPetersen\Instagram\Client;
 
 use SvenPetersen\Instagram\Domain\Model\Dto\FeedDTO;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
-use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Factory\Dto\FeedDTOFactory;
 use SvenPetersen\Instagram\Factory\Dto\PostDTOFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
