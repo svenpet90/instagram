@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Service;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use SvenPetersen\Instagram\Client\ApiClientInterface;
 use SvenPetersen\Instagram\Domain\Model\Dto\PostDTO;
+use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Model\Post;
 use SvenPetersen\Instagram\Domain\Repository\PostRepository;
 use SvenPetersen\Instagram\Event\Post\PostPersistPostEvent;
@@ -26,15 +26,12 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
+/**
+ * @internal
+ */
 class PostUpserter
 {
     private const TABLENAME = 'tx_instagram_domain_model_post';
-
-    private PostRepository $postRepository;
-
-    private PersistenceManagerInterface $persistenceManager;
-
-    private EventDispatcherInterface $eventDispatcher;
 
     /**
      * @var array<string, string>
@@ -42,14 +39,11 @@ class PostUpserter
     private array $extConf;
 
     public function __construct(
-        PostRepository $postRepository,
-        PersistenceManagerInterface $persistenceManager,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->postRepository = $postRepository;
-        $this->persistenceManager = $persistenceManager;
-        $this->eventDispatcher = $eventDispatcher;
-
+        private readonly PostRepository              $postRepository,
+        private readonly PersistenceManagerInterface $persistenceManager,
+        private readonly EventDispatcherInterface    $eventDispatcher,
+    )
+    {
         /** @var ExtensionConfiguration $extensionConfiguration */
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
         $this->extConf = $extensionConfiguration->get('instagram');
@@ -58,7 +52,7 @@ class PostUpserter
     /**
      * @param int<0, max> $storagePid
      */
-    public function upsertPost(PostDTO $dto, int $storagePid, ApiClientInterface $apiClient): Post
+    public function upsertPost(PostDTO $dto, int $storagePid, Feed $feed): Post
     {
         $querySettings = $this->postRepository->createQuery()->getQuerySettings();
         $querySettings->setStoragePageIds([$storagePid]);
@@ -78,7 +72,7 @@ class PostUpserter
 
         $post = $this->upsertFromDTO($dto, $post);
         $post
-            ->setFeed($apiClient->getFeed())
+            ->setFeed($feed)
             ->setPid($storagePid);
 
         /** @var PrePersistPostEvent $event */

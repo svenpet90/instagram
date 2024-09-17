@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use SvenPetersen\Instagram\Client\ApiClient;
 use SvenPetersen\Instagram\Factory\FeedFactory;
-use SvenPetersen\Instagram\Service\AccessTokenService;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -14,7 +14,7 @@ class TokenGeneratorController extends ActionController
 {
     public function __construct(
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
-        private readonly AccessTokenService $accessTokenService,
+        private readonly ApiClient  $apiClient,
         private readonly FeedFactory $feedFactory,
     ) {}
 
@@ -40,7 +40,7 @@ class TokenGeneratorController extends ActionController
 
         $storagePid = (int)$this->request->getArgument('storagePid');
 
-        $link = $this->accessTokenService->getAuthorizationLink($appId, $returnUrl);
+        $link = $this->apiClient->getAuthorizationLink($appId, $returnUrl);
 
         $view->assignMultiple([
             'link' => $link,
@@ -73,12 +73,12 @@ class TokenGeneratorController extends ActionController
         $storagePid = (int)$this->request->getArgument('storagePid');
 
         // get access token
-        $accessTokenResponse = $this->accessTokenService->getAccessToken($instagramAppId, $clientSecret, $redirect_uri, $code);
+        $accessTokenResponse = $this->apiClient->getAccessToken($instagramAppId, $clientSecret, $redirect_uri, $code);
         $accessToken = $accessTokenResponse['access_token'];
-        $me = $this->accessTokenService->me($accessToken);
+        $me = $this->apiClient->me($accessToken);
 
         // get long-lived access token
-        $longLivedAccessTokenResponse = $this->accessTokenService->getLongLivedAccessToken($clientSecret, $accessToken);
+        $longLivedAccessTokenResponse = $this->apiClient->getLongLivedAccessToken($clientSecret, $accessToken);
         $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $longLivedAccessTokenResponse['expires_in']));
 
         $feed = $this->feedFactory->upsert(

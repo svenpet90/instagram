@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Command;
 
+use SvenPetersen\Instagram\Client\ApiClient;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
-use SvenPetersen\Instagram\Factory\ApiClientFactoryInterface;
 use SvenPetersen\Instagram\Service\PostUpserter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,7 +27,7 @@ class ImportPostsCommand extends Command
 {
     public function __construct(
         private readonly FeedRepository $feedRepository,
-        private readonly ApiClientFactoryInterface $apiClientFactory,
+        private readonly ApiClient $apiClient,
         private readonly PostUpserter $postUpserter,
     ) {
         parent::__construct();
@@ -89,12 +89,11 @@ class ImportPostsCommand extends Command
             return Command::FAILURE;
         }
 
-        $apiClient = $this->apiClientFactory->create($feed);
-
-        $posts = $apiClient->getPosts((int)$limit, $since, $until);
+        $this->apiClient->setup($feed->getUserId(), $feed->getToken());
+        $posts = $this->apiClient->getPosts((int)$limit, $since, $until);
 
         foreach ($posts as $postDTO) {
-            $this->postUpserter->upsertPost($postDTO, (int)$storagePid, $apiClient);
+            $this->postUpserter->upsertPost($postDTO, (int)$storagePid, $feed);
         }
 
         $output->writeln(sprintf('<fg=green>The posts have been successfully imported/updated</>'));

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace SvenPetersen\Instagram\Service;
 
 use DateTime;
+use SvenPetersen\Instagram\Client\ApiClient;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -23,20 +24,11 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  */
 class AccessTokenRefresher
 {
-    private FeedRepository $feedRepository;
-
-    private PersistenceManagerInterface $persistenceManager;
-
-    private AccessTokenService $accessTokenService;
-
     public function __construct(
-        FeedRepository $feedRepository,
-        PersistenceManagerInterface $persistenceManager,
-        AccessTokenService $accessTokenService
+        private readonly FeedRepository $feedRepository,
+        private readonly PersistenceManagerInterface $persistenceManager,
+        private readonly ApiClient $apiClient,
     ) {
-        $this->feedRepository = $feedRepository;
-        $this->persistenceManager = $persistenceManager;
-        $this->accessTokenService = $accessTokenService;
     }
 
     /**
@@ -73,7 +65,7 @@ class AccessTokenRefresher
             return $feed;
         }
 
-        $updatedTokenData = $this->accessTokenService->refreshAccessToken($feed);
+        $updatedTokenData = $this->apiClient->refreshAccessToken($feed->getToken());
 
         $expiresAt = (new \DateTimeImmutable())->modify(sprintf('+ %s seconds', $updatedTokenData['expires_in']));
 

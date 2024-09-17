@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Command;
 
+use SvenPetersen\Instagram\Client\ApiClient;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
-use SvenPetersen\Instagram\Factory\ApiClientFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,7 +26,7 @@ final class UpdateFeedDataCommand extends Command
 {
     public function __construct(
         private readonly FeedRepository $feedRepository,
-        private readonly ApiClientFactory $apiClientFactory,
+        private readonly ApiClient $apiClient,
         private readonly PersistenceManager $persistenceManager,
     ) {
         parent::__construct();
@@ -54,9 +54,9 @@ final class UpdateFeedDataCommand extends Command
             return Command::FAILURE;
         }
 
-        $apiClient = $this->apiClientFactory->create($feed);
+        $this->apiClient->setup($feed->getUserId(), $feed->getToken());
+        $me = $this->apiClient->me();
 
-        $me = $apiClient->me();
         $feed->updateFromArray($me);
 
         $this->feedRepository->update($feed);

@@ -12,20 +12,14 @@ services:
     resource: '../Classes/*'
 
   # Service Aliases
-  SvenPetersen\Instagram\Factory\ApiClientFactoryInterface: '@SvenPetersen\Instagram\Factory\ApiClientFactory'
   SvenPetersen\Instagram\Factory\FeedFactoryInterface: '@SvenPetersen\Instagram\Factory\FeedFactory'
 
   # Services
-  SvenPetersen\Instagram\Service\AccessTokenService:
+  SvenPetersen\Instagram\Client\ApiClient:
     arguments:
       $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
       $apiBaseUrl: '%instagram.api_baseurl%'
       $graphApiBaseUrl: '%instagram.graph_api_baseurl%'
-
-  SvenPetersen\Instagram\Factory\ApiClientFactory:
-    arguments:
-      $requestFactory: '@Psr\Http\Message\RequestFactoryInterface'
-      $apiBaseUrl: '%instagram.graph_api_baseurl%'
 
   # Commands
   SvenPetersen\Instagram\Command\AccessTokenRefresherCommand:

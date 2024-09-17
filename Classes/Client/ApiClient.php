@@ -20,11 +20,38 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 
 class ApiClient implements ApiClientInterface
 {
+    private ?string $token;
+
+    private ?string $userId;
+
     public function __construct(
-        private readonly Feed $feed,
         private readonly RequestFactory $requestFactory,
-        private readonly string $apiBaseUrl,
-    ) {}
+        private readonly string         $apiBaseUrl,
+        private readonly string         $graphApiBaseUrl,
+    ) {
+    }
+
+    public function setup(string $userId, string $token): self
+    {
+        $this->setToken($token);
+        $this->setUserId($userId);
+
+        return $this;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function setUserId(string $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -35,9 +62,9 @@ class ApiClient implements ApiClientInterface
 
         $endpoint = sprintf(
             '%s/%s/media/?access_token=%s&fields=%s',
-            $this->apiBaseUrl,
-            $this->feed->getUserId(),
-            $this->feed->getToken(),
+            $this->graphApiBaseUrl,
+            $this->userId,
+            $this->token,
             implode(',', $this->getDefaultMediaFields())
         );
 
@@ -109,7 +136,7 @@ class ApiClient implements ApiClientInterface
      * @return mixed[]
      * @throws \Exception
      */
-    public function me(): array
+    public function me(?string $token = null): array
     {
         $fields = [
             'id',
@@ -125,8 +152,8 @@ class ApiClient implements ApiClientInterface
 
         $endpoint = sprintf(
             '%s/me?access_token=%s&fields=%s',
-            $this->apiBaseUrl,
-            $this->feed->getToken(),
+            $this->graphApiBaseUrl,
+            $token ?: $this->token,
             implode(',', $fields),
         );
 
@@ -153,11 +180,6 @@ class ApiClient implements ApiClientInterface
         return json_decode($contents, true);
     }
 
-    public function getFeed(): Feed
-    {
-        return $this->feed;
-    }
-
     /**
      * @return string[]
      */
@@ -175,5 +197,70 @@ class ApiClient implements ApiClientInterface
             'username',
             'children{id,media_type,media_url,thumbnail_url,timestamp,permalink,username}',
         ];
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function refreshAccessToken(?string $token = null): array
+    {
+        $endpoint = sprintf(
+            '%s/refresh_access_token/?grant_type=ig_refresh_token&access_token=%s',
+            $this->graphApiBaseUrl,
+            $token ?: $this->token
+        );
+
+        return $this->request($endpoint);
+    }
+
+    /**
+     * @return mixed[] array{'access_token': string, 'user_id': int}
+     *
+     * @throws \Exception
+     */
+    public function getAccessToken(string $clientId, string $clientSecret, string $redirectUri, string $code): array
+    {
+        $endpoint = sprintf('%s/oauth/access_token', $this->apiBaseUrl);
+
+        $additionalOptions = [
+            'form_params' => [
+                'grant_type' => 'authorization_code',
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'redirect_uri' => $redirectUri,
+                'code' => rtrim($code, '#_'),
+            ],
+        ];
+
+        return $this->request($endpoint, 'POST', $additionalOptions);
+    }
+
+    /**
+     * @return mixed[]
+     *
+     * @throws \Exception
+     */
+    public function getLongLivedAccessToken(
+        string $clientSecret,
+        string $accessToken
+    ): array
+    {
+        $endpoint = sprintf(
+            '%s/access_token/?grant_type=ig_exchange_token&client_secret=%s&access_token=%s',
+            $this->graphApiBaseUrl,
+            $clientSecret,
+            $accessToken
+        );
+
+        return $this->request($endpoint);
+    }
+
+    public function getAuthorizationLink(string $instagramAppId, string $returnUri): string
+    {
+        return sprintf(
+            'https://www.instagram.com/oauth/authorize/?client_id=%s&redirect_uri=%s&response_type=code&scope=business_basic',
+            $instagramAppId,
+            $returnUri,
+        );
     }
 }
