@@ -18,8 +18,8 @@ Creates and auto-refreshes long-lived api access tokens, imports
 instagram feeds/posts as entities to the database and output feeds/posts via
 Frontend-Plugin.
 
-V3.x of this extension uses the "Instagram API with Instagram Login" App and API.
-V2.x uses the "Instagram Basic Display API" which will reach its EOL on Dec 4th 2024.
+* \>\= V3.x of this extension uses the "Instagram API with Instagram Login" App and API.
+* \<\= V2.x uses the "Instagram Basic Display API" which will reach its EOL on Dec 4th 2024.
 
 **Summary of features**
 
@@ -63,9 +63,10 @@ __Recommended__:
 
 | Version | TYPO3       | PHP           | Support/Development                  | API                                |
 |---------|-------------|---------------|--------------------------------------|------------------------------------|
-| 3.x     | 12.4        | >= 8.1 <= 8.2 | Features, Bugfixes, Security Updates | Instagram API with Instagram Login |
+| 4.x     | 13.4        | >= 8.2 <= 8.4 | Features, Bugfixes, Security Updates | Instagram API with Instagram Login |
+| 3.x     | 12.4        | >= 8.1 <= 8.2 | Bugfixes, Security Updates           | Instagram API with Instagram Login |
 | 2.x     | 12.4        | >= 8.1 <= 8.2 | Bugfixes, Security Updates           | Instagram Basic Display API        |
-| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️    | Bugfixes only                        | Instagram Basic Display API        |
+| 1.x     | 10.4 - 11.5 | 7.4 - 8.0️    | Abandoned                            | Instagram Basic Display API        |
 
 
 ## Funtionalities
