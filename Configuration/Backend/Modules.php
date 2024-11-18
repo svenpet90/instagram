@@ -1,9 +1,6 @@
 <?php
 
-use SvenPetersen\Instagram\Controller\TokenGeneratorController;
-use TYPO3\CMS\Core\Configuration\Features;
-
-if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Features::class)
+if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\Features::class)
     ->isFeatureEnabled('instagram.tokenGeneratorBeModule')
 ) {
     return [
@@ -15,9 +12,9 @@ if (TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Features::class)
             'path' => '/module/system/instagram',
             'icon' => 'EXT:instagram/Resources/Public/Icons/instagram.jpg',
             'labels' => 'LLL:EXT:instagram/Resources/Private/Language/locallang_db.xml:instagram',
-            'extensionName' => 'Examples',
+            'extensionName' => 'Instagram',
             'controllerActions' => [
-                TokenGeneratorController::class => [
+                \SvenPetersen\Instagram\Controller\TokenGeneratorController::class => [
                     'stepOne', 'stepTwo', 'stepThree',
                 ],
             ],

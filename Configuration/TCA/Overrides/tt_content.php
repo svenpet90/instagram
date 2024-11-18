@@ -11,15 +11,27 @@ if (!defined('TYPO3')) {
     'actions-brand-instagram'
 );
 
-$pluginSignature = 'instagram_list';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:instagram/Configuration/FlexForms/List.xml'
-);
-
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Instagram',
     'Show',
     'Instagram: Show single post'
 );
+
+$flexformMappings = [
+    ['instagram_list', 'FILE:EXT:instagram/Configuration/FlexForms/List.xml'],
+];
+
+foreach ($flexformMappings as $map) {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;Configuration,pi_flexform,pages,recursive,pages,recursive',
+        $map[0],
+        'after:subheader',
+    );
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        $map[1],
+        $map[0],
+    );
+}

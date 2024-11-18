@@ -63,13 +63,13 @@ class PostUpserter
         $querySettings = $this->postRepository->createQuery()->getQuerySettings();
         $querySettings->setStoragePageIds([$storagePid]);
         $this->postRepository->setDefaultQuerySettings($querySettings);
-        
+
         $action = 'UPDATE';
 
         /** @var Post|null $post */
         $post = $this->postRepository->findOneBy([
             'instagram_id' => $dto->getId(),
-            'pid' => $storagePid
+            'pid' => $storagePid,
         ]);
 
         if ($post === null) {

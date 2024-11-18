@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace SvenPetersen\Instagram\Service;
 
-use DateTime;
 use SvenPetersen\Instagram\Domain\Model\Feed;
 use SvenPetersen\Instagram\Domain\Repository\FeedRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -65,7 +64,7 @@ class AccessTokenRefresher
     {
         /** @var \DateTimeImmutable $expiresAt */
         $expiresAt = $feed->getExpiresat();
-        $now = new DateTime();
+        $now = new \DateTime();
         $diffInDays = $expiresAt->diff($now)->days;
 
         if ($diffInDays >= 10) {

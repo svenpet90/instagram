@@ -18,6 +18,5 @@ class FeedDTO
         public readonly string $username,
         public readonly string $accountType,
         public readonly int $mediaCount,
-    ) {
-    }
+    ) {}
 }

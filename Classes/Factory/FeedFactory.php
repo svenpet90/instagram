@@ -17,25 +17,21 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
-class FeedFactory implements FeedFactoryInterface
+readonly class FeedFactory implements FeedFactoryInterface
 {
-    private FeedRepository $feedRepository;
-
-    private PersistenceManagerInterface $persistenceManager;
-
     public function __construct(
-        FeedRepository $feedRepository,
-        PersistenceManagerInterface $persistenceManager
-    ) {
-        $this->feedRepository = $feedRepository;
-        $this->persistenceManager = $persistenceManager;
-    }
+        private FeedRepository $feedRepository,
+        private PersistenceManagerInterface $persistenceManager
+    ) {}
 
     public function create(): Feed
     {
         return new Feed();
     }
 
+    /**
+     * @param int<0, max> $storagePid
+     */
     public function upsert(
         string $token,
         string $tokenType,
@@ -49,19 +45,20 @@ class FeedFactory implements FeedFactoryInterface
         $querySettings->setRespectStoragePage(false);
         $this->feedRepository->setDefaultQuerySettings($querySettings);
 
+        /** @var Feed|null $feed */
         $feed = $this->feedRepository->findOneBy(['username' => $username]);
 
         if ($feed === null) {
             $feed = $this->create();
         }
 
-        $feed->setPid($storagePid);
         $feed
             ->setToken($token)
             ->setTokenType($tokenType)
             ->setExpiresAt($expiresAt)
             ->setUserId($userId)
-            ->setUsername($username);
+            ->setUsername($username)
+            ->setPid($storagePid);
 
         $this->feedRepository->add($feed);
         $this->persistenceManager->persistAll();

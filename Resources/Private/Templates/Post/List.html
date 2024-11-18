@@ -2,14 +2,18 @@
       data-namespace-typo3-fluid="true"
 >
 
-<f:layout name="Default"/>
+    <f:layout name="Default"/>
 
-<f:section name="main">
-    <div class="row">
-        <f:for each="{posts}" as="post">
-            <f:render partial="Post/RenderMedia" arguments="{post:post}"/>
-        </f:for>
-    </div>
-</f:section>
+    <f:section name="main">
+        <div class="row">
+            <f:for each="{posts}"
+                   as="post"
+            >
+                <f:render partial="Post/RenderMedia"
+                          arguments="{post:post}"
+                />
+            </f:for>
+        </div>
+    </f:section>
 
 </html>
