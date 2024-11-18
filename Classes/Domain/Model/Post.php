@@ -31,9 +31,6 @@ class Post extends AbstractEntity
     /** @var string */
     public const MEDIA_TYPE_VIDEO = 'VIDEO';
 
-    /**
-     * @var int
-     */
     protected ?int $_languageUid = -1;
 
     protected string $caption = '';

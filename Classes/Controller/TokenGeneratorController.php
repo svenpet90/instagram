@@ -6,42 +6,36 @@ namespace SvenPetersen\Instagram\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use SvenPetersen\Instagram\Service\AccessTokenService;
-use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class TokenGeneratorController extends ActionController
 {
     public function __construct(
-        private readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly AccessTokenService $accessTokenService,
-    ) {
-    }
+    ) {}
 
     public function stepOneAction(): ResponseInterface
     {
-        $view = $this->moduleTemplateFactory->create($this->request);
-
-        return $view->renderResponse('StepOne');
+        return $this->htmlResponse();
     }
 
     public function stepTwoAction(): ResponseInterface
     {
-        $view = $this->moduleTemplateFactory->create($this->request);
-
-        /** @var string $appId */
         $appId = $this->request->getArgument('clientid');
+        assert(is_string($appId));
 
-        /** @var string $returnUrl */
         $returnUrl = $this->request->getArgument('returnurl');
+        assert(is_string($returnUrl));
 
-        /** @var string $appSecret */
         $appSecret = $this->request->getArgument('clientsecret');
+        assert(is_string($appSecret));
 
         $storagePid = (int)$this->request->getArgument('storagePid');
+        assert(is_int($storagePid));
 
         $link = $this->accessTokenService->getAuthorizationLink($appId, $returnUrl);
 
-        $view->assignMultiple([
+        $this->view->assignMultiple([
             'link' => $link,
             'appId' => $appId,
             'returnUrl' => $returnUrl,
@@ -49,24 +43,22 @@ class TokenGeneratorController extends ActionController
             'storagePid' => $storagePid,
         ]);
 
-        return $view->renderResponse('StepTwo');
+        return $this->htmlResponse();
     }
 
     public function stepThreeAction(): ResponseInterface
     {
-        $view = $this->moduleTemplateFactory->create($this->request);
-
-        /** @var string $instagramAppId */
         $instagramAppId = $this->request->getArgument('clientid');
+        assert(is_string($instagramAppId));
 
-        /** @var string $clientSecret */
         $clientSecret = $this->request->getArgument('clientsecret');
+        assert(is_string($clientSecret));
 
-        /** @var string $redirect_uri */
         $redirect_uri = $this->request->getArgument('returnurl');
+        assert(is_string($redirect_uri));
 
-        /** @var string $code */
         $code = $this->request->getArgument('code');
+        assert(is_string($code));
 
         $storagePid = (int)$this->request->getArgument('storagePid');
 
@@ -78,10 +70,10 @@ class TokenGeneratorController extends ActionController
             $storagePid
         );
 
-        $view->assignMultiple([
+        $this->view->assignMultiple([
             'feed' => $feed,
         ]);
 
-        return $view->renderResponse('StepThree');
+        return $this->htmlResponse();
     }
 }

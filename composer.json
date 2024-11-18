@@ -11,11 +11,11 @@
 		"GPL-2.0-or-later"
 	],
 	"require": {
-		"php": ">=8.1",
+		"php": ">=8.2",
 		"psr/http-factory": "^1.0",
-		"symfony/console": ">=5.0",
-		"typo3/cms-core": "^12.4",
-		"typo3/cms-extbase": "^12.4"
+		"symfony/console": ">=7.0",
+		"typo3/cms-core": "^13.4",
+		"typo3/cms-extbase": "^13.4"
 	},
 	"suggest": {
 		"typo3/cms-scheduler": "To setup the cronjobs as tasks from within the backend"
@@ -26,17 +26,11 @@
 		"helmich/typo3-typoscript-lint": "^3.0",
 		"phpstan/extension-installer": "^1.2",
 		"phpstan/phpstan": "^1.4",
-		"typo3/coding-standards": "^0.6.1",
-		"typo3/testing-framework": "^8"
+		"typo3/coding-standards": "^0.8.0"
 	},
 	"autoload": {
 		"psr-4": {
 			"SvenPetersen\\Instagram\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"SvenPetersen\\Instagram\\Tests\\": "Tests/"
 		}
 	},
 	"config": {
@@ -65,27 +59,16 @@
 		"ci:coverage": [
 			"@ci:coverage:functional"
 		],
-		"ci:coverage:functional": "phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/functional.cov Tests/Functional",
-		"ci:coverage:merge": "phpcov merge --clover=./coverage/clover.xml coverage/",
-		"ci:coverage:unit": "phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1 --coverage-php=coverage/unit.cov Tests/Unit",
 		"ci:lint:typoscript": [
 			"typoscript-lint --ansi -n --fail-on-warnings -vvv Configuration/TypoScript"
 		],
 		"ci:php:cs-fixer": "php-cs-fixer fix -v --dry-run --using-cache no --diff",
-		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:lint": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"ci:php:stan": "phpstan --no-progress",
 		"ci:test": [
 			"@ci:lint:typoscript",
 			"@ci:php:cs-fixer",
-			"@ci:php:stan",
-			"@ci:test:unit",
-			"@ci:test:functional"
-		],
-		"ci:test:functional": [
-			"phpunit -c Tests/Functional/phpunit.xml -d memory_limit=-1"
-		],
-		"ci:test:unit": [
-			"phpunit -c Tests/Unit/phpunit.xml -d memory_limit=-1"
+			"@ci:php:stan"
 		],
 		"fix:php:cs-fixer": [
 			"php-cs-fixer fix -v --using-cache no"
@@ -94,7 +77,6 @@
 			"rm .gitignore",
 			"rm -rf .Build",
 			"rm -rf .github",
-			"rm -rf Tests",
 			"rm -rf Resources",
 			"rm .editorconfig",
 			"rm .gitattributes",

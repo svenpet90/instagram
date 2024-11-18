@@ -48,6 +48,7 @@ class ImportPostsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
+        /** @var int<0,max> $storagePid */
         $storagePid = $input->getArgument('storagePid');
         $limit = $input->getArgument('limit');
 
@@ -59,12 +60,6 @@ class ImportPostsCommand extends Command
 
         if ($since === false || $until === false) {
             $output->writeln(sprintf('<fg=red>The option "since" and/or "until" is not valid strtotime format.</>'));
-
-            return Command::FAILURE;
-        }
-
-        if (is_numeric($storagePid) === false) {
-            $output->writeln(sprintf('<fg=red>The StoragePid argument must be an Integer. "%s" given.</>', $storagePid));
 
             return Command::FAILURE;
         }

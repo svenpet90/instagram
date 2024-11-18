@@ -8,27 +8,25 @@
                 <type>array</type>
                 <el>
                     <settings.mediaTypes>
-                        <TCEforms>
-                            <label>Types of posts to show</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectMultipleSideBySide</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">Image</numIndex>
-                                        <numIndex index="1">IMAGE</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">Video</numIndex>
-                                        <numIndex index="1">VIDEO</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3" type="array">
-                                        <numIndex index="0">Carousel</numIndex>
-                                        <numIndex index="1">CAROUSEL_ALBUM</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>Types of posts to show</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectMultipleSideBySide</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">Image</numIndex>
+                                    <numIndex index="1">IMAGE</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">Video</numIndex>
+                                    <numIndex index="1">VIDEO</numIndex>
+                                </numIndex>
+                                <numIndex index="3" type="array">
+                                    <numIndex index="0">Carousel</numIndex>
+                                    <numIndex index="1">CAROUSEL_ALBUM</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.mediaTypes>
 
                     <settings.feeds>
@@ -41,68 +39,62 @@
                     </settings.feeds>
 
                     <settings.maxPostsToShow>
-                        <TCEforms>
-                            <label>Maximum number of posts to show</label>
-                            <config>
-                                <type>input</type>
-                                <size>20</size>
-                                <max>30</max>
-                                <eval>int</eval>
-                            </config>
-                        </TCEforms>
+                        <label>Maximum number of posts to show</label>
+                        <config>
+                            <type>input</type>
+                            <size>20</size>
+                            <max>30</max>
+                            <eval>int</eval>
+                        </config>
                     </settings.maxPostsToShow>
 
                     <settings.hashtagConstraints>
-                        <TCEforms>
-                            <label>Only show posts containing the following hashtags (with #, comma-separated)</label>
-                            <config>
-                                <type>input</type>
-                                <size>20</size>
-                                <max>255</max>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>Only show posts containing the following hashtags (with #, comma-separated)</label>
+                        <config>
+                            <type>input</type>
+                            <size>20</size>
+                            <max>255</max>
+                            <eval>trim</eval>
+                        </config>
                     </settings.hashtagConstraints>
 
                     <settings.logicalConstraint>
-                        <TCEforms>
-                            <label>Hashtags constraint</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items type="array">
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0">Logical Or</numIndex>
-                                        <numIndex index="1">logicalOr</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1" type="array">
-                                        <numIndex index="0">Logical And</numIndex>
-                                        <numIndex index="1">logicalAnd</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>Hashtags constraint</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">Logical Or</numIndex>
+                                    <numIndex index="1">logicalOr</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">Logical And</numIndex>
+                                    <numIndex index="1">logicalAnd</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.logicalConstraint>
 
                     <settings.templateLayout>
-                        <TCEforms>
-                            <label>LLL:EXT:instagram/Resources/Private/Language/locallang_be.xlf:flexform_list.templateLayout</label>
-                            <config>
-                                <type>select</type>
-                                <itemsProcFunc>SvenPetersen\Instagram\Hooks\ItemsProcFunc->user_templateLayout</itemsProcFunc>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0" type="array">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>
+                            LLL:EXT:instagram/Resources/Private/Language/locallang_be.xlf:flexform_list.templateLayout
+                        </label>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>SvenPetersen\Instagram\Hooks\ItemsProcFunc->user_templateLayout
+                            </itemsProcFunc>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.templateLayout>
                 </el>
             </ROOT>
         </sDEF>
     </sheets>
-
 </T3DataStructure>

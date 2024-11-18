@@ -24,8 +24,7 @@ class ApiClient implements ApiClientInterface
         private readonly Feed $feed,
         private readonly RequestFactory $requestFactory,
         private readonly string $apiBaseUrl,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc
