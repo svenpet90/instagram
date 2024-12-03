@@ -15,11 +15,23 @@ class EmojiRemover
 {
     public static function filter(string $string = ''): string
     {
-        $clear_string = (string)preg_replace('%(?:
-          \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
-        | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
-        | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
-    )%xs', '', $string);
+        $emojiRegex = '/[\x{1F600}-\x{1F64F}]|' .
+            '[\x{1F300}-\x{1F5FF}]|' .
+            '[\x{1F680}-\x{1F6FF}]|' .
+            '[\x{1F700}-\x{1F77F}]|' .
+            '[\x{1F780}-\x{1F7FF}]|' .
+            '[\x{1F800}-\x{1F8FF}]|' .
+            '[\x{2600}-\x{26FF}][\x{FE0F}]?|' .
+            '[\x{2700}-\x{27BF}][\x{FE0F}]?|' .
+            '[\x{E000}-\x{F8FF}]|' .
+            '[\x{FE00}-\x{FE0F}]|' .
+            '[\x{1F900}-\x{1F9FF}]|' .
+            '[\x{1FA70}-\x{1FAFF}]|' .
+            '[\x{1FB00}-\x{1FBFF}]|' .
+            '[\x{200D}]|' .
+            '[\x{1F1E6}-\x{1F1FF}]{2}/u';
+
+        $clear_string = preg_replace($emojiRegex, '', $string) ?? '';
 
         return str_replace(' # ', ' ', $clear_string);
     }
